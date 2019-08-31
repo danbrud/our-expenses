@@ -1,0 +1,14 @@
+.fab {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.fab:hover {
+  cursor: pointer;
+}
+.fab > .MuiFab-primary {
+  background-color: #8EBDC3;
+}
+.fab > .MuiFab-primary:hover {
+  background-color: #6d9297;
+}
