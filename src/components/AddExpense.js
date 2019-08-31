@@ -20,19 +20,19 @@ class AddExpense extends Component {
             <div id="add-expense-form">
                 <TextField
                         id="outlined-name"
-                        label="Name"
-                        // className={classes.textField}
-                        // value={values.name}
-                        // onChange={handleChange('name')}
+                        label="User"
+                        name="user"
+                        value={generalStore.user}
+                        onChange={generalStore.handleInputs}
                         margin="normal"
                         variant="outlined"
                     />
-                <input
+                {/* <input
                     type="text"
                     name="user"
                     placeholder="Name"
                     value={generalStore.user}
-                    onChange={generalStore.handleInputs} />
+                    onChange={generalStore.handleInputs} /> */}
                 <input
                     type="number"
                     name="amount"
