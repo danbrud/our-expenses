@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react';
 import { expenseCategories } from '../utils';
+import TextField from '@material-ui/core/TextField';
 
 
 @inject('generalStore', 'expensesStore')
@@ -17,6 +18,15 @@ class AddExpense extends Component {
 
         return (
             <div id="add-expense-form">
+                <TextField
+                        id="outlined-name"
+                        label="Name"
+                        // className={classes.textField}
+                        // value={values.name}
+                        // onChange={handleChange('name')}
+                        margin="normal"
+                        variant="outlined"
+                    />
                 <input
                     type="text"
                     name="user"
