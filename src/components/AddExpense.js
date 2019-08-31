@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import '../styles/AddExpense.css'
 
 
 @inject('generalStore', 'expensesStore')
