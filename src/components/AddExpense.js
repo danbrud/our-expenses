@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react';
 import { expenseCategories } from '../utils';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
 
 @inject('generalStore', 'expensesStore')
@@ -19,36 +23,49 @@ class AddExpense extends Component {
         return (
             <div id="add-expense-form">
                 <TextField
-                        id="outlined-name"
-                        label="User"
-                        name="user"
-                        value={generalStore.user}
-                        onChange={generalStore.handleInputs}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                {/* <input
-                    type="text"
+                    label="User"
                     name="user"
-                    placeholder="Name"
-                    value={generalStore.user}
-                    onChange={generalStore.handleInputs} /> */}
-                <input
-                    type="number"
-                    name="amount"
-                    placeholder="Add expense"
-                    value={generalStore.amount}
-                    onChange={generalStore.handleInputs} />
-                <input
                     type="text"
+                    value={generalStore.user}
+                    onChange={generalStore.handleInputs}
+                    margin="normal"
+                />
+                <TextField
+                    label="Amount"
+                    name="amount"
+                    type="number"
+                    value={generalStore.amount}
+                    onChange={generalStore.handleInputs}
+                    margin="normal"
+                />
+                <TextField
+                    label="Name"
                     name="name"
-                    placeholder="What did you buy?"
+                    type="text"
                     value={generalStore.name}
-                    onChange={generalStore.handleInputs} />
-                <select name="category" value={generalStore.category} onChange={generalStore.handleInputs}>
-                    {expenseCategories.map(c => <option key={c}>{c}</option>)}
-                </select>
-                <div className="btn" onClick={this.addExpense}>ADD</div>
+                    onChange={generalStore.handleInputs}
+                    margin="normal"
+                />
+                <InputLabel htmlFor="category">Age</InputLabel>
+                <Select
+                    value={generalStore.category}
+                    onChange={generalStore.handleInputs}
+                    inputProps={{
+                        name: 'category',
+                        id: 'category'
+                    }}
+                >
+                    {expenseCategories.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
+                </Select>
+                <Button 
+                    onClick={this.addExpense} 
+                    disableRipple={true} 
+                    variant="contained" 
+                    color="primary"
+                    href="/"
+                >
+                    ADD
+                </Button>
             </div>
         )
     }
