@@ -36,9 +36,9 @@ class AddExpense extends Component {
                     value={generalStore.name}
                     onChange={generalStore.handleInputs} />
                 <select name="category" value={generalStore.category} onChange={generalStore.handleInputs}>
-                    {expenseCategories.map(c => <option>{c}</option>)}
+                    {expenseCategories.map(c => <option key={c}>{c}</option>)}
                 </select>
-                <div class="btn" onClick={this.addExpense}>ADD</div>
+                <div className="btn" onClick={this.addExpense}>ADD</div>
             </div>
         )
     }
