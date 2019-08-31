@@ -6,9 +6,9 @@
 .fab:hover {
   cursor: pointer;
 }
-.fab > .MuiFab-primary {
+.fab .MuiFab-primary {
   background-color: #8EBDC3;
 }
-.fab > .MuiFab-primary:hover {
+.fab .MuiFab-primary:hover {
   background-color: #6d9297;
 }
