@@ -4,7 +4,7 @@ import '../styles/Expense.css'
 export default function Expense(props) {
 
     return (
-        <div id="expense">
+        <div className="expense-table">
             <div>{props.expense.user}</div>
             <div>{props.expense.name}</div>
             <div>{props.expense.amount}</div>
