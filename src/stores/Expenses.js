@@ -21,9 +21,9 @@ export class Expenses {
         this.setExpenses(res.data)
     }
 
-    async addExpenses(user, amount, category) {
-        const newExpense = { user, amount, category, date: new Date() }
-        const res = await axios.post(`http://localhost:8080/expense`)
+    async addExpense(user, amount, name, category) {
+        const newExpense = { user, amount, name, category, date: new Date() }
+        const res = await axios.post(`http://localhost:8080/expense`, newExpense)
         
         const expenses = [...this.expenses, res.data]
         this.setExpenses(expenses)

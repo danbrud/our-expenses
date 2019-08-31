@@ -3,9 +3,14 @@ import { observer, inject } from 'mobx-react';
 import { expenseCategories } from '../utils';
 
 
-@inject('generalStore')
+@inject('generalStore', 'expensesStore')
 @observer
 class AddExpense extends Component {
+
+    addExpense = () => {
+        const gs = this.props.generalStore
+        this.props.expensesStore.addExpense(gs.user, gs.amount, gs.name, gs.category)
+    }
 
     render() {
         const generalStore = this.props.generalStore
@@ -33,7 +38,7 @@ class AddExpense extends Component {
                 <select name="category" value={generalStore.category} onChange={generalStore.handleInputs}>
                     {expenseCategories.map(c => <option>{c}</option>)}
                 </select>
-                <div class="btn">ADD</div>
+                <div class="btn" onClick={this.addExpense}>ADD</div>
             </div>
         )
     }
