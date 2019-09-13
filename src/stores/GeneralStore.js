@@ -5,7 +5,7 @@ import { expenseCategories } from '../utils';
 export class GeneralStore {
     @observable user = ''
     @observable amount = ''
-    @observable name = ''
+    @observable expense = ''
     @observable category = ''
 
     @action handleInputs = e => {

@@ -40,14 +40,22 @@ class AddExpense extends Component {
                     margin="normal"
                 />
                 <TextField
-                    label="Name"
-                    name="name"
+                    label="Expense"
+                    name="expense"
+                    type="text"
+                    value={generalStore.expense}
+                    onChange={generalStore.handleInputs}
+                    margin="normal"
+                />
+                <TextField
+                    label="Category"
+                    name="category"
                     type="text"
                     value={generalStore.name}
                     onChange={generalStore.handleInputs}
                     margin="normal"
                 />
-                <InputLabel htmlFor="category">Age</InputLabel>
+                {/* <InputLabel htmlFor="category">Age</InputLabel>
                 <Select
                     value={generalStore.category}
                     onChange={generalStore.handleInputs}
@@ -56,8 +64,8 @@ class AddExpense extends Component {
                         id: 'category'
                     }}
                 >
-                    {expenseCategories.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
-                </Select>
+                    {["Apartment", "Groceries"].map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
+                </Select> */}
                 <Button 
                     onClick={this.addExpense} 
                     disableRipple={true} 
