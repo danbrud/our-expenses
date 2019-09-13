@@ -15,7 +15,7 @@ class AddExpense extends Component {
 
     addExpense = () => {
         const gs = this.props.generalStore
-        this.props.expensesStore.addExpense(gs.user, gs.amount, gs.name, gs.category)
+        this.props.expensesStore.addExpense(gs.user, gs.amount, gs.expense, gs.category)
     }
 
     render() {
