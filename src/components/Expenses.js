@@ -6,6 +6,8 @@ import Expense from './Expense';
 @observer
 class Expenses extends Component {
 
+    componentDidMount = () => this.props.expensesStore.getExpenses()
+
     render() {
         const expenses = this.props.expensesStore.expenses
         return(

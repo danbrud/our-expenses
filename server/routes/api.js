@@ -13,11 +13,11 @@ router.get('/expenses', async function(req, res) {
     res.send(expenses)
 })
 
-router.post('/expense', async function(req, res, body) {
-    const expense = new Expense(body)
-    await expense.save()
+router.post('/expense', async function(req, res) {
+    const expense = new Expense(req.body)
+    const savedExpense = await expense.save()
 
-    res.send("Saved expense!")
+    res.send(savedExpense)
 })
 
 module.exports = router
