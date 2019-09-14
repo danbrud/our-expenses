@@ -7,8 +7,8 @@
   cursor: pointer;
 }
 .fab .MuiFab-primary {
-  background-color: #8EBDC3;
+  background-color: #34495E;
 }
 .fab .MuiFab-primary:hover {
-  background-color: #6d9297;
+  background-color: #272838;
 }

@@ -3,7 +3,7 @@ import React from 'react'
 export default function ExpenseTableHeader() {
 
     return (
-        <div className="expense-table">
+        <div className="expense-table" id="expense-table-header">
             <div>User</div>
             <div>Expense</div>
             <div>Amount</div>
