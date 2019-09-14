@@ -8,6 +8,10 @@ export class GeneralStore {
     @observable expense = ''
     @observable category = ''
 
+    constructor(){
+        this.allCategories = ['דירה', 'קניות לבית', 'רכב']
+    }
+
     @action handleInputs = e => {
         this[e.target.name] = e.target.value
     }

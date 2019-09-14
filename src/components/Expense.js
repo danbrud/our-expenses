@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/Expense.css'
+import moment from 'moment'
 
 export default function Expense(props) {
 
@@ -9,7 +10,7 @@ export default function Expense(props) {
             <div>{props.expense.expense}</div>
             <div>{props.expense.amount}</div>
             <div>{props.expense.category}</div>
-            <div>{props.expense.date.toString()}</div>
+            <div>{moment(props.expense.date).format("l")}</div>
         </div>
     )
 }

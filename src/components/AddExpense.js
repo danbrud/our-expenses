@@ -20,7 +20,7 @@ class AddExpense extends Component {
 
     render() {
         const generalStore = this.props.generalStore
-
+        
         return (
             <div id="add-expense-form">
                 <TextField
