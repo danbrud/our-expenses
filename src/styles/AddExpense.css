@@ -1,5 +1,51 @@
 #add-expense-form {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-  padding: 10vh 15vw;
+  align-items: center;
+  padding: 3vh 15vw;
+}
+input {
+  height: 40px;
+  font-size: 1.03em;
+  margin: 5px;
+  padding-right: 7px;
+  color: #0D090A;
+  border: none;
+  border-bottom: 0.5px #0D090A solid;
+}
+#add-expense-button {
+  width: 97%;
+  display: grid;
+  justify-self: center;
+  background-color: #34495e;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#add-expense-button:hover {
+  background-color: #272838;
+}
+h1 {
+  color: #34495e;
+  text-align: center;
+  margin-top: 15vh;
+}
+select {
+  width: 98%;
+  height: 40px;
+  font-size: 1.03em;
+  margin: 5px;
+  padding-right: 5px;
+  display: grid;
+  justify-self: center;
+  border: none;
+  border-bottom: 0.5px #0D090A solid;
+}
+#error-message {
+  color: #942c2c;
+  font-size: 22px;
+  text-align: center;
 }

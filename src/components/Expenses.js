@@ -12,7 +12,7 @@ class Expenses extends Component {
         const expenses = this.props.expensesStore.expenses
         return(
             <div>
-                {expenses.map(e => <Expense key={e._id} expense={e}/>)}       
+                {expenses.length ? expenses.map(e => <Expense key={e._id} expense={e}/>)}       
             </div>
         )
     }

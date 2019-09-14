@@ -11,6 +11,7 @@ export default function Home() {
             <MonthSelector />
             <ExpenseTableHeader />
             <Expenses />
+            {/* {put total here} */}
             <FabButton />
         </div>
     )

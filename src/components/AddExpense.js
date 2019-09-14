@@ -1,83 +1,54 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { observer, inject } from 'mobx-react';
 import { expenseCategories } from '../utils';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import '../styles/AddExpense.css'
 
+const AddExpense = inject('generalStore', 'expensesStore')(observer(function (props) {
 
-@inject('generalStore', 'expensesStore')
-@observer
-class AddExpense extends Component {
+    const generalStore = props.generalStore
 
-    addExpense = () => {
-        const gs = this.props.generalStore
-        this.props.expensesStore.addExpense(gs.user, gs.amount, gs.expense, gs.category)
+    const addExpense = () => {
+        const gStore = props.generalStore
+        props.expensesStore.addExpense(gStore.user, gStore.amount, gStore.expense, gStore.category)
     }
 
-    render() {
-        const generalStore = this.props.generalStore
-        
-        return (
+    return (
+        <div>
+            <h1>הוספת הוצאה</h1>
             <div id="add-expense-form">
-                <TextField
-                    label="User"
-                    name="user"
+                <input
                     type="text"
+                    dir="rtl"
+                    placeholder="משתמש"
+                    name="user"
                     value={generalStore.user}
                     onChange={generalStore.handleInputs}
-                    margin="normal"
                 />
-                <TextField
-                    label="Amount"
+                <input
                     name="amount"
                     type="number"
+                    dir="rtl"
+                    placeholder="סכום"
                     value={generalStore.amount}
                     onChange={generalStore.handleInputs}
-                    margin="normal"
                 />
-                <TextField
-                    label="Expense"
+                <input
+                    dir="rtl"
+                    placeholder="הוצאה"
                     name="expense"
                     type="text"
                     value={generalStore.expense}
                     onChange={generalStore.handleInputs}
-                    margin="normal"
                 />
-                <TextField
-                    label="Category"
-                    name="category"
-                    type="text"
-                    value={generalStore.name}
-                    onChange={generalStore.handleInputs}
-                    margin="normal"
-                />
-                {/* <InputLabel htmlFor="category">Age</InputLabel>
-                <Select
-                    value={generalStore.category}
-                    onChange={generalStore.handleInputs}
-                    inputProps={{
-                        name: 'category',
-                        id: 'category'
-                    }}
-                >
-                    {["Apartment", "Groceries"].map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
-                </Select> */}
-                <Button 
-                    onClick={this.addExpense} 
-                    disableRipple={true} 
-                    variant="contained" 
-                    color="primary"
-                    href="/"
-                >
-                    ADD
-                </Button>
+                <select name="category" dir="rtl" onChange={generalStore.handleInputs}>
+                    <option selected disabled>תבחר קטגוריה</option>
+                    {expenseCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
+                </select>
+                <div id="add-expense-button" onClick={addExpense}>הוסף</div>
+                {props.expensesStore.showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
             </div>
-        )
-    }
-}
+        </div>
+    )
+}))
 
 export default AddExpense

@@ -1,16 +1,14 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react';
+import { months } from '../utils'
 import '../styles/Expense.css'
 
 const MonthSelector = inject('expensesStore')(observer(function (props) {
-    
-    const months = [
-        'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'
-    ]
 
     return (
         <select 
             id='month-selector'
+            dir='rtl'
             value={props.expensesStore.currentMonth}
             onChange={props.expensesStore.changeCurrentMonth}
         >
