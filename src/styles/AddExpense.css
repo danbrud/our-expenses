@@ -14,6 +14,9 @@ input {
   border-bottom: 0.5px #0D090A solid;
   background-color: #EAF2EF;
 }
+input:focus {
+  outline: none;
+}
 #add-expense-button {
   width: 97%;
   display: grid;
@@ -45,6 +48,9 @@ select {
   border: none;
   border-bottom: 0.5px #0D090A solid;
   background-color: #EAF2EF;
+}
+select:focus {
+  outline: none;
 }
 #error-message {
   color: #942c2c;

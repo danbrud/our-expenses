@@ -27,3 +27,6 @@
   border-bottom: 0.5px #0D090A solid;
   background-color: #EAF2EF;
 }
+#month-selector:focus {
+  outline: none;
+}
