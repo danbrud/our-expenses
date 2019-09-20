@@ -8,7 +8,7 @@ export class Expenses {
     @observable currentMonth = new Date().getMonth()
     @observable showErrorMessage = false
     @observable showExpensePopup = false
-    @observable expenseForPupop = {}
+    @observable expenseForPopup = {}
 
     @action setExpenses(expenses) {
         this.expenses = expenses
@@ -50,5 +50,5 @@ export class Expenses {
 
     @action togglePopup = () => this.showExpensePopup = !this.showExpensePopup
 
-    @action updateExpenseForPopup = expense => this.expenseForPupop = expense
+    @action updateExpenseForPopup = expense => this.expenseForPopup = expense
 }
