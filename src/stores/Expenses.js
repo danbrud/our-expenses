@@ -1,12 +1,14 @@
 import { observable, action } from "mobx";
 import axios from 'axios'
-const API_URL = ''
+const API_URL = 'http://localhost:4000'
 
 
 export class Expenses {
     @observable expenses = []
     @observable currentMonth = new Date().getMonth()
     @observable showErrorMessage = false
+    @observable showExpensePopup = false
+    @observable expenseForPupop = {}
 
     @action setExpenses(expenses) {
         this.expenses = expenses
@@ -45,4 +47,8 @@ export class Expenses {
         this.currentMonth = e.target.value
         this.getExpenses()
     }
+
+    @action togglePopup = () => this.showExpensePopup = !this.showExpensePopup
+
+    @action updateExpenseForPopup = expense => this.expenseForPupop = expense
 }

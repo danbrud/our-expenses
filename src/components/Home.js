@@ -12,6 +12,7 @@ export default function Home() {
             <ExpenseTableHeader />
             <Expenses />
             {/* {put total here} */}
+            {/* <ExpensePopup /> */}
             <FabButton />
         </div>
     )
