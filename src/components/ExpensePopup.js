@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { inject, observer } from 'mobx-react'
+import '../styles/ExpensePopup.css'
 
 const ExpensePopup = inject('expensesStore')(observer(function (props) {
 

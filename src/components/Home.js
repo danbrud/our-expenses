@@ -6,6 +6,7 @@ import MonthSelector from './MonthSelector';
 import '../styles/Expense.css'
 import ExpensePopup from './ExpensePopup'
 import {inject, observer} from 'mobx-react'
+import Panels from './Panels';
 
 const Home = inject('expensesStore')(observer(function (props) {
     return (
@@ -13,6 +14,7 @@ const Home = inject('expensesStore')(observer(function (props) {
             <MonthSelector />
             <ExpenseTableHeader />
             <Expenses />
+            <Panels expenses={props.expensesStore.expenses}/>
             {/* {put total here} */}
             {props.expensesStore.showExpensePopup ? <ExpensePopup /> : null}
             <FabButton />
