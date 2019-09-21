@@ -5,6 +5,7 @@ export class GeneralStore {
     @observable amount = ''
     @observable expense = ''
     @observable category = ''
+    @observable date = ''
 
     @action handleInputs = e => {
         this[e.target.name] = e.target.value

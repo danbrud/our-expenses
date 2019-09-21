@@ -57,3 +57,7 @@ select:focus {
   font-size: 22px;
   text-align: center;
 }
+#date-picker-dialog {
+  padding-right: 5px;
+  font-size: 1.03em;
+}

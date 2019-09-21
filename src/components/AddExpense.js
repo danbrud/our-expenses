@@ -2,7 +2,7 @@ import React from 'react'
 import { observer, inject } from 'mobx-react';
 import { expenseCategories } from '../utils';
 import '../styles/AddExpense.css'
-import DatePicker from './DatePicker';
+import DateSelector from './DateSelector';
 
 const AddExpense = inject('generalStore', 'expensesStore')(observer(function (props) {
 
@@ -10,7 +10,7 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
 
     const addExpense = () => {
         const gStore = props.generalStore
-        props.expensesStore.addExpense(gStore.user, gStore.amount, gStore.expense, gStore.category)
+        props.expensesStore.addExpense(gStore.user, gStore.amount, gStore.expense, gStore.category, gStore.date)
     }
 
     return (
@@ -45,9 +45,9 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
                     <option selected disabled>תבחר קטגוריה</option>
                     {expenseCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                 </select>
-                {props.expensesStore.showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
+                <DateSelector />
                 <div id="add-expense-button" onClick={addExpense}>הוסף</div>
-                <DatePicker />
+                {props.expensesStore.showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
             </div>
         </div>
     )
