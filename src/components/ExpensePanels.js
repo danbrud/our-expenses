@@ -58,7 +58,7 @@ export default function ExpensePanels(props) {
                         <ExpansionPanelDetails>
                             <div className={classes.expanded}>
                                 <p><span>קטגוריה: </span><span>{e.category}</span></p>
-                                <p><span>תאריך: </span><span>{moment(e.date).format("l")}</span></p>
+                                <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>

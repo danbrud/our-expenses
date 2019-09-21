@@ -9,8 +9,11 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
     const generalStore = props.generalStore
 
     const addExpense = () => {
-        const gStore = props.generalStore
-        props.expensesStore.addExpense(gStore.user, gStore.amount, gStore.expense, gStore.category, gStore.date)
+        props.expensesStore.addExpense(generalStore.user, generalStore.amount, generalStore.expense, generalStore.category, generalStore.date)
+    }
+
+    const changeDate = date => {
+        generalStore.handleDateChange(date)
     }
 
     return (
@@ -45,7 +48,7 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
                     <option selected disabled>תבחר קטגוריה</option>
                     {expenseCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                 </select>
-                <DateSelector />
+                <DateSelector changeDate={changeDate} date={generalStore.date}/>
                 <div id="add-expense-button" onClick={addExpense}>הוסף</div>
                 {props.expensesStore.showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
             </div>

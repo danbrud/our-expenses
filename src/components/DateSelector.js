@@ -20,20 +20,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function DateSelector(props) {
     const classes = useStyles()
-    const [selectedDate, setSelectedDate] = React.useState(new Date())
 
-    const handleDateChange = function (date) {
-        setSelectedDate(date)
-    }
+    const handleDateChange = date => props.changeDate(date)
 
     return (
         <div className={classes.root}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker className={classes.picker}
                     margin="normal"
-                    id="date-picker-dialog"
+                    id="date-picker-dialog" 
                     format="dd/MM/yyyy"
-                    value={selectedDate}
+                    value={props.date}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',

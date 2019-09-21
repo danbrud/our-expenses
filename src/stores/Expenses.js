@@ -31,10 +31,10 @@ export class Expenses {
         }, 2000)
     }
 
-    async addExpense(user, amount, expense, category) {
-        if(!this.validateInputs(user, amount, expense, category)) {return this.setShowErrorMessage()}
+    async addExpense(user, amount, expense, category, date) {
+        if(!this.validateInputs(user, amount, expense, category)) { return this.setShowErrorMessage() }
 
-        const newExpense = { user, expense, amount, category, date: new Date() }
+        const newExpense = { user, expense, amount, category, date: date }
         const res = await axios.post(`${API_URL}/expense`, newExpense)
         
         const expenses = [...this.expenses, res.data]
