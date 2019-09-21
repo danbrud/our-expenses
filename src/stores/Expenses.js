@@ -7,14 +7,14 @@ export class Expenses {
     @observable expenses = []
     @observable currentMonth = new Date().getMonth()
     @observable showErrorMessage = false
-    @observable showExpensePopup = false
-    @observable expenseForPopup = {}
+    // @observable showExpensePopup = false
+    // @observable expenseForPopup = {}
 
     @action setExpenses(expenses) {
         this.expenses = expenses
     }
 
-    async getExpenses(shouldGetByMonth = true) {
+    getExpenses = async (shouldGetByMonth = true) => {
         const optionalMonthParam = shouldGetByMonth ? `?month=${this.currentMonth}` : ''
 
         const res = await axios.get(`${API_URL}/expenses${optionalMonthParam}`)
@@ -48,7 +48,7 @@ export class Expenses {
         this.getExpenses()
     }
 
-    @action togglePopup = () => this.showExpensePopup = !this.showExpensePopup
+    // @action togglePopup = () => this.showExpensePopup = !this.showExpensePopup
 
-    @action updateExpenseForPopup = expense => this.expenseForPopup = expense
+    // @action updateExpenseForPopup = expense => this.expenseForPopup = expense
 }

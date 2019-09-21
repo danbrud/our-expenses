@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -11,12 +11,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         direction: 'rtl',
+        padding: '0',
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
         flexBasis: '33.33%',
         flexShrink: 0,
-        textAlign: 'center',
+        padding: '0 8px',
+        // textAlign: 'center',
     },
     expanded: {
         width: '100%',
@@ -24,17 +26,16 @@ const useStyles = makeStyles(theme => ({
         gridTemplateColumns: '1fr 1fr',
         justifyItems: 'center',
     },
-    // secondaryHeading: {
-    //     fontSize: theme.typography.pxToRem(15),
-    //     color: theme.palette.text.secondary,
-    //     flexBasis: '33.33%',
-    //     flexShrink: 0,
-    // },
+    paper: {
+        backgroundColor: '#EAF2EF',
+    },
 }))
 
-export default function Panels(props) {
+export default function ExpensePanels(props) {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false)
+    
+    useEffect(() => { props.getExpenses() }, [])
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false)
@@ -44,7 +45,7 @@ export default function Panels(props) {
         <div className={classes.root}>
             {props.expenses.map(e => {
                 return (
-                    <ExpansionPanel expanded={expanded === e._id} onChange={handleChange(e._id)}>
+                    <ExpansionPanel key={e._id} className={classes.paper} expanded={expanded === e._id} onChange={handleChange(e._id)}>
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
@@ -57,7 +58,7 @@ export default function Panels(props) {
                         <ExpansionPanelDetails>
                             <div className={classes.expanded}>
                                 <p><span>קטגוריה: </span><span>{e.category}</span></p>
-                                <p><span>תאריך: </span><span>{moment(e.   date).format("l")}</span></p>
+                                <p><span>תאריך: </span><span>{moment(e.date).format("l")}</span></p>
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
