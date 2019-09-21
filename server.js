@@ -26,9 +26,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use('/', api)
 
 
-// app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const port = 4000
 app.listen(process.env.PORT || port, function () {
