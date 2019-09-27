@@ -7,10 +7,13 @@ import '../styles/Expense.css'
 import ExpensePopup from './ExpensePopup'
 import {inject, observer} from 'mobx-react'
 import ExpensePanels from './ExpensePanels';
+import { Link } from 'react-router-dom';
 
 const Home = inject('expensesStore')(observer(function (props) {
     return (
         <div id='home-container'>
+            <Link to='/reports'><div>Reports</div></Link>
+            <h1>הוצאות</h1>
             <MonthSelector />
             <ExpenseTableHeader />
             {/* <Expenses /> */}

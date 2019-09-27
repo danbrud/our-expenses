@@ -17,7 +17,7 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
     }
 
     return (
-        <div>
+        <div id="add-expense">
             <h1>הוספת הוצאה</h1>
             <div id="add-expense-form">
                 <input
