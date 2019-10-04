@@ -8,7 +8,9 @@ export const expenseCategories = [
     "תחבורה ציבורית",
     "השקעות וחסכונות",
     "מתנות",
-    "טיפוח"
+    "טיפוח",
+    "בריאות",
+    "בילוי"
 ]
 
 export const months = [
