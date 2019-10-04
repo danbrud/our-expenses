@@ -50,9 +50,7 @@ export default function NavBar(props) {
     setState({ ...state, [side]: open })
   }
 
-  const sum = props.store.sumCurrentMonth.toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-
+  const sum = new Intl.NumberFormat('en-US').format(props.store.sumCurrentMonth)
 
   const sideList = side => (
     <div
