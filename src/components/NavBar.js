@@ -19,9 +19,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
   const classes = useStyles();
+  const sum = props.store.sumCurrentMonth.toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 
+
+  console.log(window.location)
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -30,9 +34,15 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            ההוצאות שלנו
+
           </Typography>
-          <Button color="inherit">Login</Button>
+          {
+            window.location.pathname === '/'
+              ? <Typography variant="p">
+                  {sum} :סה"כ הוצאות
+                </Typography>
+              : null
+          }
         </Toolbar>
       </AppBar>
     </div>

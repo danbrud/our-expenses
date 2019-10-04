@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 import axios from 'axios'
 const API_URL = 'http://localhost:4000'
 // const API_URL = ''
@@ -26,7 +26,7 @@ export class Expenses {
         this.showErrorMessage = true
 
         setTimeout(() => {
-           this.showErrorMessage = false 
+           this.showErrorMessage = false
         }, 2000)
     }
 
@@ -35,16 +35,21 @@ export class Expenses {
 
         const newExpense = { user, expense, amount, category, date: date }
         const res = await axios.post(`${API_URL}/expense`, newExpense)
-        
+
         const expenses = [...this.expenses, res.data]
         this.setExpenses(expenses)
-        
+
         window.location = '/'
     }
 
     @action changeCurrentMonth = (e) => {
         this.currentMonth = e.target.value
         this.getExpenses()
+    }
+
+    @computed get sumCurrentMonth() {
+        const sum = this.expenses.reduce((acc, curr) => acc + curr.amount, 0)
+        return sum
     }
 
 }
