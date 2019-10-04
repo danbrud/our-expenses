@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  bar: {
+    backgroundColor: '#34495e',
+  }
 }));
 
 export default function NavBar(props) {
@@ -28,7 +31,7 @@ export default function NavBar(props) {
   console.log(window.location)
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar className={classes.bar} position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
@@ -38,7 +41,7 @@ export default function NavBar(props) {
           </Typography>
           {
             window.location.pathname === '/'
-              ? <Typography variant="p">
+              ? <Typography variant="h6">
                   {sum} :סה"כ הוצאות
                 </Typography>
               : null
