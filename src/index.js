@@ -14,4 +14,4 @@ const stores = { expensesStore, generalStore }
 
 ReactDOM.render(<Provider {...stores}><App /></Provider>, document.getElementById('root'));
 
-serviceWorker.unregister();
+serviceWorker.register();
