@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 import axios from 'axios'
-const API_URL = 'http://localhost:4000'
-// const API_URL = ''
+// const API_URL = 'http://localhost:4000'
+const API_URL = ''
 
 
 export class Expenses {
