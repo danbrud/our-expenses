@@ -3,6 +3,7 @@ import MonthSelector from './MonthSelector'
 import { inject, observer } from 'mobx-react'
 import FabButton from './FabButton'
 import Report from './Report'
+import Loader from './Loader'
 
 @inject('expensesStore')
 @observer
@@ -26,7 +27,7 @@ class Reports extends Component {
             <div>
                 <h1>Reports</h1>
                 <MonthSelector />
-                {this.props.expensesStore.expenses.length ? <Report expenses={this.props.expensesStore.expenses}/> : <div>loading</div>}
+                {this.props.expensesStore.expenses.length ? <Report expenses={this.props.expensesStore.expenses}/> : <Loader />}
                 <FabButton />
             </div>
         )
