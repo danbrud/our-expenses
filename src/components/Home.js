@@ -14,7 +14,7 @@ const Home = inject('expensesStore')(observer(function (props) {
             <MonthSelector />
             <ExpenseTableHeader />
             {
-                props.expensesStore.expenses.length 
+                props.expensesStore.showLoader
                 ? <ExpensePanels expenses={props.expensesStore.expenses} getExpenses={props.expensesStore.getExpenses}/> 
                 : <Loader />
             }
