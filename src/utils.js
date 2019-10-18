@@ -10,7 +10,8 @@ export const expenseCategories = [
     "מתנות",
     "טיפוח",
     "בריאות",
-    "בילוי"
+    "בילוי",
+    "מותרות"
 ]
 
 export const months = [
