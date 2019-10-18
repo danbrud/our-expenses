@@ -4,15 +4,26 @@ import { inject, observer } from 'mobx-react'
 import FabButton from './FabButton'
 import Report from './Report'
 import Loader from './Loader'
+import './../styles/Reports.css'
+import Categories from './Categories'
 
 @inject('expensesStore')
 @observer
 class Reports extends Component {
 
-    componentDidMount = () => {
-        if(this.isExpensesCurrent()) { return }
+    constructor() {
+        super()
+        this.state = {
+            showLoader: true
+        }
+    }
 
-        this.props.expensesStore.getExpenses()
+    componentDidMount = async () => {
+        if(!this.isExpensesCurrent()) { 
+            await this.props.expensesStore.getExpenses()
+        }
+
+        this.state.showLoader = false
     }
 
     isExpensesCurrent = () => {
@@ -20,14 +31,16 @@ class Reports extends Component {
             return this.props.expensesStore.currentMonth === new Date(this.props.expensesStore.expenses[0].date).getMonth() 
                         ? true : false
         }
+        // return false
     }
 
     render() {
         return(
             <div>
-                <h1>Reports</h1>
+                <h1>סיכום הוצאות</h1>
                 <MonthSelector />
-                {this.props.expensesStore.expenses.length ? <Report expenses={this.props.expensesStore.expenses}/> : <Loader />}
+                {/* {this.state.showLoader ? <Loader /> : <Report expenses={this.props.expensesStore.expenses}/>} */}
+                <Categories expenses={this.props.expensesStore.expenses}/>
                 <FabButton />
             </div>
         )
