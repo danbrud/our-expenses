@@ -52,8 +52,8 @@ export class Expenses {
         return sum
     }
 
-    @computed get showLoader() {
-        return this.expenses.length ? true : false
-    }
+    // @computed get showLoader() {
+    //     return this.expenses.length ? true : false
+    // }
 
 }

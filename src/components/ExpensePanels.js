@@ -6,6 +6,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import moment from 'moment'
+import Loader from './Loader'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,36 +35,48 @@ const useStyles = makeStyles(theme => ({
 export default function ExpensePanels(props) {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false)
-    
-    useEffect(() => { props.getExpenses() }, [])
+    const [showLoader, setLoader] = React.useState(true)
+
+    useEffect(async () => {
+        await props.getExpenses()
+        setLoader(false)
+    }, [])
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false)
     }
 
+    const panels = () => {
+        return (
+            <div className={classes.root}>
+                {props.expenses.map(e => {
+                    return (
+                        <ExpansionPanel key={e._id} className={classes.paper} expanded={expanded === e._id} onChange={handleChange(e._id)}>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                            >
+                                <Typography className={classes.heading}>{e.user}</Typography>
+                                <Typography className={classes.heading}>{e.expense}</Typography>
+                                <Typography className={classes.heading}>{e.amount} ₪</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <div className={classes.expanded}>
+                                    <p><span>קטגוריה: </span><span>{e.category}</span></p>
+                                    <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
+                                </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    )
+                })}
+            </div>
+        )
+    }
+
     return (
-        <div className={classes.root}>
-            {props.expenses.map(e => {
-                return (
-                    <ExpansionPanel key={e._id} className={classes.paper} expanded={expanded === e._id} onChange={handleChange(e._id)}>
-                        <ExpansionPanelSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1bh-content"
-                            id="panel1bh-header"
-                        >
-                            <Typography className={classes.heading}>{e.user}</Typography>
-                            <Typography className={classes.heading}>{e.expense}</Typography>
-                            <Typography className={classes.heading}>{e.amount} ₪</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <div className={classes.expanded}>
-                                <p><span>קטגוריה: </span><span>{e.category}</span></p>
-                                <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
-                            </div>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                )
-            })}
+        <div>
+            { showLoader ? <Loader /> : panels() }
         </div>
     )
 }

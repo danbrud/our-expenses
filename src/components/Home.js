@@ -8,16 +8,15 @@ import {inject, observer} from 'mobx-react'
 import ExpensePanels from './ExpensePanels';
 import Loader from './Loader';
 
+
+
 const Home = inject('expensesStore')(observer(function (props) {
+
     return (
         <div id='home-container'>
             <MonthSelector />
             <ExpenseTableHeader />
-            {
-                props.expensesStore.showLoader
-                ? <ExpensePanels expenses={props.expensesStore.expenses} getExpenses={props.expensesStore.getExpenses}/> 
-                : <Loader />
-            }
+            <ExpensePanels expenses={props.expensesStore.expenses} getExpenses={props.expensesStore.getExpenses}/>
             {props.expensesStore.showExpensePopup ? <ExpensePopup /> : null}
             <FabButton />
         </div>
