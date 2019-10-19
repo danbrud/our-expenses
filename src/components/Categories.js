@@ -1,45 +1,31 @@
-import React, { Component } from 'react'
-import { inject, observer } from 'mobx-react';
-import Expense from './Category';
-import { scaleOrdinal } from 'd3-scale';
-import { schemeCategory10 } from 'd3-scale-chromatic';
+import React from 'react'
 import Category from './Category';
-
-@inject('expensesStore')
-@observer
-class Categories extends Component {
-
-    componentDidMount = () => this.props.expensesStore.getExpenses()
+import { colors } from '../utils'
 
 
-    mapData = (expenses) => {
+function Categories(props) {
+
+    const mapData = expenses => {
         const dataObj = {}
+
         expenses.forEach(e => {
-            if (dataObj[e.category]) {
-                dataObj[e.category] += e.amount
-            } else {
-                dataObj[e.category] = e.amount || 0
-            }
+            const categoryExists = dataObj[e.category] ? true : false
+            dataObj[e.category] = categoryExists ? dataObj[e.category] + e.amount : e.amount || 0
         })
 
         const dataArr = []
-        for (let d in dataObj) {
-            dataArr.push({ name: d, value: dataObj[d] })
+        for (let data in dataObj) {
+            dataArr.push({ name: data, amount: dataObj[data] })
         }
 
         return dataArr
     }
 
-    render() {
-        const categories = this.mapData(this.props.expensesStore.expenses)
-        const colors = scaleOrdinal(schemeCategory10).range();
-
-        return(
-            <div>
-                {categories.map((c, i) => <Category key={c.name} category={c} color={colors[i % 20]}/>)}       
-            </div>
-        )
-    }
+    return (
+        <div>
+            {mapData(props.expenses).map((c, i) => <Category key={c.name} category={c} color={colors[i]} />)}
+        </div>
+    )
 }
 
 export default Categories

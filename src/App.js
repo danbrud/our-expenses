@@ -33,7 +33,7 @@ function App() {
       <NavBar expenses={expenses} />
       <Route exact path="/" render={() => <Home expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
       <Route exact path="/add-expense" render={() => <AddExpense />} />
-      <Route exact path="/reports" render={() => <Reports />} />
+      <Route exact path="/reports" render={() => <Reports expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
     </Router>
   )
 }

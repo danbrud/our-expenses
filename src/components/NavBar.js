@@ -11,8 +11,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom'
 import { Drawer } from '@material-ui/core';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -101,7 +99,7 @@ export default function NavBar(props) {
 
           </Typography>
           {
-            window.location.pathname === '/'
+            window.location.pathname === '/' || window.location.pathname === '/reports'
               ? <Typography variant="h6">
                 {sumExpenses()} :סה"כ הוצאות
                 </Typography>

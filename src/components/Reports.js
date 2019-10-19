@@ -1,50 +1,40 @@
-import React, { Component } from 'react'
+import React from 'react'
 import MonthSelector from './MonthSelector'
-import { inject, observer } from 'mobx-react'
 import FabButton from './FabButton'
-import Report from './Report'
 import Loader from './Loader'
-import './../styles/Reports.css'
 import Categories from './Categories'
+import './../styles/Reports.css'
 
-@inject('expensesStore')
-@observer
-class Reports extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            showLoader: true
-        }
-    }
+function Reports(props) {
 
-    componentDidMount = async () => {
-        if(!this.isExpensesCurrent()) { 
-            await this.props.expensesStore.getExpenses()
-        }
+    // componentDidMount = async () => {
+    //     if(!this.isExpensesCurrent()) { 
+    //         await this.props.expensesStore.getExpenses()
+    //     }
 
-        this.state.showLoader = false
-    }
+    //     this.state.showLoader = false
+    // }
 
-    isExpensesCurrent = () => {
-        if(this.props.expensesStore.expenses.length) {
-            return this.props.expensesStore.currentMonth === new Date(this.props.expensesStore.expenses[0].date).getMonth() 
-                        ? true : false
-        }
-        // return false
-    }
+    // isExpensesCurrent = () => {
+    //     if(this.props.expensesStore.expenses.length) {
+    //         return this.props.expensesStore.currentMonth === new Date(this.props.expensesStore.expenses[0].date).getMonth() 
+    //                     ? true : false
+    //     }
+    //     // return false
+    // }
 
-    render() {
-        return(
-            <div>
-                <h1>סיכום הוצאות</h1>
-                <MonthSelector />
-                {/* {this.state.showLoader ? <Loader /> : <Report expenses={this.props.expensesStore.expenses}/>} */}
-                <Categories expenses={this.props.expensesStore.expenses}/>
-                <FabButton />
+    return (
+        <div id="reports-container">
+            <MonthSelector currentMonth={props.currentMonth} changeCurrentMonth={props.changeCurrentMonth} />
+            <div className="category-table" id="expense-table-header">
+                <div>סכום</div>
+                <div>קטגוריה</div>
             </div>
-        )
-    }
+            {props.expenses.length ? <Categories expenses={props.expenses} /> : <Loader />}
+            <FabButton />
+        </div>
+    )
 }
 
 export default Reports
