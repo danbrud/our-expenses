@@ -14,6 +14,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom'
+import { Drawer } from '@material-ui/core';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar(props) {
   const classes = useStyles()
   const [state, setState] = React.useState({
-    left: false,
+    left: false
   })
 
   const toggleDrawer = (side, open) => event => {
@@ -50,7 +54,10 @@ export default function NavBar(props) {
     setState({ ...state, [side]: open })
   }
 
-  const sum = new Intl.NumberFormat('en-US').format(props.store.sumCurrentMonth)
+  const sumExpenses = () => {
+    const sum = props.expenses.reduce((acc, curr) => acc + curr.amount, 0)
+    return new Intl.NumberFormat('en-US').format(sum)
+  }
 
   const sideList = side => (
     <div
@@ -59,11 +66,15 @@ export default function NavBar(props) {
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
     >
+      <Typography variant="h6" >
+        תפריט
+      </Typography>
+      <Divider />
       <List>
         {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות'].map((text, index) => (
-          <Link to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : '/reports'}>
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+          <Link key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : '/reports'}>
+            <ListItem button>
+              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : <TrendingUpIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           </Link>
@@ -75,13 +86,13 @@ export default function NavBar(props) {
   return (
     <div className={classes.root}>
       <AppBar className={classes.bar} position="fixed">
-        <SwipeableDrawer
+        <Drawer
           open={state.left}
           onClose={toggleDrawer('left', false)}
           onOpen={toggleDrawer('left', true)}
         >
           {sideList('left')}
-        </SwipeableDrawer>
+        </Drawer>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon onClick={toggleDrawer('left', true)} />
@@ -92,7 +103,7 @@ export default function NavBar(props) {
           {
             window.location.pathname === '/'
               ? <Typography variant="h6">
-                {sum} :סה"כ הוצאות
+                {sumExpenses()} :סה"כ הוצאות
                 </Typography>
               : null
           }

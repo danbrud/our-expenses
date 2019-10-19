@@ -13,7 +13,7 @@ const API_URL = 'http://localhost:4000'
 function App() {
   const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth())
   const [expenses, setExpenses] = React.useState([])
-  
+
 
   const changeCurrentMonth = async month => setCurrentMonth(month)
 
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <Router>
-      {/* <NavBar store={this.props.expensesStore} /> */}
+      <NavBar expenses={expenses} />
       <Route exact path="/" render={() => <Home expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
       <Route exact path="/add-expense" render={() => <AddExpense />} />
       <Route exact path="/reports" render={() => <Reports />} />
