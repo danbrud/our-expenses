@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ExpenseTableHeader from './ExpenseTableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './MonthSelector';
@@ -10,17 +10,25 @@ import Loader from './Loader';
 
 
 
-const Home = inject('expensesStore')(observer(function (props) {
+function Home(props) {
+    const [expenses, setExpenses] = React.useState([])
+    const [showLoader, setLoader] = React.useState(true)
+
+
+    useEffect(async () => {
+        const expenses = await props.getExpenses()
+        setExpenses(expenses)
+        setLoader(false)
+    }, [])
 
     return (
         <div id='home-container'>
             <MonthSelector />
             <ExpenseTableHeader />
-            <ExpensePanels expenses={props.expensesStore.expenses} getExpenses={props.expensesStore.getExpenses}/>
-            {props.expensesStore.showExpensePopup ? <ExpensePopup /> : null}
+            {showLoader ? <Loader /> : <ExpensePanels expenses={expenses} />}
             <FabButton />
         </div>
     )
-}))
+}
 
 export default Home
