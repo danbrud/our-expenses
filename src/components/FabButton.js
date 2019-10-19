@@ -3,7 +3,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import '../styles/FabButton.css'
 
-export default function FabButton(props) {
+ function FabButton() {
 
     return (
         <div className="fab">
@@ -13,3 +13,5 @@ export default function FabButton(props) {
         </div>
     )
 }
+
+export default FabButton

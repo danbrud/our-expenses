@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ExpenseTableHeader() {
+function ExpenseTableHeader() {
 
     return (
         <div className="expense-table" id="expense-table-header">
@@ -10,3 +10,5 @@ export default function ExpenseTableHeader() {
         </div>
     )
 }
+
+export default ExpenseTableHeader

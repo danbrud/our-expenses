@@ -1,31 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ExpenseTableHeader from './ExpenseTableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './MonthSelector';
-import '../styles/Expense.css'
-import ExpensePopup from './ExpensePopup'
-import {inject, observer} from 'mobx-react'
 import ExpensePanels from './ExpensePanels';
 import Loader from './Loader';
+import '../styles/Expense.css'
 
 
 
 function Home(props) {
-    const [expenses, setExpenses] = React.useState([])
-    const [showLoader, setLoader] = React.useState(true)
-
-
-    useEffect(async () => {
-        const expenses = await props.getExpenses()
-        setExpenses(expenses)
-        setLoader(false)
-    }, [])
 
     return (
         <div id='home-container'>
-            <MonthSelector />
+            <MonthSelector currentMonth={props.currentMonth} changeCurrentMonth={props.changeCurrentMonth} />
             <ExpenseTableHeader />
-            {showLoader ? <Loader /> : <ExpensePanels expenses={expenses} />}
+            {props.expenses.length ? <ExpensePanels expenses={props.expenses} /> : <Loader />}
             <FabButton />
         </div>
     )
