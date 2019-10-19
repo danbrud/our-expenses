@@ -1,20 +1,38 @@
 import React from 'react'
-import { observer, inject } from 'mobx-react';
-import { expenseCategories } from '../utils';
-import '../styles/AddExpense.css'
 import DateSelector from './DateSelector';
+import axios from 'axios'
+import { expenseCategories, API_URL } from '../utils';
+import '../styles/AddExpense.css'
 
-const AddExpense = inject('generalStore', 'expensesStore')(observer(function (props) {
+function AddExpense(props) {
+    const [state, setState] = React.useState({ user: '', amount: '', expense: '', category: '', date: new Date() })
+    const [showErrorMessage, setShowErrorMessage] = React.useState(false)
 
-    const generalStore = props.generalStore
+    const handleInputs = e => setState({ ...state, [e.target.name]: e.target.value })
+    const changeDate = date => setState({ ...state, date })
 
-    const addExpense = () => {
-        props.expensesStore.addExpense(generalStore.user, generalStore.amount, generalStore.expense, generalStore.category, generalStore.date)
+    const validateInputs = (user, amount, expense, category) => user && amount && expense && category ? true : false
+
+    const addExpense = async (user, amount, expense, category, date) => {
+        const newExpense = { user, expense, amount, category, date }
+        const res = await axios.post(`${API_URL}/expense`, newExpense)
+        props.setExpenses([...props.expenses, res.data])
+
+        window.location = '/'
     }
 
-    const changeDate = date => {
-        generalStore.handleDateChange(date)
+    const toggleErrorMessage = () => {
+        setShowErrorMessage(true)
+        setTimeout(() => {
+            setShowErrorMessage(false)
+        }, 2000)
     }
+
+    const handleAdd = () => {
+        const { user, amount, expense, category, date } = state
+        validateInputs(user, amount, expense, category) ? addExpense(user, amount, expense, category, date) : toggleErrorMessage()
+    }
+
 
     return (
         <div id="add-expense">
@@ -25,35 +43,35 @@ const AddExpense = inject('generalStore', 'expensesStore')(observer(function (pr
                     dir="rtl"
                     placeholder="משתמש"
                     name="user"
-                    value={generalStore.user}
-                    onChange={generalStore.handleInputs}
+                    value={state.user}
+                    onChange={handleInputs}
                 />
                 <input
                     name="amount"
                     type="number"
                     dir="rtl"
                     placeholder="סכום"
-                    value={generalStore.amount}
-                    onChange={generalStore.handleInputs}
+                    value={state.amount}
+                    onChange={handleInputs}
                 />
                 <input
                     dir="rtl"
                     placeholder="הוצאה"
                     name="expense"
                     type="text"
-                    value={generalStore.expense}
-                    onChange={generalStore.handleInputs}
+                    value={state.expense}
+                    onChange={handleInputs}
                 />
-                <select name="category" dir="rtl" onChange={generalStore.handleInputs}>
+                <select name="category" dir="rtl" onChange={handleInputs}>
                     <option selected disabled>תבחר קטגוריה</option>
                     {expenseCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                 </select>
-                <DateSelector changeDate={changeDate} date={generalStore.date}/>
-                <div id="add-expense-button" onClick={addExpense}>הוסף</div>
-                {props.expensesStore.showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
+                <DateSelector changeDate={changeDate} date={state.date} />
+                <div id="add-expense-button" onClick={handleAdd}>הוסף</div>
+                {showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
             </div>
         </div>
     )
-}))
+}
 
 export default AddExpense

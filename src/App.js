@@ -6,8 +6,7 @@ import Reports from './components/Reports';
 import NavBar from './components/NavBar'
 import axios from 'axios'
 import './App.css'
-const API_URL = 'http://localhost:4000'
-// const API_URL = ''
+import { API_URL } from './utils'
 
 
 function App() {
@@ -32,7 +31,7 @@ function App() {
     <Router>
       <NavBar expenses={expenses} />
       <Route exact path="/" render={() => <Home expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
-      <Route exact path="/add-expense" render={() => <AddExpense />} />
+      <Route exact path="/add-expense" render={() => <AddExpense expenses={expenses} setExpenses={setExpenses} />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
     </Router>
   )

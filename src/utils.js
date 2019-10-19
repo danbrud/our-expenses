@@ -33,3 +33,5 @@ export const colors = [
     '#D7F9F1',
     '#FFD5FF'
 ]
+
+export const API_URL = ''// 'http://localhost:4000'
