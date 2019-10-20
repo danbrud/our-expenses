@@ -15,7 +15,7 @@ function AddExpense(props) {
 
     const addExpense = async (user, amount, expense, category, date) => {
         const newExpense = { user, expense, amount, category, date }
-        const res = await axios.post(`${API_URL}/expense`, newExpense)
+        const res = await axios.post(`${API_URL}/api/expense`, newExpense)
         props.setExpenses([...props.expenses, res.data])
 
         window.location = '/'

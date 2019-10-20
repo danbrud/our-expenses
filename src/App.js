@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import axios from 'axios'
 import './App.css'
 import { API_URL } from './utils'
+import Login from './components/Login';
 
 
 function App() {
@@ -14,24 +15,26 @@ function App() {
   const [expenses, setExpenses] = React.useState([])
 
 
-  const changeCurrentMonth = async month => setCurrentMonth(month)
-
   useEffect(() => {
     const getExpenses = async (shouldGetByMonth = true) => {
       const optionalMonthParam = shouldGetByMonth !== -1 ? `?month=${currentMonth}` : ''
-  
-      const res = await axios.get(`${API_URL}/expenses${optionalMonthParam}`)
+      
+      const res = await axios.get(`${API_URL}/api/expenses${optionalMonthParam}`)
       setExpenses(res.data)
     }
     
     getExpenses()
   }, [currentMonth])
+  
+  const changeCurrentMonth = async month => setCurrentMonth(month)
+
+  const isLoggedIn = () => localStorage.userName ? true : false
 
   return (
     <Router>
       <NavBar expenses={expenses} />
       <Route exact path="/" render={() => <Home expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
-      <Route exact path="/add-expense" render={() => <AddExpense expenses={expenses} setExpenses={setExpenses} />} />
+      <Route exact path="/add-expense" render={() => isLoggedIn() ? <AddExpense expenses={expenses} setExpenses={setExpenses} /> : <Login />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
     </Router>
   )

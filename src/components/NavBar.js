@@ -12,7 +12,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom'
-import { Drawer } from '@material-ui/core';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -84,13 +83,13 @@ export default function NavBar(props) {
   return (
     <div className={classes.root}>
       <AppBar className={classes.bar} position="fixed">
-        <Drawer
+        <SwipeableDrawer
           open={state.left}
           onClose={toggleDrawer('left', false)}
           onOpen={toggleDrawer('left', true)}
         >
           {sideList('left')}
-        </Drawer>
+        </SwipeableDrawer>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon onClick={toggleDrawer('left', true)} />
