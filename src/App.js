@@ -13,6 +13,7 @@ import Login from './components/Login';
 function App() {
   const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth())
   const [expenses, setExpenses] = React.useState([])
+  const [currentUser, setCurrentUser] = React.useState(localStorage.userName)
 
 
   useEffect(() => {
@@ -28,13 +29,13 @@ function App() {
   
   const changeCurrentMonth = async month => setCurrentMonth(month)
 
-  const isLoggedIn = () => localStorage.userName ? true : false
+  const isLoggedIn = () => currentUser ? true : false
 
   return (
     <Router>
       <NavBar expenses={expenses} />
       <Route exact path="/" render={() => <Home expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
-      <Route exact path="/add-expense" render={() => isLoggedIn() ? <AddExpense expenses={expenses} setExpenses={setExpenses} /> : <Login />} />
+      <Route exact path="/add-expense" render={() => isLoggedIn() ? <AddExpense currentUser={currentUser} expenses={expenses} setExpenses={setExpenses} /> : <Login setCurrentUser={setCurrentUser} />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentMonth={currentMonth} changeCurrentMonth={changeCurrentMonth} />} />
     </Router>
   )

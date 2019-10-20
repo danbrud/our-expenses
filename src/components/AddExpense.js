@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DateSelector from './DateSelector';
 import axios from 'axios'
 import { expenseCategories, API_URL } from '../utils';
 import '../styles/AddExpense.css'
 
 function AddExpense(props) {
-    const [state, setState] = React.useState({ user: '', amount: '', expense: '', category: '', date: new Date() })
+    const [state, setState] = React.useState({ user: props.currentUser, amount: '', expense: '', category: '', date: new Date() })
     const [showErrorMessage, setShowErrorMessage] = React.useState(false)
+    const amountInput = React.createRef()
+
+    useEffect(() => {
+        amountInput.current.focus()
+    }, [])
 
     const handleInputs = e => setState({ ...state, [e.target.name]: e.target.value })
     const changeDate = date => setState({ ...state, date })
@@ -53,6 +58,7 @@ function AddExpense(props) {
                     placeholder="סכום"
                     value={state.amount}
                     onChange={handleInputs}
+                    ref={amountInput}
                 />
                 <input
                     dir="rtl"
