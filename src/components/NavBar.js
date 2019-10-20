@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     height: '50px',
     fontSize: '24px',
     textAlign: 'right',
-    marginTop: '10px',
+    marginTop: '12px',
     marginRight: '20px'
   },
   bar: {
