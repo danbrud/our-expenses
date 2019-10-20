@@ -1,20 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import {AppBar, Toolbar, Typography, IconButton, List, Divider, ListItem, ListItemIcon, ListItemText, Drawer} from '@material-ui/core'
+import CreditCardIcon from '@material-ui/icons/CreditCard'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import TrendingUpIcon from '@material-ui/icons/TrendingUp'
+import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
-import CreditCardIcon from '@material-ui/icons/CreditCard';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,16 +17,30 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    height: '50px',
+    fontSize: '24px',
+    textAlign: 'right',
+    marginTop: '10px',
+    marginRight: '20px'
   },
   bar: {
     backgroundColor: '#34495e',
   },
   list: {
     width: 250,
+    backgroundColor: '#EAF2EF',
+    height: '100vh'
   },
   fullList: {
     width: 'auto',
   },
+  link: {
+    textDecoration: 'none',
+    color: '#34495e'
+  },
+  listItem: {
+    margin: '20px 0'
+  }
 }))
 
 export default function NavBar(props) {
@@ -63,14 +69,14 @@ export default function NavBar(props) {
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
     >
-      <Typography variant="h6" >
+      <Typography variant="h6" className={classes.title} >
         תפריט
       </Typography>
       <Divider />
       <List>
         {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות'].map((text, index) => (
-          <Link key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : '/reports'}>
-            <ListItem button>
+          <Link className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : '/reports'}>
+            <ListItem button className={classes.listItem}>
               <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : <TrendingUpIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -83,14 +89,14 @@ export default function NavBar(props) {
   return (
     <div className={classes.root}>
       <AppBar className={classes.bar} position="fixed">
-        <SwipeableDrawer
+        <Drawer
           open={state.left}
           onClose={toggleDrawer('left', false)}
           onOpen={toggleDrawer('left', true)}
         >
           {sideList('left')}
-        </SwipeableDrawer>
-        <Toolbar>
+        </Drawer>
+        <Toolbar >
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon onClick={toggleDrawer('left', true)} />
           </IconButton>
