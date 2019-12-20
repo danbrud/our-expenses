@@ -48,7 +48,6 @@ Expanded side menu for the app.
 ## TODO
 1. Add a tab view in the reports screen and add an expense report by user.
 2. Create real signup/login and database of users for use over many couples.
-3. Add error snackbar popup when expense is added.
-4. Add ability to expand each category (in the category report) which will show all the expenses in that category.
-5. Compare totals between months and show if specific categories increased or decreased between months.
-6. Create a `loadData` function which loads data when the server is started for the demo site and local run.
+3. Add ability to expand each category (in the category report) which will show all the expenses in that category.
+4. Compare totals between months and show if specific categories increased or decreased between months.
+5. Create a `loadData` function which loads data when the server is started for the demo site and local run.
