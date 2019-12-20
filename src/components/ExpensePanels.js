@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         justifyItems: 'center',
+        fontSize: '14px'
     },
     paper: {
         backgroundColor: '#EAF2EF',
