@@ -9,7 +9,7 @@ import './../styles/Reports.css'
 function Reports(props) {
 
     // componentDidMount = async () => {
-    //     if(!this.isExpensesCurrent()) { 
+    //     if(!this.isExpensesCurrent()) {
     //         await this.props.expensesStore.getExpenses()
     //     }
 
@@ -18,7 +18,7 @@ function Reports(props) {
 
     // isExpensesCurrent = () => {
     //     if(this.props.expensesStore.expenses.length) {
-    //         return this.props.expensesStore.currentMonth === new Date(this.props.expensesStore.expenses[0].date).getMonth() 
+    //         return this.props.expensesStore.currentMonth === new Date(this.props.expensesStore.expenses[0].date).getMonth()
     //                     ? true : false
     //     }
     //     // return false
@@ -26,7 +26,7 @@ function Reports(props) {
 
     return (
         <div id="reports-container">
-            <MonthSelector currentMonth={props.currentMonth} changeCurrentMonth={props.changeCurrentMonth} />
+            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
             <div className="category-table" id="expense-table-header">
                 <div>סכום</div>
                 <div>קטגוריה</div>

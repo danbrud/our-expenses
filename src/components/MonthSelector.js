@@ -70,7 +70,7 @@ function MonthSelector(props) {
         handleDateChange(date)
 
         const formattedDate = new Date(date)
-        props.changeCurrentMonth(formattedDate)
+        props.changeCurrentDate(formattedDate)
     }
 
     return (
@@ -79,12 +79,12 @@ function MonthSelector(props) {
             <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                 <DatePicker
                     views={["year", "month"]}
-                    maxDate={new Date()}
+                    // maxDate={new Date()}
                     value={selectedDate}
                     onChange={handleChange}
                     okLabel="בחר"
-                        cancelLabel="בטל"
-                        autoOk={true}
+                    cancelLabel="בטל"
+                    autoOk={true}
                 />
             </MuiPickersUtilsProvider>
         </ThemeProvider>

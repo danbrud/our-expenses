@@ -12,7 +12,7 @@ function Home(props) {
 
     return (
         <div id='home-container'>
-            <MonthSelector currentMonth={props.currentMonth} changeCurrentMonth={props.changeCurrentMonth} />
+            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
             <ExpenseTableHeader />
             {props.expenses.length ? <ExpensePanels expenses={props.expenses} /> : <Loader />}
             <FabButton />
