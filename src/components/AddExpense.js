@@ -3,10 +3,12 @@ import DateSelector from './DateSelector';
 import axios from 'axios'
 import { expenseCategories, API_URL } from '../utils';
 import '../styles/AddExpense.css'
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContentWrapper from './SnackbarContentWrapper'
 
 function AddExpense(props) {
     const [state, setState] = React.useState({ user: props.currentUser, amount: '', expense: '', category: '', date: new Date() })
-    const [showErrorMessage, setShowErrorMessage] = React.useState(false)
+    const [open, setOpen] = React.useState(false)
     const amountInput = React.createRef()
 
     useEffect(() => {
@@ -26,16 +28,17 @@ function AddExpense(props) {
         window.location = '/'
     }
 
-    const toggleErrorMessage = () => {
-        setShowErrorMessage(true)
-        setTimeout(() => {
-            setShowErrorMessage(false)
-        }, 2000)
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        setOpen(false)
     }
 
     const handleAdd = () => {
         const { user, amount, expense, category, date } = state
-        validateInputs(user, amount, expense, category) ? addExpense(user, amount, expense, category, date) : toggleErrorMessage()
+        validateInputs(user, amount, expense, category) ? addExpense(user, amount, expense, category, date) : setOpen(true)
     }
 
 
@@ -74,8 +77,22 @@ function AddExpense(props) {
                 </select>
                 <DateSelector changeDate={changeDate} date={state.date} />
                 <div id="add-expense-button" onClick={handleAdd}>הוסף</div>
-                {showErrorMessage ? <div id="error-message">מלא את כל השדות והוסף שוב</div> : null}
             </div>
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+            >
+                <SnackbarContentWrapper
+                    onClose={handleClose}
+                    variant="error"
+                    message="מלא את כל השדות והוסף שוב"
+                />
+            </Snackbar>
         </div>
     )
 }

@@ -6,7 +6,6 @@ import moment from "moment";
 import MomentUtils from "@date-io/moment";
 import 'moment/locale/he';
 import '../styles/Expense.css'
-import lightBlue from "@material-ui/core/colors/lightBlue";
 import { makeStyles } from '@material-ui/core/styles';
 
 moment.locale('he')
@@ -42,16 +41,16 @@ const materialTheme = createMuiTheme({
         },
         MuiPickersDay: {
             day: {
-                color: lightBlue.A700,
+                color: '#34495e',
             },
             monthSelected: {
                 backgroundColor: '#34495e',
             },
             dayDisabled: {
-                color: lightBlue["100"],
+                color: '#34495e',
             },
             current: {
-                color: lightBlue["900"],
+                color: '#34495e',
             },
         },
         MuiPickersModal: {

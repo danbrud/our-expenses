@@ -1,9 +1,7 @@
 import 'date-fns';
 import React from 'react';
-import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
-import lightBlue from "@material-ui/core/colors/lightBlue";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
 import moment from "moment";
