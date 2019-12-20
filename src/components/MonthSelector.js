@@ -79,7 +79,7 @@ function MonthSelector(props) {
             <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                 <DatePicker
                     views={["year", "month"]}
-                    // maxDate={new Date()}
+                    maxDate={new Date()}
                     value={selectedDate}
                     onChange={handleChange}
                     okLabel="בחר"
