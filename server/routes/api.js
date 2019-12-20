@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const getExpensesByDate = require('../utils/utilFunctions').getExpensesByDate
 
 const Expense = require('../models/Expense')
 
@@ -9,18 +10,17 @@ router.get('/sanity', function (req, res) {
 })
 
 router.get('/expenses', async function(req, res) {
-    let date, currentMonth = req.query.month, minDate, maxDate 
-    
-    if(currentMonth) {
-        date = new Date()
-        currentMonth = parseInt(currentMonth)
-        minDate = new Date(date.getFullYear(), currentMonth, 2)
-        maxDate = new Date(date.getFullYear(), currentMonth + 1, 0)
+    let minDate, maxDate, currentDate = req.query.date
+
+    if(currentDate) {
+        currentDate = new Date(currentDate)
+        minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+        maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
         maxDate.setDate(maxDate.getDate() + 1)
     }
-    
-    const expenses = currentMonth 
-        ? await Expense.find({ date: { $gte: minDate, $lte: maxDate }}) 
+
+    const expenses = currentDate
+        ? await getExpensesByDate(minDate, maxDate)
         : await Expense.find({})
 
     res.send(expenses)
