@@ -10,12 +10,17 @@ function Categories(props) {
 
         expenses.forEach(e => {
             const categoryExists = dataObj[e.category] ? true : false
-            dataObj[e.category] = categoryExists ? dataObj[e.category] + e.amount : e.amount || 0
+            if (categoryExists) {
+                dataObj[e.category].expenses.push(e)
+                dataObj[e.category].total += e.amount
+            } else {
+                dataObj[e.category] = { name: e.category, expenses: [e], total: e.amount || 0 }
+            }
         })
 
         const dataArr = []
         for (let data in dataObj) {
-            dataArr.push({ name: data, amount: dataObj[data] })
+            dataArr.push(dataObj[data])
         }
 
         return dataArr
