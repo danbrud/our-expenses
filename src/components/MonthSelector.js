@@ -7,8 +7,25 @@ import MomentUtils from "@date-io/moment";
 import 'moment/locale/he';
 import '../styles/Expense.css'
 import lightBlue from "@material-ui/core/colors/lightBlue";
+import { makeStyles } from '@material-ui/core/styles';
 
 moment.locale('he')
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '98%',
+        direction: 'rtl',
+        position: 'relative',
+        display: 'grid',
+        justifySelf: 'center',
+        margin: '3px'
+    },
+    picker: {
+        paddingRight: '5px',
+        fontSize: '1.5rem',
+    },
+}))
+
 
 const materialTheme = createMuiTheme({
     overrides: {
@@ -27,8 +44,8 @@ const materialTheme = createMuiTheme({
             day: {
                 color: lightBlue.A700,
             },
-            daySelected: {
-                backgroundColor: lightBlue["400"],
+            monthSelected: {
+                backgroundColor: '#34495e',
             },
             dayDisabled: {
                 color: lightBlue["100"],
@@ -39,22 +56,25 @@ const materialTheme = createMuiTheme({
         },
         MuiPickersModal: {
             dialogAction: {
-                color: '#1e1e1e',
+                color: '#34495e',
             },
         },
     },
 })
 
 function MonthSelector(props) {
+    const classes = useStyles()
     const [selectedDate, handleDateChange] = useState(new Date())
 
     const handleChange = date => {
-        console.log(date)
         handleDateChange(date)
-        // props.changeCurrentMonth(date)
+
+        const formattedDate = new Date(date)
+        props.changeCurrentMonth(formattedDate)
     }
 
     return (
+        <div className={classes.root}>
         <ThemeProvider theme={materialTheme}>
             <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                 <DatePicker
@@ -63,19 +83,13 @@ function MonthSelector(props) {
                     value={selectedDate}
                     onChange={handleChange}
                     okLabel="בחר"
-                    cancelLabel="בטל"
+                        cancelLabel="בטל"
+                        autoOk={true}
                 />
             </MuiPickersUtilsProvider>
         </ThemeProvider>
+        </div>
     )
 }
 
 export default MonthSelector
-    // <select
-    //     id='month-selector'
-    //     dir='rtl'
-    //     value={props.currentMonth}
-    //     onChange={(e) => props.changeCurrentMonth(e.target.value)}
-    // >
-    //     {months.map((m, i) => <option key={i} value={i}>{m}</option>)}
-    // </select>
