@@ -14,6 +14,7 @@ function App() {
   const [currentDate, setCurrentDate] = React.useState(new Date())
   const [expenses, setExpenses] = React.useState([])
   const [currentUser, setCurrentUser] = React.useState(localStorage.userName)
+  const [isLoading, setIsLoading] = React.useState(true)
 
 
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
 
       const res = await axios.get(`${API_URL}/api/expenses${optionalParam}`)
       setExpenses(res.data)
+      setIsLoading(false)
     }
 
     getExpenses()
@@ -34,9 +36,9 @@ function App() {
   return (
     <Router>
       <NavBar expenses={expenses} />
-      <Route exact path="/" render={() => <Home expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} />} />
+      <Route exact path="/" render={() => <Home expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />} />
       <Route exact path="/add-expense" render={() => isLoggedIn() ? <AddExpense currentUser={currentUser} expenses={expenses} setExpenses={setExpenses} /> : <Login setCurrentUser={setCurrentUser} />} />
-      <Route exact path="/reports" render={() => <Reports expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} />} />
+      <Route exact path="/reports" render={() => <Reports expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />} />
     </Router>
   )
 }

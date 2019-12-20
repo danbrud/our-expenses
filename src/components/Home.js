@@ -14,7 +14,13 @@ function Home(props) {
         <div id='home-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
             <ExpenseTableHeader />
-            {props.expenses.length ? <ExpensePanels expenses={props.expenses} /> : <Loader />}
+            {
+                props.expenses.length
+                    ? <ExpensePanels expenses={props.expenses} />
+                    : props.isLoading
+                        ? <Loader />
+                        : <div className="no-expense-msg">אין הוצאות לחודש זה</div>
+            }
             <FabButton />
         </div>
     )
