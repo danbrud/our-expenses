@@ -64,7 +64,7 @@ const materialTheme = createMuiTheme({
 
 function MonthSelector(props) {
     const classes = useStyles()
-    const [selectedDate, handleDateChange] = useState(new Date())
+    const [selectedDate, handleDateChange] = useState(props.currentDate)
 
     const handleChange = date => {
         handleDateChange(date)
