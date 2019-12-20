@@ -1,9 +1,11 @@
 import React from 'react'
+import CategoryPanels from './CategoryPanels'
 import Category from './Category';
 import { colors } from '../utils'
 
 
 function Categories(props) {
+    const [expanded, setExpanded] = React.useState(false)
 
     const mapData = expenses => {
         const dataObj = {}
@@ -22,13 +24,14 @@ function Categories(props) {
         for (let data in dataObj) {
             dataArr.push(dataObj[data])
         }
-
+        console.log(dataArr)
         return dataArr
     }
 
     return (
         <div>
-            {mapData(props.expenses).map((c, i) => <Category key={c.name} category={c} color={colors[i]} />)}
+            {mapData(props.expenses)
+                .map((c, i) => <CategoryPanels expanded={expanded} setExpanded={setExpanded} key={c.name} category={c} color={colors[i]} />)}
         </div>
     )
 }
