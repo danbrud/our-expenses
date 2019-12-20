@@ -50,7 +50,6 @@ Expanded side menu for the app.
 2. Create real signup/login and database of users for use over many couples.
 3. Add error snackbar popup when expense is added.
 4. Show message that there is no existing expenses (instead of loader) if api request comes back empty.
-5. Change month selector to include selection for year.
-6. Add ability to expand each category (in the category report) which will show all the expenses in that category.
-7. Compare totals between months and show if specific categories increased or decreased between months.
-8. Create a `loadData` function which loads data when the server is started for the demo site and local run.
+5. Add ability to expand each category (in the category report) which will show all the expenses in that category.
+6. Compare totals between months and show if specific categories increased or decreased between months.
+7. Create a `loadData` function which loads data when the server is started for the demo site and local run.
