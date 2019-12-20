@@ -17,7 +17,9 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         display: 'grid',
         justifySelf: 'center',
-        margin: '3px'
+        alignItems: 'center',
+        margin: '3px',
+        height: '50px'
     },
     picker: {
         paddingRight: '5px',
