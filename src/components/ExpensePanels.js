@@ -58,6 +58,8 @@ export default function ExpensePanels(props) {
                             <div className={classes.expanded}>
                                 <p><span>קטגוריה: </span><span>{e.category}</span></p>
                                 <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
+                                <div class='circle-btn edt-btn'><i class="far fa-edit mod-icon edt-icon"></i></div>
+                                <div class='circle-btn dlt-btn'><i class="far fa-trash-alt mod-icon dlt-icon"></i></div>
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
