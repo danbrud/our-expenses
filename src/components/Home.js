@@ -16,7 +16,7 @@ function Home(props) {
             <ExpenseTableHeader />
             {
                 props.expenses.length
-                    ? <ExpensePanels expenses={props.expenses} />
+                    ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
                     : props.isLoading
                         ? <Loader />
                         : <div className="no-expense-msg">אין הוצאות לחודש זה</div>
