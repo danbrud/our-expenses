@@ -49,6 +49,9 @@ export default function ExpensePanels(props) {
     }
 
     const deleteExpense = async (id) => {
+        const confirmed = window.confirm('בטוח למחוק?')
+        if(!confirmed) { return }
+
         await axios.delete(`${API_URL}/api/expenses/${id}`)
         deleteExpenseInState(id)
     }
