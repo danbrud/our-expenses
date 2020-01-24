@@ -33,4 +33,9 @@ router.post('/expense', async function(req, res) {
     res.send(savedExpense)
 })
 
+router.delete('/expenses/:id', async function(req, res) {
+    const expense = await Expense.findOneAndDelete({_id: req.params.id})
+    res.send(expense)
+})
+
 module.exports = router
