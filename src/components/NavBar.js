@@ -4,6 +4,7 @@ import {AppBar, Toolbar, Typography, IconButton, List, Divider, ListItem, ListIt
 import CreditCardIcon from '@material-ui/icons/CreditCard'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import TrendingUpIcon from '@material-ui/icons/TrendingUp'
+import SettingsIcon from '@material-ui/icons/Settings'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 
@@ -74,10 +75,10 @@ export default function NavBar(props) {
       </Typography>
       <Divider />
       <List>
-        {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות'].map((text, index) => (
-          <Link className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : '/reports'}>
+        {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות', 'הגדרות'].map((text, index) => (
+          <Link className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : text === 'סיכום הוצאות' ? '/reports' : '/settings'}>
             <ListItem button className={classes.listItem}>
-              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : <TrendingUpIcon />}</ListItemIcon>
+              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : index === 2 ? <TrendingUpIcon /> : <SettingsIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           </Link>

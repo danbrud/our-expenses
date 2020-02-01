@@ -8,6 +8,7 @@ import axios from 'axios'
 import './App.css'
 import { API_URL } from './utils'
 import Login from './components/Login';
+import Settings from './components/Settings'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Route exact path="/" render={() => <Home expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setExpenses={setExpenses} />} />
       <Route exact path="/add-expense" render={() => isLoggedIn() ? <AddExpense currentUser={currentUser} expenses={expenses} setExpenses={setExpenses} /> : <Login setCurrentUser={setCurrentUser} />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />} />
+      <Route exact path='/settings' render={() => <Settings />} />
     </Router>
   )
 }
