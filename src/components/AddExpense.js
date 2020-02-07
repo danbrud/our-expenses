@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import DateSelector from './DateSelector';
 import axios from 'axios'
-import { expenseCategories, API_URL } from '../utils';
+import { API_URL } from '../utils';
 import '../styles/AddExpense.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'
@@ -21,7 +21,7 @@ function AddExpense(props) {
     const validateInputs = (user, amount, expense, category) => user && amount && expense && category ? true : false
 
     const addExpense = async (user, amount, expense, category, date) => {
-        const newExpense = { user, expense, amount, category, date }
+        const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
         const res = await axios.post(`${API_URL}/api/expense`, newExpense)
         props.setExpenses([...props.expenses, res.data])
 
@@ -73,7 +73,7 @@ function AddExpense(props) {
                 />
                 <select name="category" dir="rtl" onChange={handleInputs}>
                     <option selected disabled>תבחר קטגוריה</option>
-                    {expenseCategories.map((c, i) => <option key={i} value={c}>{c}</option>)}
+                    {props.currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                 </select>
                 <DateSelector changeDate={changeDate} date={state.date} />
                 <div id="add-expense-button" onClick={handleAdd}>הוסף</div>

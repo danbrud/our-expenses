@@ -1,26 +1,33 @@
 import React from 'react'
 import './../styles/Settings.css'
 import ChipsArray from './ChipsArray'
-import { users, expenseCategories } from '../utils'
+import { API_URL } from '../utils'
+import axios from 'axios'
+
 
 function Settings(props) {
-    const [userData, setUserData] = React.useState(users)
-    const [categoriesData, setCategoriesData] = React.useState(expenseCategories)
-    const [inputs, setInputs] = React.useState({ user: '', category: '' })
+    const [inputs, setInputs] = React.useState({ users: '', categories: '' })
 
-
-    const handleDelete = chipToDelete => () => {
-        userData.includes(chipToDelete)
-            ? setUserData(chips => chips.filter(chip => chip !== chipToDelete))
-            : setCategoriesData(chips => chips.filter(chip => chip !== chipToDelete))
+    const handleDelete = chipToDelete => async () => {
+        const fieldToUpdate = props.currentAccount.users.includes(chipToDelete) ? 'users' : 'categories'
+        const account = await axios.put(`${API_URL}/api/accounts`, {
+            fieldToUpdate, accountId: props.currentAccount._id, data: chipToDelete, operation: 'remove'
+        })
+        
+        props.setCurrentAccount(account.data)
     }
 
     const handleInputs = e => {
         setInputs({ ...inputs, [e.target.name]: e.target.value })
     }
 
-    const handleAdd = type => {
+    const handleAdd = async fieldToUpdate => {
+        const account = await axios.put(`${API_URL}/api/accounts`, {
+            fieldToUpdate, accountId: props.currentAccount._id, data: inputs[fieldToUpdate], operation: 'add'
+        })
 
+        props.setCurrentAccount(account.data)
+        setInputs({ ...inputs, [fieldToUpdate]: '' })
     }
 
     return (
@@ -32,14 +39,14 @@ function Settings(props) {
                         class="add-data-input"
                         dir="rtl"
                         placeholder="הוסף משתמש"
-                        name="user"
+                        name="users"
                         type="text"
-                        value={inputs.user}
+                        value={inputs.users}
                         onChange={handleInputs}
                     />
-                    <div class="add-button" onClick={() => handleAdd('user')}>הוסף</div>
+                    <div class="add-button" onClick={() => handleAdd('users')}>הוסף</div>
                 </div>
-                <ChipsArray chipData={userData} handleDelete={handleDelete} />
+                <ChipsArray chipData={props.currentAccount.users} handleDelete={handleDelete} />
             </div>
             <div>
                 <div class="type-container">
@@ -48,14 +55,14 @@ function Settings(props) {
                         class="add-data-input"
                         dir="rtl"
                         placeholder="הוסף קטגוריה"
-                        name="category"
+                        name="categories"
                         type="text"
-                        value={inputs.category}
+                        value={inputs.categories}
                         onChange={handleInputs}
                     />
-                    <div class="add-button" onClick={() => handleAdd('category')}>הוסף</div>
+                    <div class="add-button" onClick={() => handleAdd('categories')}>הוסף</div>
                 </div>
-                <ChipsArray chipData={categoriesData} handleDelete={handleDelete} />
+                <ChipsArray chipData={props.currentAccount.categories} handleDelete={handleDelete} />
             </div>
         </div>
     )

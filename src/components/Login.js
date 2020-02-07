@@ -1,5 +1,4 @@
 import React from 'react'
-import { users } from '../utils'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import '../styles/Login.css'
@@ -27,7 +26,7 @@ function Login(props) {
         <div>
             <h1>תבחר/י משתמש</h1>
             <div id="user-container">
-                {users.map(u => <Button key={u} variant="contained" onClick={() => setUser(u)} className={classes.button}>{u}</Button>)}
+                {props.users.map(u => <Button key={u} variant="contained" onClick={() => setUser(u)} className={classes.button}>{u}</Button>)}
             </div>
         </div>
     )

@@ -2,13 +2,22 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
+  background-color: #34495E;
+  color: white;
+  width: 65px;
+  height: 65px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border-radius: 50%;
 }
 .fab:hover {
   cursor: pointer;
-}
-.fab .MuiFab-primary {
-  background-color: #34495E;
-}
-.fab .MuiFab-primary:hover {
   background-color: #272838;
+}
+.fab .MuiSvgIcon-root {
+  font-size: 1.75rem;
+}
+.fab a {
+  color: white;
 }
