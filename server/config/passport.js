@@ -9,7 +9,7 @@ const opts = {}
 opts.jwtFromRequest = extractJwt.fromAuthHeaderAsBearerToken()
 opts.secretOrKey = secretOrKey
 
-const authenticate = passport => {
+const useStrategy = passport => {
     passport.use(
         new JwtStrategy(opts, (jwtPayload, done) => {
             Account.findById(jwtPayload._id)
@@ -24,4 +24,4 @@ const authenticate = passport => {
     )
 }
 
-module.exports = authenticate
+module.exports = useStrategy

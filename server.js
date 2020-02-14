@@ -2,9 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const app = express()
 const api = require('./server/routes/api')
+const useStrategy = require('./server/config/passport')
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/our-expenses", {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false
@@ -23,8 +25,11 @@ app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use('/api', api)
 
+app.use(passport.initialize())
+useStrategy(passport)
+
+app.use('/api', api)
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
