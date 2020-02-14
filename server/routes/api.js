@@ -117,7 +117,7 @@ router.post('/login', async function (req, res) {
                 _id: account._id,
                 users: account.users,
                 expenses: account.expenses,
-                categories
+                categories: account.categories
             }
 
             jwt.sign(
