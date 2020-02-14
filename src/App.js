@@ -10,7 +10,7 @@ import { API_URL } from './utils'
 import Login from './components/Login';
 import Settings from './components/Settings'
 import Loader from './components/Loader';
-import SignIn from './components/SignIn';
+import AccountSignIn from './components/AccountSignIn';
 
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
       <Route exact path="/add-expense" render={() => !currentAccount._id ? <Loader /> : isLoggedIn() ? <AddExpense currentUser={currentUser} setExpenses={setExpenses} currentAccount={currentAccount} /> : <Login users={currentAccount.users} setCurrentUser={setCurrentUser} />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />} />
       <Route exact path='/settings' render={() => !currentAccount._id ? <Loader /> : <Settings currentAccount={currentAccount} setCurrentAccount={setCurrentAccount} />} />
-      <Route exact path='/signin' render={() => <SignIn />} />
+      <Route exact path='/signin' render={() => <AccountSignIn />} />
     </Router>
   )
 }

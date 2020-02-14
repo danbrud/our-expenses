@@ -18,10 +18,6 @@ function SignIn(props) {
                 {/* {this.state.invalidLogin ?
                     <div className="error">Wrong Email or Password</div> :
                     null} */}
-                <div id="navigateToRegister">
-                    {/* <div id="registerLink" onClick={this.changeLogin}>Not a member? Sign Up</div> */}
-                    <div id="registerLink">Not a member? Sign Up</div>
-                </div>
             </div>
         </div>
     )
