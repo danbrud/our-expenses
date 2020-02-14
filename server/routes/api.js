@@ -54,13 +54,15 @@ router.get('/accounts/:username', async function(req, res) {
     //     res.send(account)
     // })
 
-    const account = await Account.find({ username: req.params.username })
+    const account = await Account.findOne({ username: req.params.username })
     res.send(account)
 })
 
 router.put('/accounts', async function(req, res) {
-    const { fieldToUpdate, accountId, data } = req.body
-    const account = await Account.findOneAndUpdate({ _id: accountId }, { $push: { [fieldToUpdate]: data } }, { new: true }) 
+    const { fieldToUpdate, accountId, data, operation } = req.body
+    const account = operation === 'add' 
+        ? await Account.findOneAndUpdate({ _id: accountId }, { $push: { [fieldToUpdate]: data } }, { new: true }) 
+        : await Account.findOneAndUpdate({ _id: accountId }, { $pull: { [fieldToUpdate]: data } }, { new: true })
 
     res.send(account)
 })
