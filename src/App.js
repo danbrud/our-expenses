@@ -36,9 +36,9 @@ function App() {
     }
 
 
-    if(!currentAccount._id) { 
-      getAccount() 
-    }
+    // if(!currentAccount._id) { 
+    //   getAccount() 
+    // }
     if(currentAccount._id) {
       getExpenses()
     }
@@ -48,6 +48,12 @@ function App() {
 
   const isLoggedIn = () => currentUser ? true : false
 
+  const logoutUser = () => {
+    localStorage.removeItem("token")
+    setAuthToken(false)
+    setCurrentAccount({})
+  }
+
   return (
     <Router>
       <NavBar expenses={expenses} />
@@ -55,7 +61,7 @@ function App() {
       <Route exact path="/add-expense" render={() => !currentAccount._id ? <Loader /> : isLoggedIn() ? <AddExpense currentUser={currentUser} setExpenses={setExpenses} currentAccount={currentAccount} /> : <Login users={currentAccount.users} setCurrentUser={setCurrentUser} />} />
       <Route exact path="/reports" render={() => <Reports expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />} />
       <Route exact path='/settings' render={() => !currentAccount._id ? <Loader /> : <Settings currentAccount={currentAccount} setCurrentAccount={setCurrentAccount} />} />
-      <Route exact path='/signin' render={() => <AccountSignIn />} />
+      <Route exact path='/signin' render={() => <AccountSignIn setCurrentAccount={setCurrentAccount} />} />
     </Router>
   )
 }

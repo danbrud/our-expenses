@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const expenseCategories = [
     "קניות לבית",
     "רכב",
@@ -37,3 +39,11 @@ export const colors = [
 export const users = ['טל', 'דני']
 
 export const API_URL = 'http://localhost:4000'
+
+export const setAuthToken = token => {
+    if(token) {
+        axios.defaults.headers.common["Authorization"] = token
+    } else {
+        delete axios.defaults.headers.common["Authorization"]
+    }
+}

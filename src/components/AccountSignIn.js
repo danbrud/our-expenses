@@ -8,7 +8,7 @@ function AccountSignIn() {
 
     return (
         <div id='home-container'>
-            {isLogin ? <SignIn /> : <Register />}
+            {isLogin ? <SignIn setCurrentAccount={setCurrentAccount} /> : <Register setIsLogin={setIsLogin} />}
             <div id='btns'>
                 <div onClick={() => setIsLogin(true)}>התחברות</div>
                 <div onClick={() => setIsLogin(false)}>הרשמה</div>
