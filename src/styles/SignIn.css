@@ -15,7 +15,6 @@
 }
 #login-form {
   display: grid;
-  grid-template-rows: 1fr 1fr;
   width: 80%;
 }
 #login-button {
@@ -39,4 +38,25 @@
   margin: 5px;
   height: 25px;
   padding: 10px;
+}
+#btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  background-color: #5e7d9b;
+  width: 76%;
+  height: 50px;
+}
+.toggle-btn {
+  color: whitesmoke;
+  align-self: center;
+  padding: 7% 24%;
+  border-radius: 2px;
+}
+.toggle-btn.selected {
+  background-color: #34495e;
+}
+#btn-container {
+  display: grid;
+  justify-items: center;
 }

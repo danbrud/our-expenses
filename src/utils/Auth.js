@@ -28,6 +28,7 @@ class Auth {
 
     logout() {
         localStorage.removeItem('token')
+        localStorage.removeItem('userName')
         this.setAuthToken(false)
         this.authenticated = false
     }
