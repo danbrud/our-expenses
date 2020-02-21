@@ -1,7 +1,7 @@
 import React from 'react'
 import './../styles/Settings.css'
 import ChipsArray from './ChipsArray'
-import { API_URL } from '../utils'
+import { API_URL } from '../utils/utils'
 import axios from 'axios'
 
 

@@ -7,6 +7,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp'
 import SettingsIcon from '@material-ui/icons/Settings'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,6 +64,12 @@ export default function NavBar(props) {
     return new Intl.NumberFormat('en-US').format(sum)
   }
 
+  const handleClick = text => {
+    if(text === 'יציאה') {
+      props.logoutUser()
+    }
+  }
+
   const sideList = side => (
     <div
       className={classes.list}
@@ -75,10 +82,10 @@ export default function NavBar(props) {
       </Typography>
       <Divider />
       <List>
-        {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות', 'הגדרות'].map((text, index) => (
-          <Link className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : text === 'סיכום הוצאות' ? '/reports' : '/settings'}>
+        {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות', 'הגדרות', 'יציאה'].map((text, index) => (
+          <Link onClick={() => handleClick(text)} className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : text === 'סיכום הוצאות' ? '/reports' : text === 'הגדרות' ? '/settings' : '/signin'}>
             <ListItem button className={classes.listItem}>
-              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : index === 2 ? <TrendingUpIcon /> : <SettingsIcon />}</ListItemIcon>
+              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : index === 2 ? <TrendingUpIcon /> : index === 3 ? <SettingsIcon /> : <ExitToAppIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           </Link>

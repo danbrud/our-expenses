@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/SignIn.css'
 import axios from 'axios'
-import { API_URL } from '../utils'
+import { API_URL } from '../utils/utils'
 
 function Register(props) {
     const [inputs, setInputs] = React.useState({ username: '', password: '', password2: '' })
@@ -9,7 +9,7 @@ function Register(props) {
     const handleInputs = e => setInputs({ ...inputs, [e.target.name]: e.target.value })
 
     const registerUser = async () => {
-        const res = await axios.post(`${API_URL}/api/register`, inputs)
+        await axios.post(`${API_URL}/api/register`, inputs)
         props.setIsLogin(true)
     }
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import DateSelector from './DateSelector';
 import axios from 'axios'
-import { API_URL } from '../utils';
+import { API_URL } from '../utils/utils';
 import '../styles/AddExpense.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'

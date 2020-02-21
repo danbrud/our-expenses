@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import moment from 'moment'
 import axios from 'axios';
-import { API_URL } from '../utils';
+import { API_URL } from '../utils/utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -74,8 +74,8 @@ export default function ExpensePanels(props) {
                             <div className={classes.expanded}>
                                 <p><span>קטגוריה: </span><span>{e.category}</span></p>
                                 <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
-                                <div class='circle-btn edt-btn'><i class="far fa-edit mod-icon edt-icon"></i></div>
-                                <div class='circle-btn dlt-btn' onClick={() => deleteExpense(e._id)}><i class="far fa-trash-alt mod-icon dlt-icon"></i></div>
+                                <div className='circle-btn edt-btn'><i className="far fa-edit mod-icon edt-icon"></i></div>
+                                <div className='circle-btn dlt-btn' onClick={() => deleteExpense(e._id)}><i className="far fa-trash-alt mod-icon dlt-icon"></i></div>
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>

@@ -1,7 +1,6 @@
 import React from 'react'
 import CategoryPanels from './CategoryPanels'
-import Category from './Category';
-import { colors } from '../utils'
+import { colors } from '../utils/utils'
 
 
 function Categories(props) {

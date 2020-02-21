@@ -1,8 +1,7 @@
 import React from 'react'
 import '../styles/SignIn.css'
 import axios from 'axios'
-import jwt_decode from "jwt-decode"
-import { API_URL, setAuthToken } from '../utils'
+import { API_URL } from '../utils/utils'
 
 function SignIn(props) {
     const [inputs, setInputs] = React.useState({ username: '', password: '' })
@@ -13,11 +12,10 @@ function SignIn(props) {
         const res = await axios.post(`${API_URL}/api/login`, inputs)
 
         const { token } = res.data
-        localStorage.setItem("token", token)
-        
-        setAuthToken(token)
-        const decoded = jwt_decode(token)
+        props.auth.login(token)
+        const decoded = props.auth.decodeToken()
         props.setCurrentAccount(decoded)
+        // window.location = '/' //Redirect
     }
 
     return (
