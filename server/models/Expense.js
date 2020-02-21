@@ -6,7 +6,8 @@ const expenseSchema = new Schema({
     expense: String,
     amount: Number,
     category: String,
-    date: Date
+    date: Date,
+    accountId: { type: Schema.Types.ObjectId, ref: 'Account' }
 })
 
 const Expense = mongoose.model('Expense', expenseSchema)

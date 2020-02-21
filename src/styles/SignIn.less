@@ -1,0 +1,70 @@
+#login{
+    /* border: 2px solid black; */
+    /* border-radius: 15px; */
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    margin-top: 10vh;
+    padding-bottom: 5%;
+}
+
+.welcome-text {
+    text-align: center;
+    color: #34495e;
+}
+
+#login-form{
+    display: grid;
+    // grid-template-rows: 1fr 1fr;
+    width: 80%;
+}
+
+#login-button{
+    /* border: 1px solid black; */
+    background-color: #34495e;
+    border-radius: 5px;
+    margin: 2%;
+    width: 74%;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: #272838;
+    }
+}
+
+.login-form {
+    border: none;
+    background-color: #EAF2EF;
+    border-bottom: 0.5px solid black;
+    margin: 5px;
+    height: 25px;
+    padding: 10px;
+}
+
+#btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    background-color: #5e7d9b;
+    width: 76%;
+    height: 50px;
+}
+
+.toggle-btn {
+    color: whitesmoke;
+    align-self: center;
+    padding: 7% 24%;
+    border-radius: 2px;
+    &.selected {
+        background-color: #34495e;
+    }
+}
+
+#btn-container {
+    display: grid;
+    justify-items: center;
+}

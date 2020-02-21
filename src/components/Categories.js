@@ -1,7 +1,6 @@
 import React from 'react'
 import CategoryPanels from './CategoryPanels'
-import Category from './Category';
-import { colors } from '../utils'
+import { colors } from '../utils/utils'
 
 
 function Categories(props) {
@@ -24,7 +23,7 @@ function Categories(props) {
         for (let data in dataObj) {
             dataArr.push(dataObj[data])
         }
-        console.log(dataArr)
+
         return dataArr
     }
 
