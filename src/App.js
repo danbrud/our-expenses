@@ -12,6 +12,7 @@ import Settings from './components/Settings'
 import Loader from './components/Loader';
 import AccountSignIn from './components/AccountSignIn';
 import ProtectedRoute from './components/ProtectedRoute'
+import NotFound from './components/NotFound'
 
 function App(props) {
   const [currentDate, setCurrentDate] = React.useState(new Date())
@@ -67,7 +68,7 @@ function App(props) {
         <ProtectedRoute exact path="/reports" auth={props.auth} component={Reports} expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />
         <ProtectedRoute exact path='/settings' auth={props.auth} component={!currentAccount._id ? Loader : Settings} currentAccount={currentAccount} setCurrentAccount={setCurrentAccount} />
         <Route exact path='/signin' render={() => <AccountSignIn setCurrentAccount={setCurrentAccount} auth={props.auth} />} />
-        {/* <Route path="*" render={() => <NotFound />}/> */}
+        <Route path="*" render={() => <NotFound />}/>
       </Switch>
     </Router>
   )
