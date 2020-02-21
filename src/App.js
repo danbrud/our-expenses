@@ -41,11 +41,6 @@ function App(props) {
       setIsLoading(false)
     }
 
-
-    // if (!currentAccount._id) {
-    //   // getAccount()
-    //   props.auth.checkAuthentication()
-    // }
     if (props.auth.authenticated) {
       getAccount(props.auth.decodeToken()._id)
     }
