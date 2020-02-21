@@ -6,6 +6,7 @@ const passport = require('passport')
 
 const app = express()
 const api = require('./server/routes/api')
+const script = require('./server/scripts/script')
 const useStrategy = require('./server/config/passport')
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/our-expenses", {
@@ -30,6 +31,7 @@ app.use(passport.initialize())
 useStrategy(passport)
 
 app.use('/api', api)
+app.use('/script', script)
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
