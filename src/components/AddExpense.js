@@ -5,14 +5,18 @@ import { API_URL } from '../utils/utils';
 import '../styles/AddExpense.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'
+import Loader from './Loader';
 
 function AddExpense(props) {
     const [state, setState] = React.useState({ user: props.currentUser, amount: '', expense: '', category: '', date: new Date() })
     const [open, setOpen] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
     const amountInput = React.createRef()
 
     useEffect(() => {
-        amountInput.current.focus()
+        if(amountInput.focus) {
+            amountInput.current.focus()
+        }
     }, [])
 
     const handleInputs = e => setState({ ...state, [e.target.name]: e.target.value })
@@ -21,6 +25,8 @@ function AddExpense(props) {
     const validateInputs = (user, amount, expense, category) => user && amount && expense && category ? true : false
 
     const addExpense = async (user, amount, expense, category, date) => {
+        setIsLoading(true)
+
         const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
         const res = await axios.post(`${API_URL}/api/expense`, newExpense)
         props.setExpenses([...props.currentAccount.expenses, res.data._id])
@@ -41,6 +47,9 @@ function AddExpense(props) {
         validateInputs(user, amount, expense, category) ? addExpense(user, amount, expense, category, date) : setOpen(true)
     }
 
+    if(!props.currentAccount.categories.length) { return <h1>הגדר קטגוריות להוצאות בעמוד ההגדרות</h1> }
+
+    if(isLoading) { return <Loader /> }
 
     return (
         <div id="add-expense">

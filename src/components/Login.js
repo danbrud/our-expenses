@@ -22,14 +22,22 @@ function Login(props) {
         props.setCurrentUser(user)
     }
 
-    return (
-        <div>
-            <h1>תבחר/י משתמש</h1>
-            <div id="user-container">
-                {props.users.map(u => <Button key={u} variant="contained" onClick={() => setUser(u)} className={classes.button}>{u}</Button>)}
+    if (props.users.length) {
+        return (
+            <div>
+                <h1>תבחר/י משתמש</h1>
+                <div id="user-container">
+                    {props.users.map(u => <Button key={u} variant="contained" onClick={() => setUser(u)} className={classes.button}>{u}</Button>)}
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div>
+                <h1>הגדר משתמשים בעמוד ההגדרות</h1>
+            </div>
+        )
+    }
 }
 
 export default Login

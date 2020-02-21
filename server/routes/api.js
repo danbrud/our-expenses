@@ -52,12 +52,12 @@ router.post('/accounts', async function (req, res) {
     res.send(account)
 })
 
-router.get('/accounts/:username', async function (req, res) {
+router.get('/accounts/:id', async function (req, res) {
     // Account.findOne({ username: req.params.username }).populate('expenses').exec(function(err, account) {
     //     res.send(account)
     // })
 
-    const account = await Account.findOne({ username: req.params.username })
+    const account = await Account.findOne({ _id: req.params.id })
     res.send(account)
 })
 
