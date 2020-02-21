@@ -13,9 +13,7 @@ function SignIn(props) {
 
         const { token } = res.data
         props.auth.login(token)
-        const decoded = props.auth.decodeToken()
-        props.setCurrentAccount(decoded)
-        // window.location = '/' //Redirect
+        window.location = '/'
     }
 
     return (

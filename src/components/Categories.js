@@ -23,7 +23,7 @@ function Categories(props) {
         for (let data in dataObj) {
             dataArr.push(dataObj[data])
         }
-        console.log(dataArr)
+
         return dataArr
     }
 
