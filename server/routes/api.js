@@ -7,6 +7,7 @@ const { secretOrKey } = require('../config/config')
 
 const Account = require('../models/Account')
 const Expense = require('../models/Expense')
+const Income = require('../models/Income')
 
 
 router.get('/sanity', function (req, res) {
@@ -44,6 +45,14 @@ router.delete('/expenses/:id', async function (req, res) {
     await Account.findOneAndUpdate({ _id: expense.accountId }, { $pull: { expenses: expense._id } })
 
     res.send(expense)
+})
+
+router.post('/income', async function (req, res) {
+    const income = new Income(req.body)
+    await income.save()
+    await Account.findOneAndUpdate({ _id: income.accountId }, { $push: { incomes: income._id } })
+
+    res.send(income)
 })
 
 router.post('/accounts', async function (req, res) {
