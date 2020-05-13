@@ -8,13 +8,16 @@ import SnackbarContentWrapper from './SnackbarContentWrapper'
 import Loader from './Loader';
 
 function AddExpense(props) {
-    const [state, setState] = React.useState({ user: props.currentUser, amount: '', expense: '', category: '', date: new Date() })
+    const [state, setState] = React.useState({
+        user: props.currentUser, amount: '', expense: '',
+        category: '', date: new Date(), type: 'הוצאה'
+    })
     const [open, setOpen] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
     const amountInput = React.createRef()
 
     useEffect(() => {
-        if(amountInput.focus) {
+        if (amountInput.focus) {
             amountInput.current.focus()
         }
     }, [])
@@ -22,14 +25,25 @@ function AddExpense(props) {
     const handleInputs = e => setState({ ...state, [e.target.name]: e.target.value })
     const changeDate = date => setState({ ...state, date })
 
-    const validateInputs = (user, amount, expense, category) => user && amount && expense && category ? true : false
+    const validateInputs = (user, amount, expense, category, type) => {
+        if (type === 'הוצאה') {
+            return user && amount && expense && category
+        } else {
+            return user && amount && expense
+        }
+    }
 
-    const addExpense = async (user, amount, expense, category, date) => {
+    const addExpense = async (user, amount, expense, category, date, type) => {
         setIsLoading(true)
 
-        const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
-        const res = await axios.post(`${API_URL}/api/expense`, newExpense)
-        props.setExpenses([...props.currentAccount.expenses, res.data._id])
+        if (type === 'הוצאה') {
+            const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
+            const res = await axios.post(`${API_URL}/api/expense`, newExpense)
+            props.setExpenses([...props.currentAccount.expenses, res.data._id])
+        } else {
+            const newIncome = { user, name: expense, amount, date, accountId: props.currentAccount._id }
+            const res = await axios.post(`${API_URL}/api/income`, newIncome)
+        }
 
         window.location = '/'
     }
@@ -43,18 +57,24 @@ function AddExpense(props) {
     }
 
     const handleAdd = () => {
-        const { user, amount, expense, category, date } = state
-        validateInputs(user, amount, expense, category) ? addExpense(user, amount, expense, category, date) : setOpen(true)
+        const { user, amount, expense, category, date, type } = state
+        validateInputs(user, amount, expense, category, type)
+            ? addExpense(user, amount, expense, category, date, type)
+            : setOpen(true)
     }
 
-    if(!props.currentAccount.categories.length) { return <h1>הגדר קטגוריות להוצאות בעמוד ההגדרות</h1> }
+    if (!props.currentAccount.categories.length) { return <h1>הגדר קטגוריות להוצאות בעמוד ההגדרות</h1> }
 
-    if(isLoading) { return <Loader /> }
+    if (isLoading) { return <Loader /> }
 
     return (
         <div id="add-expense">
             <h1>הוספת הוצאה</h1>
             <div id="add-expense-form">
+                <select name="type" dir="rtl" onChange={handleInputs}>
+                    <option disabled>סוג</option>
+                    {['הוצאה', 'הכנסה'].map((t, i) => <option key={i} value={t}>{t}</option>)}
+                </select>
                 <input
                     type="text"
                     dir="rtl"
@@ -74,16 +94,20 @@ function AddExpense(props) {
                 />
                 <input
                     dir="rtl"
-                    placeholder="הוצאה"
+                    placeholder={`שם ${state.type}`}
                     name="expense"
                     type="text"
                     value={state.expense}
                     onChange={handleInputs}
                 />
-                <select name="category" dir="rtl" onChange={handleInputs}>
-                    <option selected disabled>תבחר קטגוריה</option>
-                    {props.currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}
-                </select>
+                {
+                    state.type === 'הוצאה'
+                        ? <select name="category" dir="rtl" onChange={handleInputs}>
+                            <option selected disabled>תבחר קטגוריה</option>
+                            {props.currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}
+                        </select>
+                        : null
+                }
                 <DateSelector changeDate={changeDate} date={state.date} />
                 <div id="add-expense-button" onClick={handleAdd}>הוסף</div>
             </div>

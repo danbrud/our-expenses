@@ -17,7 +17,7 @@ export const colors = [
     '#FFD5FF'
 ]
 
-export const API_URL = ''
+export const API_URL = 'http://localhost:4000'//''
 
 export const validateLoginInput = function (data) {
     let errors = {}
