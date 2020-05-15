@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import SignIn from './SignIn'
-import Register from './Register'
-import '../styles/SignIn.css'
+import SignIn from '../SignIn'
+import Register from '../Register'
+import '../../styles/SignIn.css'
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContentWrapper from './SnackbarContentWrapper'
+import SnackbarContentWrapper from '../SnackbarContentWrapper'
 import { Redirect } from 'react-router-dom'
 
 function AccountSignIn(props) {
