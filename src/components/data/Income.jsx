@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import TableHeader from '../general/TableHeader';
 import FabButton from '../FabButton'
 import MonthSelector from '../general/MonthSelector';
-import ExpensePanels from './DataPanels';
+import DataPanels from './DataPanels';
 import Loader from '../Loader';
 import '../../styles/Expense.css'
-import axios from 'axios'
-import { API_URL } from '../../utils/utils';
 import NoData from '../general/NoData';
 import '../../styles/Income.css'
 import { CONSTS } from '../../utils/consts';
-import { useIncomeContext } from '../../context/Income';
+import { useIncomeContext, IncomeConsumer } from '../../context/Income';
 
 
 
@@ -28,10 +26,14 @@ function Income(props) {
     return (
         <div id='income-container'>
             <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
-            <TableHeader type={CONSTS.singularIncome}/>
+            <TableHeader type={CONSTS.singularIncome} />
             {
                 incomeData.income.length
-                    ? <ExpensePanels data={incomeData.income} type={CONSTS.pluralIncome} />
+                    ? <IncomeConsumer>
+                        {(incomeData) => (
+                            <DataPanels data={incomeData.income} deleteItem={incomeData.deleteIncome} type={CONSTS.pluralIncome} />
+                        )}
+                    </IncomeConsumer>
                     : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralIncome} />

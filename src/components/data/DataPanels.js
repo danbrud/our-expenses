@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function DataPanels(props) {
-    const { data, setData, type } = props
+    const { data, deleteItem, type } = props
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false)
 
@@ -30,23 +30,11 @@ function DataPanels(props) {
         setExpanded(isExpanded ? panel : false)
     }
 
-    const deleteDataInState = (id) => {
-        const updatedData = [...data]
-        const index = updatedData.findIndex(e => e._id === id)
-        updatedData.splice(index, 1)
-        setData(updatedData)
-    }
-
     const deleteData = async (id) => {
         const confirmed = window.confirm('בטוח למחוק?')
         if (!confirmed) { return }
 
-        if (type === CONSTS.pluralExpense) {
-            await axios.delete(`${API_URL}/api/expenses/${id}`)
-        } else {
-            await axios.delete(`${API_URL}/api/income/${id}`)
-        }
-        deleteDataInState(id)
+        deleteItem(id)
     }
 
     return (

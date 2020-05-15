@@ -12,6 +12,12 @@ class IncomeData {
     const res = await axios.get(`${API_URL}/api/income/${currentAccount._id}${optionalParam}`)
     this.income = res.data
   }
+
+  deleteIncome = async (id) => {
+    await axios.delete(`${API_URL}/api/income/${id}`)
+    const index = this.income.findIndex(i => i._id === id)
+    this.income.splice(index, 1)
+  }
 }
 
 export const incomeData = new IncomeData()
