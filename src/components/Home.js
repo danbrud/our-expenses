@@ -1,7 +1,7 @@
 import React from 'react'
 import TableHeader from './general/TableHeader';
 import FabButton from './FabButton'
-import MonthSelector from './MonthSelector';
+import MonthSelector from './general/MonthSelector';
 import ExpensePanels from './ExpensePanels';
 import Loader from './Loader';
 import '../styles/Expense.css'

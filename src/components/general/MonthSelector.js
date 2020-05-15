@@ -4,9 +4,9 @@ import { ThemeProvider } from "@material-ui/styles";
 import moment from "moment";
 import MomentUtils from "@date-io/moment";
 import 'moment/locale/he';
-import '../styles/Expense.css'
+import '../../styles/Expense.css'
 import { makeStyles } from '@material-ui/core/styles';
-import { materialTheme } from '../themes/DatePicker'
+import { materialTheme } from '../../themes/DatePicker'
 
 moment.locale('he')
 

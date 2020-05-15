@@ -1,5 +1,5 @@
 import React from 'react'
-import MonthSelector from './MonthSelector'
+import MonthSelector from './general/MonthSelector'
 import FabButton from './FabButton'
 import Loader from './Loader'
 import Categories from './Categories'
