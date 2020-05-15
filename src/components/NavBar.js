@@ -12,6 +12,7 @@ import { CONSTS } from '../utils/consts'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import ExposureIcon from '@material-ui/icons/Exposure'
 import { formatAmount } from '../utils/utils'
+import { useExpensesContext } from '../context/Expenses'
 
 
 const useStyles = makeStyles(theme => ({
@@ -51,6 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar(props) {
   const classes = useStyles()
+  const expenseData = useExpensesContext()
   const [state, setState] = React.useState({
     left: false
   })
@@ -64,7 +66,7 @@ export default function NavBar(props) {
   }
 
   const sumExpenses = () => {
-    const sum = props.expenses.reduce((acc, curr) => acc + curr.amount, 0)
+    const sum = expenseData.expenses.reduce((acc, curr) => acc + curr.amount, 0)
     return formatAmount(sum)
   }
 

@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/general/NotFound'
 import Income from './components/data/Income';
 import ComingSoon from './components/general/ComingSoon';
+import { useExpensesContext } from './context/Expenses';
 
 function App(props) {
   const [currentDate, setCurrentDate] = React.useState(new Date())
@@ -22,6 +23,7 @@ function App(props) {
   const [expenses, setExpenses] = React.useState([])
   const [currentUser, setCurrentUser] = React.useState(localStorage.userName)
   const [isLoading, setIsLoading] = React.useState(true)
+  const expenseData = useExpensesContext()
 
   const logoutUser = () => {
     props.auth.logout()
@@ -35,11 +37,8 @@ function App(props) {
       setCurrentAccount(res.data)
     }
 
-    const getExpenses = async (shouldGetByDate = true) => {
-      const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
-
-      const res = await axios.get(`${API_URL}/api/expenses/${currentAccount._id}${optionalParam}`)
-      setExpenses(res.data)
+    const getExpenses = async () => {
+      await expenseData.getExpenses(currentAccount, currentDate)
       setIsLoading(false)
     }
 
@@ -58,7 +57,7 @@ function App(props) {
 
   return (
     <Router>
-      {props.auth.authenticated ? <NavBar expenses={expenses} logoutUser={logoutUser} /> : null }
+      {props.auth.authenticated ? <NavBar logoutUser={logoutUser} /> : null }
       <Switch>
         <ProtectedRoute exact path="/" auth={props.auth} component={Home} expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setExpenses={setExpenses} />
         <ProtectedRoute exact path="/add-expense" auth={props.auth} component={!currentAccount._id ? Loader : isLoggedIn() && currentAccount.users.includes(localStorage.userName) ? AddExpense : Login} users={currentAccount.users} setCurrentUser={setCurrentUser} currentUser={currentUser} setExpenses={setExpenses} currentAccount={currentAccount}/>
