@@ -18,8 +18,8 @@ function DataPanelDetails(props) {
 
   return (
     <div className={classes.expanded}>
-      <p>{category ? <span><span>קטגוריה: </span><span>{category}</span></span> : null}</p>
       <p><span>תאריך: </span><span>{moment(date).format("D/M/YYYY")}</span></p>
+      <p>{category ? <span><span>קטגוריה: </span><span>{category}</span></span> : null}</p>
       <div className='circle-btn edt-btn'><i className="far fa-edit mod-icon edt-icon"></i></div>
       <div className='circle-btn dlt-btn' onClick={() => deleteData(id)}><i className="far fa-trash-alt mod-icon dlt-icon"></i></div>
     </div>

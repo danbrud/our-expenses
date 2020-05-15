@@ -14,8 +14,9 @@ import { CONSTS } from '../utils/consts';
 
 
 function Income(props) {
-    const { currentAccount, currentDate, setIsLoading, isLoading } = props
+    const { currentAccount, currentDate } = props
     const [income, setIncome] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const getIncome = async (shouldGetByDate = true) => {
@@ -27,7 +28,7 @@ function Income(props) {
         }
 
         getIncome()
-    }, [currentDate])
+    }, [currentDate, currentAccount])
 
     return (
         <div id='income-container'>
@@ -35,7 +36,7 @@ function Income(props) {
             <TableHeader type={CONSTS.singularIncome}/>
             {
                 income.length
-                    ? <ExpensePanels expenses={income} setExpenses={setIncome} />
+                    ? <ExpensePanels data={income} setData={setIncome} type={CONSTS.pluralIncome} />
                     : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralIncome} />
