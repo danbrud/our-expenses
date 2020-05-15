@@ -4,7 +4,7 @@ import FabButton from './FabButton'
 import Loader from './Loader'
 import Categories from './Categories'
 import './../styles/Reports.css'
-import TableHeader from './TableHeader'
+import TableHeader from './general/TableHeader'
 
 
 function Reports(props) {

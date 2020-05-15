@@ -1,5 +1,5 @@
 import React from 'react'
-import ExpenseTableHeader from './TableHeader';
+import TableHeader from './general/TableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './MonthSelector';
 import ExpensePanels from './ExpensePanels';
@@ -13,7 +13,7 @@ function Income(props) {
     return (
         <div id='income-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <ExpenseTableHeader type='הכנסה'/>
+            <TableHeader type='הכנסה'/>
             {
                 props.expenses.length
                     ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />

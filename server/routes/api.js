@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const { getExpensesByDate, validateLoginInput, validateRegisterInput } = require('../utils/utilFunctions')
+const { getDocsByDate, getMinMaxDate, validateLoginInput, validateRegisterInput } = require('../utils/utilFunctions')
 const { secretOrKey } = require('../config/config')
 
 const Account = require('../models/Account')
@@ -15,19 +15,14 @@ router.get('/sanity', function (req, res) {
 })
 
 router.get('/expenses/:accountId', async function (req, res) {
-    let minDate, maxDate, currentDate = req.query.date
+    const { date } = req.query
+    const { accountId } = req.params
 
-    if (currentDate) {
-        currentDate = new Date(currentDate)
-        minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
-        maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
-        maxDate.setDate(maxDate.getDate() + 1)
-    }
+    const { minDate, maxDate } = getMinMaxDate(date)
 
-    const accountId = req.params.accountId
-    const expenses = currentDate
-        ? await getExpensesByDate(minDate, maxDate, accountId)
-        : await Expense.find({ accountId: accountId })
+    const expenses = date
+        ? await getDocsByDate(minDate, maxDate, accountId, Expense)
+        : await Expense.find({ accountId })
 
     res.send(expenses)
 })
@@ -53,6 +48,19 @@ router.post('/income', async function (req, res) {
     await Account.findOneAndUpdate({ _id: income.accountId }, { $push: { incomes: income._id } })
 
     res.send(income)
+})
+
+router.get('/income/:accountId', async function (req, res) {
+    const { date } = req.query
+    const { accountId } = req.params
+
+    const { minDate, maxDate } = getMinMaxDate(date)
+
+    const expenses = date
+        ? await getDocsByDate(minDate, maxDate, accountId, Income)
+        : await Income.find({ accountId })
+
+    res.send(expenses)
 })
 
 router.post('/accounts', async function (req, res) {

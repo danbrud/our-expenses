@@ -1,16 +1,28 @@
-const validator = require("validator");
-const isEmpty = require("is-empty");
+const validator = require("validator")
+const isEmpty = require("is-empty")
 
-const Expense = require('../models/Expense')
+const getDocsByDate = async function (minDate, maxDate, accountId, Model) {
+  const docs = await Model.find({ accountId })
 
-const getExpensesByDate = async function (minDate, maxDate, accountId) {
-  const expenses = await Expense.find({ accountId: accountId })
-  return expenses
-    .filter(e => e.date >= minDate && e.date < maxDate)
+  return docs
+    .filter(d => d.date >= minDate && d.date < maxDate)
     .sort((a, b) => a.date - b.date)
 }
 
-const validateLoginInput = function(data) {
+const getMinMaxDate = function (currentDate) {
+  const dates = { minDate: null, maxDate: null }
+
+  if (currentDate) {
+    currentDate = new Date(currentDate)
+    dates.minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+    dates.maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
+    dates.maxDate.setDate(dates.maxDate.getDate() + 1)
+  }
+
+  return dates
+}
+
+const validateLoginInput = function (data) {
   let errors = {}
 
   data.username = !isEmpty(data.username) ? data.username : ''
@@ -31,13 +43,13 @@ const validateLoginInput = function(data) {
   }
 }
 
-const validateRegisterInput = function(data) {
+const validateRegisterInput = function (data) {
   let errors = {}
 
   data.username = !isEmpty(data.username) ? data.username : ''
   data.password = !isEmpty(data.password) ? data.password : ''
   data.password2 = !isEmpty(data.password2) ? data.password2 : ''
-  
+
   if (validator.isEmpty(data.username)) {
     errors.username = 'Email field is required'
   } else if (!validator.isEmail(data.username)) {
@@ -62,4 +74,4 @@ const validateRegisterInput = function(data) {
   }
 }
 
-module.exports = { getExpensesByDate, validateLoginInput, validateRegisterInput }
+module.exports = { getDocsByDate, getMinMaxDate, validateLoginInput, validateRegisterInput }
