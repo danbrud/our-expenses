@@ -5,8 +5,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios';
-import { API_URL } from '../utils/utils';
-import { CONSTS } from '../utils/consts';
+import { API_URL } from '../../utils/utils';
+import { CONSTS } from '../../utils/consts';
 import DataPanelSummary from './DataPanelSummary';
 import DataPanelDetails from './DataPanelDetails';
 

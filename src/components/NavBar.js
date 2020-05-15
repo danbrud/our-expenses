@@ -11,6 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { CONSTS } from '../utils/consts'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import ExposureIcon from '@material-ui/icons/Exposure'
+import { formatAmount } from '../utils/utils'
 
 
 const useStyles = makeStyles(theme => ({
@@ -64,7 +65,7 @@ export default function NavBar(props) {
 
   const sumExpenses = () => {
     const sum = props.expenses.reduce((acc, curr) => acc + curr.amount, 0)
-    return new Intl.NumberFormat('en-US').format(sum)
+    return formatAmount(sum)
   }
 
   const handleClick = text => {

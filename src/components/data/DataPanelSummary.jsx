@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
+import { formatAmount } from '../../utils/utils';
 
 const useStyles = makeStyles(theme => ({
   heading: {
@@ -19,7 +20,7 @@ function DataPanelSummary(props) {
     <Fragment>
       <Typography className={classes.heading}>{user}</Typography>
       <Typography className={classes.heading}>{name}</Typography>
-      <Typography className={classes.heading}>{amount} ₪</Typography>
+      <Typography className={classes.heading}>{formatAmount(amount)} ₪</Typography>
     </Fragment>
   )
 }
