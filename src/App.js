@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AddExpense from './components/AddExpense';
-import Home from './components/Home';
+import Home from './components/data/Home';
 import Reports from './components/reports/Reports';
 import NavBar from './components/NavBar'
 import axios from 'axios'
