@@ -34,7 +34,7 @@ function Reports(props) {
                     ? <Categories expenses={props.expenses} />
                     : props.isLoading
                         ? < Loader />
-                        : <div className="no-expense-msg ">אין הוצאות לחודש זה</div>
+                        : <NoData type='הוצאות' />
             }
             <FabButton />
         </div>

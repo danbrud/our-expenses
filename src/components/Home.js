@@ -5,6 +5,7 @@ import MonthSelector from './MonthSelector';
 import ExpensePanels from './ExpensePanels';
 import Loader from './Loader';
 import '../styles/Expense.css'
+import NoData from './general/NoData';
 
 
 
@@ -19,7 +20,7 @@ function Home(props) {
                     ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
                     : props.isLoading
                         ? <Loader />
-                        : <div className="no-expense-msg">אין הוצאות לחודש זה</div>
+                        : <NoData type='הוצאות' />
             }
             <FabButton />
         </div>

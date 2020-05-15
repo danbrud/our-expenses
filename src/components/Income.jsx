@@ -7,6 +7,7 @@ import Loader from './Loader';
 import '../styles/Expense.css'
 import axios from 'axios'
 import { API_URL } from '../utils/utils';
+import NoData from './general/NoData';
 
 
 
@@ -35,7 +36,7 @@ function Income(props) {
                     ? <ExpensePanels expenses={income} setExpenses={setIncome} />
                     : isLoading
                         ? <Loader />
-                        : <div className="no-expense-msg">אין הכנסות לחודש זה</div>
+                        : <NoData type='הכנסות' />
             }
             <FabButton />
         </div>
