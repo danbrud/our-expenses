@@ -4,7 +4,7 @@
   padding: 3px;
   margin-top: 60px;
 }
-.expense-table {
+.table {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: end;
@@ -13,7 +13,7 @@
   color: #0D090A;
   padding-right: 20px;
 }
-#expense-table-header {
+#table-header {
   background-color: #34495e;
   color: white;
 }

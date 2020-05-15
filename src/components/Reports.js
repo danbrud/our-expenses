@@ -4,6 +4,7 @@ import FabButton from './FabButton'
 import Loader from './Loader'
 import Categories from './Categories'
 import './../styles/Reports.css'
+import TableHeader from './TableHeader'
 
 
 function Reports(props) {
@@ -27,10 +28,7 @@ function Reports(props) {
     return (
         <div id="reports-container">
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <div className="category-table" id="expense-table-header">
-                <div>סכום</div>
-                <div>קטגוריה</div>
-            </div>
+            <TableHeader />
             {
                 props.expenses.length
                     ? <Categories expenses={props.expenses} />

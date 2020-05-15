@@ -1,5 +1,5 @@
 import React from 'react'
-import ExpenseTableHeader from './ExpenseTableHeader';
+import ExpenseTableHeader from './TableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './MonthSelector';
 import ExpensePanels from './ExpensePanels';
