@@ -69,7 +69,7 @@ function AddExpense(props) {
 
     return (
         <div id="add-expense">
-            <h1>הוספת הוצאה</h1>
+            <h1>הוספת {state.type}</h1>
             <div id="add-expense-form">
                 <select name="type" dir="rtl" onChange={handleInputs}>
                     <option disabled>סוג</option>
