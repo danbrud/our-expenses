@@ -8,6 +8,8 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { CONSTS } from '../utils/consts'
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +72,15 @@ export default function NavBar(props) {
     }
   }
 
+  const menuIcons = [
+    <CreditCardIcon />, <AccountBalanceIcon />, <AddCircleOutlineIcon />,
+    <TrendingUpIcon />, <SettingsIcon />, <ExitToAppIcon />
+  ]
+
+  const linkRoutes = [
+    '/', '/income', '/add-expense', '/reports', '/settings', '/signin'
+  ]
+
   const sideList = side => (
     <div
       className={classes.list}
@@ -82,10 +93,10 @@ export default function NavBar(props) {
       </Typography>
       <Divider />
       <List>
-        {['הוצאות', 'הוסף הוצאה', 'סיכום הוצאות', 'הגדרות', 'יציאה'].map((text, index) => (
-          <Link onClick={() => handleClick(text)} className={classes.link} key={text} to={text === 'הוצאות' ? '/' : text === 'הוסף הוצאה' ? '/add-expense' : text === 'סיכום הוצאות' ? '/reports' : text === 'הגדרות' ? '/settings' : '/signin'}>
+        {CONSTS.menuItems.map((text, index) => (
+          <Link onClick={() => handleClick(text)} className={classes.link} key={text} to={linkRoutes[index]}>
             <ListItem button className={classes.listItem}>
-              <ListItemIcon>{index === 0 ? <CreditCardIcon /> : index === 1 ? <AddCircleOutlineIcon /> : index === 2 ? <TrendingUpIcon /> : index === 3 ? <SettingsIcon /> : <ExitToAppIcon />}</ListItemIcon>
+              <ListItemIcon>{menuIcons[index]}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           </Link>
