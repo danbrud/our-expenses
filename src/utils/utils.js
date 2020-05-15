@@ -17,7 +17,9 @@ export const colors = [
     '#FFD5FF'
 ]
 
-export const API_URL = '' //'http://localhost:4000'
+export const API_URL = ''//'http://localhost:4000'
+
+export const formatAmount = amount => new Intl.NumberFormat('en-US').format(amount)
 
 export const validateLoginInput = function (data) {
     let errors = {}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers"
-import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import moment from "moment";
 import MomentUtils from "@date-io/moment";
 import 'moment/locale/he';
-import '../styles/Expense.css'
+import '../../styles/Expense.css'
 import { makeStyles } from '@material-ui/core/styles';
+import { materialTheme } from '../../themes/DatePicker'
 
 moment.locale('he')
 
@@ -28,50 +28,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const materialTheme = createMuiTheme({
-    overrides: {
-        MuiPickersToolbar: {
-            toolbar: {
-                backgroundColor: '#34495e',
-            },
-        },
-        MuiPickersCalendarHeader: {
-            switchHeader: {
-                // backgroundColor: lightBlue.A200,
-                // color: "white",
-            },
-        },
-        MuiPickersDay: {
-            day: {
-                color: '#34495e',
-            },
-            monthSelected: {
-                backgroundColor: '#34495e',
-            },
-            dayDisabled: {
-                color: '#34495e',
-            },
-            current: {
-                color: '#34495e',
-            },
-        },
-        MuiPickersModal: {
-            dialogAction: {
-                color: '#34495e',
-            },
-        },
-    },
-})
+
 
 function MonthSelector(props) {
     const classes = useStyles()
-    const [selectedDate, handleDateChange] = useState(props.currentDate)
+    const { currentDate, changeCurrentDate } = props
+    const [selectedDate, handleDateChange] = useState(currentDate)
 
     const handleChange = date => {
         handleDateChange(date)
 
         const formattedDate = new Date(date)
-        props.changeCurrentDate(formattedDate)
+        changeCurrentDate(formattedDate)
     }
 
     return (

@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react'
-import SignIn from './SignIn'
-import Register from './Register'
-import '../styles/SignIn.css'
+import SignIn from '../SignIn'
+import Register from '../Register'
+import '../../styles/SignIn.css'
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContentWrapper from './SnackbarContentWrapper'
+import SnackbarContentWrapper from '../SnackbarContentWrapper'
 import { Redirect } from 'react-router-dom'
 
 function AccountSignIn(props) {
+    const { auth, setCurrentAccount } = props
+
     const [isLogin, setIsLogin] = React.useState(true)
     const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: '' })
 
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return
-        }
-
+        if (reason === 'clickaway') { return }
         setSnackbar({ ...snackbar, open: false })
     }
 
-    if(props.auth.authenticated) { return <Redirect to='/' /> }
+    if(auth.authenticated) { return <Redirect to='/' /> }
 
     return (
         <div>
@@ -29,7 +28,7 @@ function AccountSignIn(props) {
                     <div className={`toggle-btn ${isLogin ? 'selected' : null}`} onClick={() => setIsLogin(true)}>התחברות</div>
                 </div>
             </div>
-            {isLogin ? <SignIn auth={props.auth} setCurrentAccount={props.setCurrentAccount} setSnackbar={setSnackbar} /> : <Register setIsLogin={setIsLogin} setSnackbar={setSnackbar} />}
+            {isLogin ? <SignIn auth={auth} setCurrentAccount={setCurrentAccount} setSnackbar={setSnackbar} /> : <Register setIsLogin={setIsLogin} setSnackbar={setSnackbar} />}
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',

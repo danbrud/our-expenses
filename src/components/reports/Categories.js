@@ -1,23 +1,28 @@
 import React from 'react'
 import CategoryPanels from './CategoryPanels'
-import { colors } from '../utils/utils'
+import { colors } from '../../utils/utils'
 
 
 function Categories(props) {
+    const { expenses, setExpenses } = props
     const [expanded, setExpanded] = React.useState(false)
 
-    const mapData = expenses => {
+    const createCategoryObj = expenses => {
         const dataObj = {}
-
         expenses.forEach(e => {
-            const categoryExists = dataObj[e.category] ? true : false
-            if (categoryExists) {
+            if (dataObj[e.category]) {
                 dataObj[e.category].expenses.push(e)
                 dataObj[e.category].total += e.amount
             } else {
                 dataObj[e.category] = { name: e.category, expenses: [e], total: e.amount || 0 }
             }
         })
+
+        return dataObj
+    }
+
+    const mapData = expenses => {
+        const dataObj = createCategoryObj(expenses)
 
         const dataArr = []
         for (let data in dataObj) {
@@ -29,8 +34,8 @@ function Categories(props) {
 
     return (
         <div>
-            {mapData(props.expenses)
-                .map((c, i) => <CategoryPanels expanded={expanded} setExpanded={setExpanded} key={c.name} category={c} color={colors[i]} />)}
+            {mapData(expenses)
+                .map((c, i) => <CategoryPanels expanded={expanded} setExpenses={setExpenses} setExpanded={setExpanded} key={c.name} category={c} color={colors[i]} />)}
         </div>
     )
 }

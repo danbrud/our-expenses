@@ -1,25 +1,28 @@
 import React from 'react'
-import ExpenseTableHeader from './ExpenseTableHeader';
+import TableHeader from './general/TableHeader';
 import FabButton from './FabButton'
-import MonthSelector from './MonthSelector';
-import ExpensePanels from './ExpensePanels';
+import MonthSelector from './general/MonthSelector';
+import DataPanels from './data/DataPanels';
 import Loader from './Loader';
 import '../styles/Expense.css'
+import NoData from './general/NoData';
+import { CONSTS } from '../utils/consts';
 
 
 
 function Home(props) {
+    const { currentDate, changeCurrentDate, expenses, setExpenses, isLoading } = props
 
     return (
         <div id='home-container'>
-            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <ExpenseTableHeader />
+            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
+            <TableHeader type={CONSTS.singularExpense} />
             {
-                props.expenses.length
-                    ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
-                    : props.isLoading
+                expenses.length
+                    ? <DataPanels data={expenses} setData={setExpenses} type={CONSTS.pluralExpense}/>
+                    : isLoading
                         ? <Loader />
-                        : <div className="no-expense-msg">אין הוצאות לחודש זה</div>
+                        : <NoData type={CONSTS.pluralExpense} />
             }
             <FabButton />
         </div>
