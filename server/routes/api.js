@@ -63,6 +63,13 @@ router.get('/income/:accountId', async function (req, res) {
     res.send(expenses)
 })
 
+router.delete('/income/:id', async function (req, res) {
+    const income = await Income.findOneAndDelete({ _id: req.params.id })
+    await Account.findOneAndUpdate({ _id: income.accountId }, { $pull: { incomes: income._id } })
+
+    res.send(income)
+})
+
 router.post('/accounts', async function (req, res) {
     const account = new Account(req.body)
     await account.save()
