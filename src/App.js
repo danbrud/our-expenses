@@ -12,8 +12,9 @@ import Settings from './components/Settings'
 import Loader from './components/Loader';
 import AccountSignIn from './components/signin/AccountSignIn';
 import ProtectedRoute from './components/ProtectedRoute'
-import NotFound from './components/NotFound'
+import NotFound from './components/general/NotFound'
 import Income from './components/Income';
+import ComingSoon from './components/general/ComingSoon';
 
 function App(props) {
   const [currentDate, setCurrentDate] = React.useState(new Date())
@@ -63,6 +64,7 @@ function App(props) {
         <ProtectedRoute exact path="/add-expense" auth={props.auth} component={!currentAccount._id ? Loader : isLoggedIn() && currentAccount.users.includes(localStorage.userName) ? AddExpense : Login} users={currentAccount.users} setCurrentUser={setCurrentUser} currentUser={currentUser} setExpenses={setExpenses} currentAccount={currentAccount}/>
         <ProtectedRoute exact path="/reports" auth={props.auth} component={Reports} expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} />
         <ProtectedRoute exact path="/income" auth={props.auth} component={Income} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setIsLoading={setIsLoading} currentAccount={currentAccount} />
+        <ProtectedRoute exact path="/cashflow" auth={props.auth} component={ComingSoon} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setIsLoading={setIsLoading} currentAccount={currentAccount} />
         <ProtectedRoute exact path='/settings' auth={props.auth} component={!currentAccount._id ? Loader : Settings} currentAccount={currentAccount} setCurrentAccount={setCurrentAccount} />
         <Route exact path='/signin' render={() => <AccountSignIn setCurrentAccount={setCurrentAccount} auth={props.auth} />} />
         <Route path="*" render={() => <NotFound />}/>

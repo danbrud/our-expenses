@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { CONSTS } from '../utils/consts'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
+import ExposureIcon from '@material-ui/icons/Exposure'
 
 
 const useStyles = makeStyles(theme => ({
@@ -73,12 +74,12 @@ export default function NavBar(props) {
   }
 
   const menuIcons = [
-    <CreditCardIcon />, <AccountBalanceIcon />, <AddCircleOutlineIcon />,
-    <TrendingUpIcon />, <SettingsIcon />, <ExitToAppIcon />
+    <CreditCardIcon />, <AccountBalanceIcon />, <TrendingUpIcon />,
+    <ExposureIcon />, <AddCircleOutlineIcon />, <SettingsIcon />, <ExitToAppIcon />
   ]
 
   const linkRoutes = [
-    '/', '/income', '/add-expense', '/reports', '/settings', '/signin'
+    '/', '/income', '/reports', '/cashflow', '/add-expense', '/settings', '/signin'
   ]
 
   const sideList = side => (
