@@ -6,11 +6,12 @@ import '../styles/AddExpense.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'
 import Loader from './Loader';
+import { CONSTS } from '../utils/consts';
 
 function AddExpense(props) {
     const [state, setState] = React.useState({
         user: props.currentUser, amount: '', expense: '',
-        category: '', date: new Date(), type: 'הוצאה'
+        category: '', date: new Date(), type: CONSTS.singularExpense
     })
     const [open, setOpen] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(false)
@@ -26,7 +27,7 @@ function AddExpense(props) {
     const changeDate = date => setState({ ...state, date })
 
     const validateInputs = (user, amount, expense, category, type) => {
-        if (type === 'הוצאה') {
+        if (type === CONSTS.singularExpense) {
             return user && amount && expense && category
         } else {
             return user && amount && expense
@@ -36,7 +37,7 @@ function AddExpense(props) {
     const addExpense = async (user, amount, expense, category, date, type) => {
         setIsLoading(true)
 
-        if (type === 'הוצאה') {
+        if (type === CONSTS.singularExpense) {
             const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
             const res = await axios.post(`${API_URL}/api/expense`, newExpense)
             props.setExpenses([...props.currentAccount.expenses, res.data._id])
@@ -73,7 +74,7 @@ function AddExpense(props) {
             <div id="add-expense-form">
                 <select name="type" dir="rtl" onChange={handleInputs}>
                     <option disabled>סוג</option>
-                    {['הוצאה', 'הכנסה'].map((t, i) => <option key={i} value={t}>{t}</option>)}
+                    {[CONSTS.singularExpense, CONSTS.singularIncome].map((t, i) => <option key={i} value={t}>{t}</option>)}
                 </select>
                 <input
                     type="text"
@@ -101,7 +102,7 @@ function AddExpense(props) {
                     onChange={handleInputs}
                 />
                 {
-                    state.type === 'הוצאה'
+                    state.type === CONSTS.singularExpense
                         ? <select name="category" dir="rtl" onChange={handleInputs}>
                             <option selected disabled>תבחר קטגוריה</option>
                             {props.currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}

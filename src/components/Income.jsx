@@ -8,6 +8,8 @@ import '../styles/Expense.css'
 import axios from 'axios'
 import { API_URL } from '../utils/utils';
 import NoData from './general/NoData';
+import '../styles/Income.css'
+import { CONSTS } from '../utils/consts';
 
 
 
@@ -30,13 +32,13 @@ function Income(props) {
     return (
         <div id='income-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <TableHeader type='הכנסה'/>
+            <TableHeader type={CONSTS.singularIncome}/>
             {
                 income.length
                     ? <ExpensePanels expenses={income} setExpenses={setIncome} />
                     : isLoading
                         ? <Loader />
-                        : <NoData type='הכנסות' />
+                        : <NoData type={CONSTS.pluralIncome} />
             }
             <FabButton />
         </div>

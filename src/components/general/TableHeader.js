@@ -1,10 +1,11 @@
 import React from 'react'
+import { CONSTS } from '../../utils/consts'
 
 function TableHeader(props) {
     const { type } = props
 
     return (
-        type === 'הכנסה' || type === 'הוצאה'
+        type === CONSTS.singularIncome || type === CONSTS.singularExpense
             ? <div className="table" id="table-header">
                 <div>סכום</div>
                 <div>{type}</div>

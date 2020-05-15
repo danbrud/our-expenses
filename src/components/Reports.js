@@ -5,6 +5,8 @@ import Loader from './Loader'
 import Categories from './Categories'
 import './../styles/Reports.css'
 import TableHeader from './general/TableHeader'
+import NoData from './general/NoData'
+import { CONSTS } from '../utils/consts'
 
 
 function Reports(props) {
@@ -34,7 +36,7 @@ function Reports(props) {
                     ? <Categories expenses={props.expenses} />
                     : props.isLoading
                         ? < Loader />
-                        : <NoData type='הוצאות' />
+                        : <NoData type={CONSTS.pluralExpense} />
             }
             <FabButton />
         </div>

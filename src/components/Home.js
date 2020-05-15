@@ -6,6 +6,7 @@ import ExpensePanels from './ExpensePanels';
 import Loader from './Loader';
 import '../styles/Expense.css'
 import NoData from './general/NoData';
+import { CONSTS } from '../utils/consts';
 
 
 
@@ -14,13 +15,13 @@ function Home(props) {
     return (
         <div id='home-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <TableHeader type='הוצאה' />
+            <TableHeader type={CONSTS.singularExpense} />
             {
                 props.expenses.length
                     ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
                     : props.isLoading
                         ? <Loader />
-                        : <NoData type='הוצאות' />
+                        : <NoData type={CONSTS.pluralExpense} />
             }
             <FabButton />
         </div>
