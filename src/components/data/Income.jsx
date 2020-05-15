@@ -10,33 +10,28 @@ import { API_URL } from '../../utils/utils';
 import NoData from '../general/NoData';
 import '../../styles/Income.css'
 import { CONSTS } from '../../utils/consts';
+import { useIncomeContext } from '../../context/Income';
 
 
 
 function Income(props) {
-    const { currentAccount, currentDate } = props
-    const [income, setIncome] = useState([])
+    const { currentAccount, currentDate, changeCurrentDate } = props
     const [isLoading, setIsLoading] = useState(true)
 
+    const incomeData = useIncomeContext()
+
     useEffect(() => {
-        const getIncome = async (shouldGetByDate = true) => {
-            const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
-
-            const res = await axios.get(`${API_URL}/api/income/${currentAccount._id}${optionalParam}`)
-            setIncome(res.data)
-            setIsLoading(false)
-        }
-
-        getIncome()
+        incomeData.getIncome(currentAccount, currentDate)
+            .then(() => setIsLoading(false))
     }, [currentDate, currentAccount])
 
     return (
         <div id='income-container'>
-            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
+            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
             <TableHeader type={CONSTS.singularIncome}/>
             {
-                income.length
-                    ? <ExpensePanels data={income} setData={setIncome} type={CONSTS.pluralIncome} />
+                incomeData.income.length
+                    ? <ExpensePanels data={incomeData.income} type={CONSTS.pluralIncome} />
                     : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralIncome} />
