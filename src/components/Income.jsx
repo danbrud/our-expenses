@@ -8,12 +8,12 @@ import '../styles/Expense.css'
 
 
 
-function Home(props) {
+function Income(props) {
 
     return (
-        <div id='home-container'>
+        <div id='income-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <ExpenseTableHeader type='הוצאה' />
+            <ExpenseTableHeader type='הכנסה'/>
             {
                 props.expenses.length
                     ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
@@ -26,4 +26,4 @@ function Home(props) {
     )
 }
 
-export default Home
+export default Income
