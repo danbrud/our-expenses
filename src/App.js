@@ -22,6 +22,7 @@ function App(props) {
   const [expenses, setExpenses] = React.useState([])
   const [currentUser, setCurrentUser] = React.useState(localStorage.userName)
   const [isLoading, setIsLoading] = React.useState(true)
+  const [totalIncome, setTotalIncome] = React.useState(0)
 
   const logoutUser = () => {
     props.auth.logout()
@@ -58,12 +59,12 @@ function App(props) {
 
   return (
     <Router>
-      {props.auth.authenticated ? <NavBar expenses={expenses} logoutUser={logoutUser} /> : null }
+      {props.auth.authenticated ? <NavBar expenses={expenses} totalIncome={totalIncome} logoutUser={logoutUser} /> : null }
       <Switch>
         <ProtectedRoute exact path="/" auth={props.auth} component={Home} expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setExpenses={setExpenses} />
         <ProtectedRoute exact path="/add-expense" auth={props.auth} component={!currentAccount._id ? Loader : isLoggedIn() && currentAccount.users.includes(localStorage.userName) ? AddExpense : Login} users={currentAccount.users} setCurrentUser={setCurrentUser} currentUser={currentUser} setExpenses={setExpenses} currentAccount={currentAccount}/>
         <ProtectedRoute exact path="/reports" auth={props.auth} component={Reports} expenses={expenses} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setExpenses={setExpenses} />
-        <ProtectedRoute exact path="/income" auth={props.auth} component={Income} currentDate={currentDate} changeCurrentDate={changeCurrentDate} currentAccount={currentAccount} />
+        <ProtectedRoute exact path="/income" auth={props.auth} component={Income} currentDate={currentDate} changeCurrentDate={changeCurrentDate} currentAccount={currentAccount} setTotalIncome={setTotalIncome} />
         <ProtectedRoute exact path="/cashflow" auth={props.auth} component={ComingSoon} currentDate={currentDate} changeCurrentDate={changeCurrentDate} isLoading={isLoading} setIsLoading={setIsLoading} currentAccount={currentAccount} />
         <ProtectedRoute exact path='/settings' auth={props.auth} component={!currentAccount._id ? Loader : Settings} currentAccount={currentAccount} setCurrentAccount={setCurrentAccount} />
         <Route exact path='/signin' render={() => <AccountSignIn setCurrentAccount={setCurrentAccount} auth={props.auth} />} />

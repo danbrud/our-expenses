@@ -46,7 +46,7 @@ function AddExpense(props) {
             const res = await axios.post(`${API_URL}/api/income`, newIncome)
         }
 
-        window.location = '/'
+        window.location = type === CONSTS.singularExpense ? '/' : '/income'
     }
 
     const handleClose = (event, reason) => {

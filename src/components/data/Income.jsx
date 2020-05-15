@@ -14,7 +14,7 @@ import { CONSTS } from '../../utils/consts';
 
 
 function Income(props) {
-    const { currentAccount, currentDate } = props
+    const { currentAccount, currentDate, setTotalIncome } = props
     const [income, setIncome] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
@@ -30,10 +30,15 @@ function Income(props) {
         getIncome()
     }, [currentDate, currentAccount])
 
+    useEffect(() => {
+        const sum = income.reduce((acc, curr) => acc + curr.amount, 0)
+        setTotalIncome(sum)
+    }, [income])
+
     return (
         <div id='income-container'>
             <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
-            <TableHeader type={CONSTS.singularIncome}/>
+            <TableHeader type={CONSTS.singularIncome} />
             {
                 income.length
                     ? <ExpensePanels data={income} setData={setIncome} type={CONSTS.pluralIncome} />

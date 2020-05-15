@@ -1,12 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {AppBar, Toolbar, Typography, IconButton, List, Divider, ListItem, ListItemIcon, ListItemText, Drawer} from '@material-ui/core'
+import { AppBar, Toolbar, Typography, IconButton, List, Divider, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core'
 import CreditCardIcon from '@material-ui/icons/CreditCard'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import TrendingUpIcon from '@material-ui/icons/TrendingUp'
 import SettingsIcon from '@material-ui/icons/Settings'
 import MenuIcon from '@material-ui/icons/Menu'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { CONSTS } from '../utils/consts'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
@@ -50,7 +50,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function NavBar(props) {
+  const { totalIncome } = props
+
   const classes = useStyles()
+  const location = useLocation()
   const [state, setState] = React.useState({
     left: false
   })
@@ -69,7 +72,7 @@ export default function NavBar(props) {
   }
 
   const handleClick = text => {
-    if(text === 'יציאה') {
+    if (text === 'יציאה') {
       props.logoutUser()
     }
   }
@@ -125,11 +128,15 @@ export default function NavBar(props) {
 
           </Typography>
           {
-            window.location.pathname === '/' || window.location.pathname === '/reports'
+            location.pathname === '/' || location.pathname === '/reports'
               ? <Typography variant="h6">
                 {sumExpenses()} :סה"כ הוצאות
                 </Typography>
-              : null
+              : location.pathname === '/income'
+                ? <Typography variant="h6">
+                  {formatAmount(totalIncome)} :סה"כ הכנסות
+                </Typography>
+                : null
           }
         </Toolbar>
       </AppBar>
