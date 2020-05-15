@@ -5,7 +5,9 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpensePanels from './data/DataPanels'
+import DataPanels from '../data/DataPanels'
+import { CONSTS } from '../../utils/consts';
+import { formatAmount } from '../../utils/utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function CategoryPanels(props) {
+    const { setExpenses, category, color, expanded } = props
     const classes = useStyles()
 
     const handleChange = panel => (event, isExpanded) => {
@@ -37,21 +40,17 @@ export default function CategoryPanels(props) {
 
     return (
         <div className={classes.root}>
-            <ExpansionPanel style={{ backgroundColor: props.color }} expanded={props.expanded === props.category.name} onChange={handleChange(props.category.name)}>
+            <ExpansionPanel style={{ backgroundColor: color }} expanded={expanded === category.name} onChange={handleChange(category.name)}>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography className={classes.heading}>{props.category.name}</Typography>
-                    <Typography className={classes.heading}>{props.category.total} ₪</Typography>
+                    <Typography className={classes.heading}>{category.name}</Typography>
+                    <Typography className={classes.heading}>{formatAmount(category.total)} ₪</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <ExpensePanels expenses={props.category.expenses}/>
-                    {/* <div className={classes.expanded}>
-                        <p><span>קטגוריה: </span><span>{e.category}</span></p>
-                        <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
-                    </div> */}
+                    <DataPanels data={category.expenses} setData={setExpenses} type={CONSTS.pluralExpense}/>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         </div>
