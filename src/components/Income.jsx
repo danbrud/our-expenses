@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TableHeader from './general/TableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './general/MonthSelector';
-import ExpensePanels from './ExpensePanels';
+import ExpensePanels from './DataPanels';
 import Loader from './Loader';
 import '../styles/Expense.css'
 import axios from 'axios'

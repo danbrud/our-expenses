@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import moment from 'moment'
 import axios from 'axios';
 import { API_URL } from '../utils/utils';
+import { CONSTS } from '../utils/consts';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,7 +35,8 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function ExpensePanels(props) {
+function DataPanels(props) {
+    const { data, setData, type } = props
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false)
 
@@ -42,23 +44,28 @@ export default function ExpensePanels(props) {
         setExpanded(isExpanded ? panel : false)
     }
 
-    const deleteExpenseInState = (id) => {
-        const index = props.expenses.findIndex(e => e._id === id)
-        props.expenses.splice(index, 1)
-        props.setExpenses([...props.expenses])
+    const deleteDataInState = (id) => {
+        const updatedData = [...data]
+        const index = updatedData.findIndex(e => e._id === id)
+        updatedData.splice(index, 1)
+        setData(updatedData)
     }
 
-    const deleteExpense = async (id) => {
+    const deleteData = async (id) => {
         const confirmed = window.confirm('בטוח למחוק?')
         if (!confirmed) { return }
 
-        await axios.delete(`${API_URL}/api/expenses/${id}`)
-        deleteExpenseInState(id)
+        if (type === CONSTS.pluralExpense) {
+            await axios.delete(`${API_URL}/api/expenses/${id}`)
+        } else {
+            await axios.delete(`${API_URL}/api/income/${id}`)
+        }
+        deleteDataInState(id)
     }
 
     return (
         <div className={classes.root}>
-            {props.expenses.map(e => {
+            {data.map(e => {
                 return (
                     <ExpansionPanel key={e._id} className={classes.paper} expanded={expanded === e._id} onChange={handleChange(e._id)}>
                         <ExpansionPanelSummary
@@ -75,7 +82,7 @@ export default function ExpensePanels(props) {
                                 <p><span>קטגוריה: </span><span>{e.category}</span></p>
                                 <p><span>תאריך: </span><span>{moment(e.date).format("D/M/YYYY")}</span></p>
                                 <div className='circle-btn edt-btn'><i className="far fa-edit mod-icon edt-icon"></i></div>
-                                <div className='circle-btn dlt-btn' onClick={() => deleteExpense(e._id)}><i className="far fa-trash-alt mod-icon dlt-icon"></i></div>
+                                <div className='circle-btn dlt-btn' onClick={() => deleteData(e._id)}><i className="far fa-trash-alt mod-icon dlt-icon"></i></div>
                             </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -84,3 +91,5 @@ export default function ExpensePanels(props) {
         </div>
     )
 }
+
+export default DataPanels

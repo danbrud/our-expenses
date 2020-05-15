@@ -2,7 +2,7 @@ import React from 'react'
 import TableHeader from './general/TableHeader';
 import FabButton from './FabButton'
 import MonthSelector from './general/MonthSelector';
-import ExpensePanels from './ExpensePanels';
+import DataPanels from './DataPanels';
 import Loader from './Loader';
 import '../styles/Expense.css'
 import NoData from './general/NoData';
@@ -11,15 +11,16 @@ import { CONSTS } from '../utils/consts';
 
 
 function Home(props) {
+    const { currentDate, changeCurrentDate, expenses, setExpenses, isLoading } = props
 
     return (
         <div id='home-container'>
-            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
+            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
             <TableHeader type={CONSTS.singularExpense} />
             {
-                props.expenses.length
-                    ? <ExpensePanels expenses={props.expenses} setExpenses={props.setExpenses} />
-                    : props.isLoading
+                expenses.length
+                    ? <DataPanels data={expenses} setData={setExpenses} type={CONSTS.pluralExpense}/>
+                    : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralExpense} />
             }
