@@ -12,13 +12,12 @@ import { useSelector } from 'react-redux';
 
 
 
-function Home(props) {
-    const { currentDate, changeCurrentDate, isLoading } = props
+function Home({ isLoading }) {
     const expenses = useSelector(selectAllExpenses)
 
     return (
         <div id='home-container'>
-            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
+            <MonthSelector />
             <TableHeader type={CONSTS.singularExpense} />
             {
                 expenses.length

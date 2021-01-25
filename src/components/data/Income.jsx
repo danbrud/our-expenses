@@ -11,14 +11,16 @@ import '../../styles/Income.css'
 import { CONSTS } from '../../utils/consts';
 import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice';
 import { selectCurrentAccount } from '../../state/slices/accountSlice';
+import { selectCurrentDate } from '../../state/slices/uiSlice';
 
 
 
-function Income({ currentDate, changeCurrentDate }) {
+function Income() {
     const dispatch = useDispatch()
 
     const currentAccount = useSelector(selectCurrentAccount)
     const income = useSelector(selectAllIncomes)
+    const currentDate = useSelector(selectCurrentDate)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -33,11 +35,11 @@ function Income({ currentDate, changeCurrentDate }) {
         if (currentAccount._id) {
             getIncome()
         }
-    }, [currentDate, currentAccount])
+    }, [currentDate, currentAccount, dispatch])
 
     return (
         <div id='income-container'>
-            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
+            <MonthSelector />
             <TableHeader type={CONSTS.singularIncome} />
             {
                 income.length

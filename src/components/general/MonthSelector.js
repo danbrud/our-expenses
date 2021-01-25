@@ -7,6 +7,8 @@ import 'moment/locale/he';
 import '../../styles/Expense.css'
 import { makeStyles } from '@material-ui/core/styles';
 import { materialTheme } from '../../themes/DatePicker'
+import { useDispatch, useSelector } from 'react-redux';
+import { dateUpdated, selectCurrentDate } from '../../state/slices/uiSlice';
 
 moment.locale('he')
 
@@ -30,16 +32,19 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function MonthSelector(props) {
+function MonthSelector() {
+    const dispatch = useDispatch()
     const classes = useStyles()
-    const { currentDate, changeCurrentDate } = props
+
+    const currentDate = useSelector(selectCurrentDate)
+
     const [selectedDate, handleDateChange] = useState(currentDate)
 
     const handleChange = date => {
         handleDateChange(date)
 
         const formattedDate = new Date(date)
-        changeCurrentDate(formattedDate)
+        dispatch(dateUpdated(formattedDate))
     }
 
     return (

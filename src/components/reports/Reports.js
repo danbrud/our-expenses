@@ -11,18 +11,18 @@ import { useSelector } from 'react-redux'
 import { selectAllExpenses } from '../../state/slices/expensesSlice'
 
 
-function Reports({ currentDate, changeCurrentDate, isLoading }) {
+function Reports({ isLoading }) {
     const expenses = useSelector(selectAllExpenses)
 
     return (
         <div id="reports-container">
-            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
+            <MonthSelector />
             <TableHeader />
             {
                 expenses.length
                     ? <Categories />
                     : isLoading
-                        ? < Loader />
+                        ? <Loader />
                         : <NoData type={CONSTS.pluralExpense} />
             }
             <FabButton />

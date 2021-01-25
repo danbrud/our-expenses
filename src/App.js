@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchExpenses } from './state/slices/expensesSlice'
 import MainRouter from './components/MainRouter'
 import { accountSet, fetchAccount, selectCurrentAccount } from './state/slices/accountSlice'
+import { selectCurrentDate } from './state/slices/uiSlice'
 
 function App({ auth }) {
   const dispatch = useDispatch()
 
   const currentAccount = useSelector(selectCurrentAccount)
+  const currentDate = useSelector(selectCurrentDate)
 
-  const [currentDate, setCurrentDate] = useState(new Date())
   const [isLoading, setIsLoading] = useState(true)
 
   const logoutUser = () => {
@@ -38,17 +39,14 @@ function App({ auth }) {
     if (currentAccount._id) {
       getExpenses()
     }
-  }, [currentDate, currentAccount._id])
-
-  const changeCurrentDate = async date => setCurrentDate(date)
+  }, [currentDate, currentAccount._id, dispatch])
+  
 
   return (
     <>
       {auth.authenticated && <NavBar logoutUser={logoutUser} />}
       <MainRouter
         auth={auth}
-        changeCurrentDate={changeCurrentDate}
-        currentDate={currentDate}
         setIsLoading={setIsLoading}
         isLoading={isLoading}
       />

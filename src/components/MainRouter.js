@@ -10,12 +10,7 @@ import NotFound from './general/NotFound'
 import Income from './data/Income'
 import ComingSoon from './general/ComingSoon'
 
-function MainRouter(
-  {
-    auth, changeCurrentDate, currentDate,
-    setIsLoading, isLoading, currentUser, setCurrentUser
-  }
-) {
+function MainRouter({ auth, setIsLoading, isLoading }) {
 
   return (
     <Switch>
@@ -24,8 +19,6 @@ function MainRouter(
         path='/'
         component={Home}
         auth={auth}
-        currentDate={currentDate}
-        changeCurrentDate={changeCurrentDate}
         isLoading={isLoading}
       />
       <ProtectedRoute
@@ -39,8 +32,6 @@ function MainRouter(
         path='/reports'
         component={Reports}
         auth={auth}
-        currentDate={currentDate}
-        changeCurrentDate={changeCurrentDate}
         isLoading={isLoading}
       />
       <ProtectedRoute
@@ -48,16 +39,12 @@ function MainRouter(
         path='/income'
         component={Income}
         auth={auth}
-        currentDate={currentDate}
-        changeCurrentDate={changeCurrentDate}
       />
       <ProtectedRoute
         exact
         path='/cashflow'
         component={ComingSoon}
         auth={auth}
-        currentDate={currentDate}
-        changeCurrentDate={changeCurrentDate}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
