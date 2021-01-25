@@ -7,11 +7,15 @@ import Loader from '../Loader';
 import '../../styles/Expense.css'
 import NoData from '../general/NoData';
 import { CONSTS } from '../../utils/consts';
+import { selectAllExpenses } from '../../state/slices/expensesSlice';
+import { useSelector } from 'react-redux';
 
 
 
 function Home(props) {
-    const { currentDate, changeCurrentDate, expenses, setExpenses, isLoading } = props
+    const { currentDate, changeCurrentDate, setExpenses, isLoading } = props
+    const expenses = useSelector(selectAllExpenses)
+    console.log(expenses)
 
     return (
         <div id='home-container'>

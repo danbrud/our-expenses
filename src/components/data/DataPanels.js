@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -9,6 +9,8 @@ import { API_URL } from '../../utils/utils';
 import { CONSTS } from '../../utils/consts';
 import DataPanelSummary from './DataPanelSummary';
 import DataPanelDetails from './DataPanelDetails';
+import { useDispatch } from 'react-redux';
+import { deleteExpense } from '../../state/slices/expensesSlice';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,31 +24,32 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function DataPanels(props) {
+    const dispatch = useDispatch()
+
     const { data, setData, type } = props
     const classes = useStyles()
-    const [expanded, setExpanded] = React.useState(false)
+    const [expanded, setExpanded] = useState(false)
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false)
     }
 
-    const deleteDataInState = (id) => {
-        const updatedData = [...data]
-        const index = updatedData.findIndex(e => e._id === id)
-        updatedData.splice(index, 1)
-        setData(updatedData)
-    }
+    // const deleteDataInState = (id) => {
+    //     const updatedData = [...data]
+    //     const index = updatedData.findIndex(e => e._id === id)
+    //     updatedData.splice(index, 1)
+    //     setData(updatedData)
+    // }
 
     const deleteData = async (id) => {
         const confirmed = window.confirm('בטוח למחוק?')
         if (!confirmed) { return }
 
         if (type === CONSTS.pluralExpense) {
-            await axios.delete(`${API_URL}/api/expenses/${id}`)
+            dispatch(deleteExpense(id))
         } else {
             await axios.delete(`${API_URL}/api/income/${id}`)
         }
-        deleteDataInState(id)
     }
 
     return (

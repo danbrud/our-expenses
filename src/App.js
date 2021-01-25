@@ -15,8 +15,12 @@ import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/general/NotFound'
 import Income from './components/data/Income';
 import ComingSoon from './components/general/ComingSoon';
+import { useDispatch } from 'react-redux';
+import { fetchExpenses } from './state/slices/expensesSlice';
 
 function App(props) {
+  const dispatch = useDispatch()
+
   const [currentDate, setCurrentDate] = React.useState(new Date())
   const [currentAccount, setCurrentAccount] = React.useState({})
   const [expenses, setExpenses] = React.useState([])
@@ -38,9 +42,7 @@ function App(props) {
 
     const getExpenses = async (shouldGetByDate = true) => {
       const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
-
-      const res = await axios.get(`${API_URL}/api/expenses/${currentAccount._id}${optionalParam}`)
-      setExpenses(res.data)
+      dispatch(fetchExpenses(currentAccount._id, optionalParam))
       setIsLoading(false)
     }
 

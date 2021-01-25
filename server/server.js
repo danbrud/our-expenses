@@ -5,9 +5,9 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 
 const app = express()
-const api = require('./server/routes/api')
-const script = require('./server/scripts/script')
-const useStrategy = require('./server/config/passport')
+const api = require('./routes/api')
+const script = require('./scripts/script')
+const useStrategy = require('./config/passport')
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/our-expenses", {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false

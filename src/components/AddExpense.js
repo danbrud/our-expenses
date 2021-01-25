@@ -7,8 +7,14 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'
 import Loader from './Loader';
 import { CONSTS } from '../utils/consts';
+import { useDispatch } from 'react-redux';
+import { saveExpense } from '../state/slices/expensesSlice'
+import { useHistory } from 'react-router-dom';
 
 function AddExpense(props) {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
     const [state, setState] = React.useState({
         user: props.currentUser, amount: '', expense: '',
         category: '', date: new Date(), type: CONSTS.singularExpense
@@ -27,26 +33,21 @@ function AddExpense(props) {
     const changeDate = date => setState({ ...state, date })
 
     const validateInputs = (user, amount, expense, category, type) => {
-        if (type === CONSTS.singularExpense) {
-            return user && amount && expense && category
-        } else {
-            return user && amount && expense
-        }
+        return type === CONSTS.singularExpense ? user && amount && expense && category : user && amount && expense
     }
 
-    const addExpense = async (user, amount, expense, category, date, type) => {
+    const onAddExpenseClick = async (user, amount, expense, category, date, type) => {
         setIsLoading(true)
 
         if (type === CONSTS.singularExpense) {
-            const newExpense = { user, expense, amount, category, date, accountId: props.currentAccount._id }
-            const res = await axios.post(`${API_URL}/api/expense`, newExpense)
-            props.setExpenses([...props.currentAccount.expenses, res.data._id])
+            const newExpense = { user, expense, amount: Number(amount), category, date, accountId: props.currentAccount._id }
+            dispatch(saveExpense(newExpense))
         } else {
-            const newIncome = { user, name: expense, amount, date, accountId: props.currentAccount._id }
+            const newIncome = { user, name: expense, amount: Number(amount), date, accountId: props.currentAccount._id }
             const res = await axios.post(`${API_URL}/api/income`, newIncome)
         }
 
-        window.location = type === CONSTS.singularExpense ? '/' : '/income'
+        history.push(type === CONSTS.singularExpense ? '/' : '/income')
     }
 
     const handleClose = (event, reason) => {
@@ -60,7 +61,7 @@ function AddExpense(props) {
     const handleAdd = () => {
         const { user, amount, expense, category, date, type } = state
         validateInputs(user, amount, expense, category, type)
-            ? addExpense(user, amount, expense, category, date, type)
+            ? onAddExpenseClick(user, amount, expense, category, date, type)
             : setOpen(true)
     }
 

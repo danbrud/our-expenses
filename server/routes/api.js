@@ -27,7 +27,7 @@ router.get('/expenses/:accountId', async function (req, res) {
     res.send(expenses)
 })
 
-router.post('/expense', async function (req, res) {
+router.post('/expenses', async function (req, res) {
     const expense = new Expense(req.body)
     await expense.save()
     await Account.findOneAndUpdate({ _id: expense.accountId }, { $push: { expenses: expense._id } })

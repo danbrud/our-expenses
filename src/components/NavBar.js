@@ -12,6 +12,8 @@ import { CONSTS } from '../utils/consts'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import ExposureIcon from '@material-ui/icons/Exposure'
 import { formatAmount } from '../utils/utils'
+import { useSelector } from 'react-redux'
+import { selectExpensesSum } from '../state/slices/expensesSlice'
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +54,9 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar(props) {
   const { totalIncome } = props
 
+  const expensesSum = useSelector(selectExpensesSum)
+  console.log(expensesSum)
+
   const classes = useStyles()
   const location = useLocation()
   const [state, setState] = React.useState({
@@ -64,11 +69,6 @@ export default function NavBar(props) {
     }
 
     setState({ ...state, [side]: open })
-  }
-
-  const sumExpenses = () => {
-    const sum = props.expenses.reduce((acc, curr) => acc + curr.amount, 0)
-    return formatAmount(sum)
   }
 
   const handleClick = text => {
@@ -130,7 +130,7 @@ export default function NavBar(props) {
           {
             location.pathname === '/' || location.pathname === '/reports'
               ? <Typography variant="h6">
-                {sumExpenses()} :סה"כ הוצאות
+                {formatAmount(expensesSum)} :סה"כ הוצאות
                 </Typography>
               : location.pathname === '/income'
                 ? <Typography variant="h6">
