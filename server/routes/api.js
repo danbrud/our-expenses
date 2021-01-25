@@ -42,7 +42,7 @@ router.delete('/expenses/:id', async function (req, res) {
     res.send(expense)
 })
 
-router.post('/income', async function (req, res) {
+router.post('/incomes', async function (req, res) {
     const income = new Income(req.body)
     await income.save()
     await Account.findOneAndUpdate({ _id: income.accountId }, { $push: { incomes: income._id } })
@@ -50,7 +50,7 @@ router.post('/income', async function (req, res) {
     res.send(income)
 })
 
-router.get('/income/:accountId', async function (req, res) {
+router.get('/incomes/:accountId', async function (req, res) {
     const { date } = req.query
     const { accountId } = req.params
 
@@ -63,7 +63,7 @@ router.get('/income/:accountId', async function (req, res) {
     res.send(expenses)
 })
 
-router.delete('/income/:id', async function (req, res) {
+router.delete('/incomes/:id', async function (req, res) {
     const income = await Income.findOneAndDelete({ _id: req.params.id })
     await Account.findOneAndUpdate({ _id: income.accountId }, { $pull: { incomes: income._id } })
 

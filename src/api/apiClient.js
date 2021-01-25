@@ -11,5 +11,14 @@ export const apiClient = {
   },
   deleteExpense: (expenseId) => {
     return axios.delete(`${API_URL}/api/expenses/${expenseId}`)
+  },
+  getIncomes: (accountId, optionalParam) => {
+    return axios.get(`${API_URL}/api/incomes/${accountId}${optionalParam}`)
+  },
+  addIncome: (income) => {
+    return axios.post(`${API_URL}/api/incomes`, income)
+  },
+  deleteIncome: (incomeId) => {
+    return axios.delete(`${API_URL}/api/incomes/${incomeId}`)
   }
 }

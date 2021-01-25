@@ -1,6 +1,9 @@
-const { combineReducers } = require("redux");
-const { default: expensesReducer } = require("./slices/expensesSlice");
+import { combineReducers } from 'redux'
+import expensesReducer from './slices/expensesSlice'
+import incomesReducer from './slices/incomesSlice'
+
 
 export const rootReducer = combineReducers({
-  expenses: expensesReducer
+  expenses: expensesReducer,
+  incomes: incomesReducer
 })

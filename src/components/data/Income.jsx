@@ -5,35 +5,34 @@ import MonthSelector from '../general/MonthSelector';
 import ExpensePanels from './DataPanels';
 import Loader from '../Loader';
 import '../../styles/Expense.css'
-import axios from 'axios'
-import { API_URL } from '../../utils/utils';
+import { useDispatch, useSelector } from 'react-redux'
 import NoData from '../general/NoData';
 import '../../styles/Income.css'
 import { CONSTS } from '../../utils/consts';
+import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice';
 
 
 
 function Income(props) {
-    const { currentAccount, currentDate, setTotalIncome } = props
-    const [income, setIncome] = useState([])
+    const dispatch = useDispatch()
+
+    const income = useSelector(selectAllIncomes)
+
     const [isLoading, setIsLoading] = useState(true)
+    const { currentAccount, currentDate, setIncome } = props
 
     useEffect(() => {
         const getIncome = async (shouldGetByDate = true) => {
             const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
+            dispatch(fetchIncomes(currentAccount._id, optionalParam))
 
-            const res = await axios.get(`${API_URL}/api/income/${currentAccount._id}${optionalParam}`)
-            setIncome(res.data)
             setIsLoading(false)
         }
 
-        getIncome()
+        if (currentAccount._id) {
+            getIncome()
+        }
     }, [currentDate, currentAccount])
-
-    useEffect(() => {
-        const sum = income.reduce((acc, curr) => acc + curr.amount, 0)
-        setTotalIncome(sum)
-    }, [income])
 
     return (
         <div id='income-container'>

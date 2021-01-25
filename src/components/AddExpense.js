@@ -10,6 +10,7 @@ import { CONSTS } from '../utils/consts';
 import { useDispatch } from 'react-redux';
 import { saveExpense } from '../state/slices/expensesSlice'
 import { useHistory } from 'react-router-dom';
+import { saveIncome } from '../state/slices/incomesSlice';
 
 function AddExpense(props) {
     const dispatch = useDispatch()
@@ -44,7 +45,7 @@ function AddExpense(props) {
             dispatch(saveExpense(newExpense))
         } else {
             const newIncome = { user, name: expense, amount: Number(amount), date, accountId: props.currentAccount._id }
-            const res = await axios.post(`${API_URL}/api/income`, newIncome)
+            dispatch(saveIncome(newIncome))
         }
 
         history.push(type === CONSTS.singularExpense ? '/' : '/income')

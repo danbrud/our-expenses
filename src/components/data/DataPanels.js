@@ -11,6 +11,7 @@ import DataPanelSummary from './DataPanelSummary';
 import DataPanelDetails from './DataPanelDetails';
 import { useDispatch } from 'react-redux';
 import { deleteExpense } from '../../state/slices/expensesSlice';
+import { deleteIncome } from '../../state/slices/incomesSlice';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -48,7 +49,7 @@ function DataPanels(props) {
         if (type === CONSTS.pluralExpense) {
             dispatch(deleteExpense(id))
         } else {
-            await axios.delete(`${API_URL}/api/income/${id}`)
+            dispatch(deleteIncome(id))
         }
     }
 

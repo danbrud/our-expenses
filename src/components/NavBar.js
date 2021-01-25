@@ -14,6 +14,7 @@ import ExposureIcon from '@material-ui/icons/Exposure'
 import { formatAmount } from '../utils/utils'
 import { useSelector } from 'react-redux'
 import { selectExpensesSum } from '../state/slices/expensesSlice'
+import { selectIncomesSum } from '../state/slices/incomesSlice'
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,10 +53,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function NavBar(props) {
-  const { totalIncome } = props
-
   const expensesSum = useSelector(selectExpensesSum)
-  console.log(expensesSum)
+  const totalIncome = useSelector(selectIncomesSum)
 
   const classes = useStyles()
   const location = useLocation()
