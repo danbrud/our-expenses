@@ -33,8 +33,6 @@ function MainRouter(
         path='/add-expense'
         component={AddExpense}
         auth={auth}
-        setCurrentUser={setCurrentUser}
-        currentUser={currentUser}
       />
       <ProtectedRoute
         exact

@@ -1,7 +1,5 @@
 import React, { createRef, useEffect, useState } from 'react'
 import DateSelector from './DateSelector';
-import axios from 'axios'
-import { API_URL } from '../utils/utils';
 import '../styles/AddExpense.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from './SnackbarContentWrapper'
@@ -11,17 +9,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveExpense } from '../state/slices/expensesSlice'
 import { useHistory } from 'react-router-dom';
 import { saveIncome } from '../state/slices/incomesSlice';
-import { selectCurrentAccount } from '../state/slices/accountSlice';
-import Login from './Login';
+import { selectCurrentAccount, selectAccountUser } from '../state/slices/accountSlice';
+import SelectUser from './SelectUser';
 
-function AddExpense({ currentUser }) {
+function AddExpense() {
     const dispatch = useDispatch()
     const history = useHistory()
 
     const currentAccount = useSelector(selectCurrentAccount)
+    const selectedAccountUser = useSelector(selectAccountUser)
 
     const [state, setState] = useState({
-        user: currentUser, amount: '', expense: '',
+        user: selectedAccountUser, amount: '', expense: '',
         category: '', date: new Date(), type: CONSTS.singularExpense
     })
     const [open, setOpen] = useState(false)
@@ -70,14 +69,14 @@ function AddExpense({ currentUser }) {
             : setOpen(true)
     }
 
-    const isLoggedIn = () => currentUser ? true : false
+    const isLoggedIn = () => selectedAccountUser ? true : false
 
     if (!currentAccount._id) { return <Loader /> }
 
     if (!currentAccount.categories.length) { return <h1>הגדר קטגוריות להוצאות בעמוד ההגדרות</h1> }
 
     return (
-        isLoggedIn() && currentAccount.users.includes(localStorage.userName)
+        isLoggedIn() && currentAccount.users.includes(selectedAccountUser)
             ? (
                 <div id="add-expense">
                     <h1>הוספת {state.type}</h1>
@@ -112,12 +111,12 @@ function AddExpense({ currentUser }) {
                             onChange={handleInputs}
                         />
                         {
-                            state.type === CONSTS.singularExpense
-                                ? <select name="category" dir="rtl" onChange={handleInputs}>
+                            state.type === CONSTS.singularExpense && (
+                                <select name="category" dir="rtl" onChange={handleInputs}>
                                     <option selected disabled>תבחר קטגוריה</option>
                                     {currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                                 </select>
-                                : null
+                            )
                         }
                         <DateSelector changeDate={changeDate} date={state.date} />
                         <div id="add-expense-button" onClick={handleAdd}>הוסף</div>
@@ -139,7 +138,7 @@ function AddExpense({ currentUser }) {
                     </Snackbar>
                 </div>
             )
-            : Login
+            : <SelectUser />
     )
 }
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from './components/NavBar'
-import axios from 'axios'
 import './App.css'
-import { API_URL } from './utils/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchExpenses } from './state/slices/expensesSlice'
 import MainRouter from './components/MainRouter'
@@ -14,7 +12,6 @@ function App({ auth }) {
   const currentAccount = useSelector(selectCurrentAccount)
 
   const [currentDate, setCurrentDate] = useState(new Date())
-  const [currentUser, setCurrentUser] = useState(localStorage.userName)
   const [isLoading, setIsLoading] = useState(true)
 
   const logoutUser = () => {
@@ -52,11 +49,8 @@ function App({ auth }) {
         auth={auth}
         changeCurrentDate={changeCurrentDate}
         currentDate={currentDate}
-        currentAccount={currentAccount}
         setIsLoading={setIsLoading}
         isLoading={isLoading}
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
       />
     </>
   )

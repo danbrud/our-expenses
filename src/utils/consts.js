@@ -7,3 +7,5 @@ export const CONSTS = {
   singularExpense: 'הוצאה',
   pluralExpense: 'הוצאות'
 }
+
+export const LS_ACCOUNT_USER = 'accountUser'
