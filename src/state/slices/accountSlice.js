@@ -53,7 +53,7 @@ export const fetchAccount = (accountId) => async (dispatch, getState) => {
 }
 
 export const updateAccount = (updateProperties) => async (dispatch, getState) => {
-  const { _id: accountId } = getState().account
+  const { _id: accountId } = getState().account.currentAccount
   const { fieldToUpdate } = updateProperties
 
   const response = await apiClient.updateAccount(accountId, updateProperties)

@@ -28,7 +28,7 @@ function App({ auth }) {
 
     const getExpenses = async (shouldGetByDate = true) => {
       const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
-      dispatch(fetchExpenses(currentAccount._id, optionalParam))
+      dispatch(fetchExpenses(optionalParam))
       setIsLoading(false)
     }
 
@@ -40,7 +40,7 @@ function App({ auth }) {
       getExpenses()
     }
   }, [currentDate, currentAccount._id, dispatch])
-  
+
 
   return (
     <>

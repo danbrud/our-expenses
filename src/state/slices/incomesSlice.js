@@ -39,7 +39,8 @@ const incomeDeleted = (incomeId) => ({
 
 
 //Change this to get current account from state...
-export const fetchIncomes = (currentAccountId, optionalParam) => async (dispatch, getState) => {
+export const fetchIncomes = (optionalParam) => async (dispatch, getState) => {
+  const { _id: currentAccountId } = getState().account.currentAccount
   const response = await apiClient.getIncomes(currentAccountId, optionalParam)
   dispatch(incomesReceived(response.data))
 }

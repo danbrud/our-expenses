@@ -27,7 +27,7 @@ function Income() {
     useEffect(() => {
         const getIncome = async (shouldGetByDate = true) => {
             const optionalParam = shouldGetByDate ? `?date=${currentDate}` : ''
-            dispatch(fetchIncomes(currentAccount._id, optionalParam))
+            dispatch(fetchIncomes(optionalParam))
 
             setIsLoading(false)
         }
