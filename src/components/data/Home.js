@@ -13,9 +13,8 @@ import { useSelector } from 'react-redux';
 
 
 function Home(props) {
-    const { currentDate, changeCurrentDate, setExpenses, isLoading } = props
+    const { currentDate, changeCurrentDate, isLoading } = props
     const expenses = useSelector(selectAllExpenses)
-    console.log(expenses)
 
     return (
         <div id='home-container'>
@@ -23,7 +22,7 @@ function Home(props) {
             <TableHeader type={CONSTS.singularExpense} />
             {
                 expenses.length
-                    ? <DataPanels data={expenses} setData={setExpenses} type={CONSTS.pluralExpense}/>
+                    ? <DataPanels data={expenses} type={CONSTS.pluralExpense}/>
                     : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralExpense} />

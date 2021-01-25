@@ -13,13 +13,12 @@ import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice'
 
 
 
-function Income(props) {
+function Income({ currentAccount, currentDate, changeCurrentDate }) {
     const dispatch = useDispatch()
 
     const income = useSelector(selectAllIncomes)
 
     const [isLoading, setIsLoading] = useState(true)
-    const { currentAccount, currentDate, setIncome } = props
 
     useEffect(() => {
         const getIncome = async (shouldGetByDate = true) => {
@@ -36,11 +35,11 @@ function Income(props) {
 
     return (
         <div id='income-container'>
-            <MonthSelector currentDate={props.currentDate} changeCurrentDate={props.changeCurrentDate} />
+            <MonthSelector currentDate={currentDate} changeCurrentDate={changeCurrentDate} />
             <TableHeader type={CONSTS.singularIncome} />
             {
                 income.length
-                    ? <ExpensePanels data={income} setData={setIncome} type={CONSTS.pluralIncome} />
+                    ? <ExpensePanels data={income} type={CONSTS.pluralIncome} />
                     : isLoading
                         ? <Loader />
                         : <NoData type={CONSTS.pluralIncome} />

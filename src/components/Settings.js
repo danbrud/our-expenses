@@ -1,20 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './../styles/Settings.css'
 import ChipsArray from './ChipsArray'
 import { API_URL } from '../utils/utils'
 import axios from 'axios'
 
 
-function Settings(props) {
-    const [inputs, setInputs] = React.useState({ users: '', categories: '' })
+function Settings({ currentAccount, setCurrentAccount }) {
+    const [inputs, setInputs] = useState({ users: '', categories: '' })
 
     const handleDelete = chipToDelete => async () => {
-        const fieldToUpdate = props.currentAccount.users.includes(chipToDelete) ? 'users' : 'categories'
+        const fieldToUpdate = currentAccount.users.includes(chipToDelete) ? 'users' : 'categories'
         const account = await axios.put(`${API_URL}/api/accounts`, {
-            fieldToUpdate, accountId: props.currentAccount._id, data: chipToDelete, operation: 'remove'
+            fieldToUpdate, accountId: currentAccount._id, data: chipToDelete, operation: 'remove'
         })
-        
-        props.setCurrentAccount(account.data)
+
+        setCurrentAccount(account.data)
     }
 
     const handleInputs = e => {
@@ -23,10 +23,10 @@ function Settings(props) {
 
     const handleAdd = async fieldToUpdate => {
         const account = await axios.put(`${API_URL}/api/accounts`, {
-            fieldToUpdate, accountId: props.currentAccount._id, data: inputs[fieldToUpdate], operation: 'add'
+            fieldToUpdate, accountId: currentAccount._id, data: inputs[fieldToUpdate], operation: 'add'
         })
 
-        props.setCurrentAccount(account.data)
+        setCurrentAccount(account.data)
         setInputs({ ...inputs, [fieldToUpdate]: '' })
     }
 
@@ -46,7 +46,7 @@ function Settings(props) {
                     />
                     <div class="add-button" onClick={() => handleAdd('users')}>הוסף</div>
                 </div>
-                <ChipsArray chipData={props.currentAccount.users} handleDelete={handleDelete} />
+                <ChipsArray chipData={currentAccount.users} handleDelete={handleDelete} />
             </div>
             <div>
                 <div class="type-container">
@@ -62,7 +62,7 @@ function Settings(props) {
                     />
                     <div class="add-button" onClick={() => handleAdd('categories')}>הוסף</div>
                 </div>
-                <ChipsArray chipData={props.currentAccount.categories} handleDelete={handleDelete} />
+                <ChipsArray chipData={currentAccount.categories} handleDelete={handleDelete} />
             </div>
         </div>
     )

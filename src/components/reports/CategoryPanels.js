@@ -30,12 +30,11 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function CategoryPanels(props) {
-    const { setExpenses, category, color, expanded } = props
+export default function CategoryPanels({ category, color, expanded, setExpanded }) {
     const classes = useStyles()
 
     const handleChange = panel => (event, isExpanded) => {
-        props.setExpanded(isExpanded ? panel : false)
+        setExpanded(isExpanded ? panel : false)
     }
 
     return (
@@ -50,7 +49,7 @@ export default function CategoryPanels(props) {
                     <Typography className={classes.heading}>{formatAmount(category.total)} ₪</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <DataPanels data={category.expenses} setData={setExpenses} type={CONSTS.pluralExpense}/>
+                    <DataPanels data={category.expenses} type={CONSTS.pluralExpense}/>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         </div>

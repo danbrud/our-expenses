@@ -27,20 +27,13 @@ const useStyles = makeStyles(theme => ({
 function DataPanels(props) {
     const dispatch = useDispatch()
 
-    const { data, setData, type } = props
+    const { data, type } = props
     const classes = useStyles()
     const [expanded, setExpanded] = useState(false)
 
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false)
     }
-
-    // const deleteDataInState = (id) => {
-    //     const updatedData = [...data]
-    //     const index = updatedData.findIndex(e => e._id === id)
-    //     updatedData.splice(index, 1)
-    //     setData(updatedData)
-    // }
 
     const deleteData = async (id) => {
         const confirmed = window.confirm('בטוח למחוק?')

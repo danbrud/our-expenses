@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { API_ENDPOINT } from '../CONSTS'
 import { API_URL } from '../utils/utils'
 
 export const apiClient = {

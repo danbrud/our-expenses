@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CategoryPanels from './CategoryPanels'
 import { colors } from '../../utils/utils'
+import { selectAllExpenses } from '../../state/slices/expensesSlice'
+import { useSelector } from 'react-redux'
 
 
-function Categories(props) {
-    const { expenses, setExpenses } = props
-    const [expanded, setExpanded] = React.useState(false)
+function Categories() {
+    const expenses = useSelector(selectAllExpenses)
+
+    const [expanded, setExpanded] = useState(false)
 
     const createCategoryObj = expenses => {
         const dataObj = {}
@@ -35,7 +38,7 @@ function Categories(props) {
     return (
         <div>
             {mapData(expenses)
-                .map((c, i) => <CategoryPanels expanded={expanded} setExpenses={setExpenses} setExpanded={setExpanded} key={c.name} category={c} color={colors[i]} />)}
+                .map((c, i) => <CategoryPanels expanded={expanded} setExpanded={setExpanded} key={c.name} category={c} color={colors[i]} />)}
         </div>
     )
 }

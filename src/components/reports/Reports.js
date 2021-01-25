@@ -7,10 +7,12 @@ import './../../styles/Reports.css'
 import TableHeader from '../general/TableHeader'
 import NoData from '../general/NoData'
 import { CONSTS } from '../../utils/consts'
+import { useSelector } from 'react-redux'
+import { selectAllExpenses } from '../../state/slices/expensesSlice'
 
 
-function Reports(props) {
-    const { currentDate, changeCurrentDate, expenses, setExpenses } = props
+function Reports({ currentDate, changeCurrentDate, isLoading }) {
+    const expenses = useSelector(selectAllExpenses)
 
     return (
         <div id="reports-container">
@@ -18,8 +20,8 @@ function Reports(props) {
             <TableHeader />
             {
                 expenses.length
-                    ? <Categories expenses={expenses} setExpenses={setExpenses} />
-                    : props.isLoading
+                    ? <Categories />
+                    : isLoading
                         ? < Loader />
                         : <NoData type={CONSTS.pluralExpense} />
             }
