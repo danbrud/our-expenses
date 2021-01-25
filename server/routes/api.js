@@ -85,8 +85,9 @@ router.get('/accounts/:id', async function (req, res) {
     res.send(account)
 })
 
-router.put('/accounts', async function (req, res) {
-    const { fieldToUpdate, accountId, data, operation } = req.body
+router.put('/accounts/:accountId', async function (req, res) {
+    const { accountId } = req.params
+    const { fieldToUpdate, data, operation } = req.body
     const account = operation === 'add'
         ? await Account.findOneAndUpdate({ _id: accountId }, { $push: { [fieldToUpdate]: data } }, { new: true })
         : await Account.findOneAndUpdate({ _id: accountId }, { $pull: { [fieldToUpdate]: data } }, { new: true })

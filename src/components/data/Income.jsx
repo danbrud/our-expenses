@@ -10,12 +10,14 @@ import NoData from '../general/NoData';
 import '../../styles/Income.css'
 import { CONSTS } from '../../utils/consts';
 import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice';
+import { selectCurrentAccount } from '../../state/slices/accountSlice';
 
 
 
-function Income({ currentAccount, currentDate, changeCurrentDate }) {
+function Income({ currentDate, changeCurrentDate }) {
     const dispatch = useDispatch()
 
+    const currentAccount = useSelector(selectCurrentAccount)
     const income = useSelector(selectAllIncomes)
 
     const [isLoading, setIsLoading] = useState(true)

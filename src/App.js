@@ -3,28 +3,29 @@ import NavBar from './components/NavBar'
 import axios from 'axios'
 import './App.css'
 import { API_URL } from './utils/utils'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchExpenses } from './state/slices/expensesSlice'
 import MainRouter from './components/MainRouter'
+import { accountSet, fetchAccount, selectCurrentAccount } from './state/slices/accountSlice'
 
 function App({ auth }) {
   const dispatch = useDispatch()
 
+  const currentAccount = useSelector(selectCurrentAccount)
+
   const [currentDate, setCurrentDate] = useState(new Date())
-  const [currentAccount, setCurrentAccount] = useState({})
   const [currentUser, setCurrentUser] = useState(localStorage.userName)
   const [isLoading, setIsLoading] = useState(true)
 
   const logoutUser = () => {
     auth.logout()
-    setCurrentAccount({})
+    dispatch(accountSet({}))
   }
 
 
   useEffect(() => {
     const getAccount = async (id) => {
-      const res = await axios.get(`${API_URL}/api/accounts/${id}`)
-      setCurrentAccount(res.data)
+      dispatch(fetchAccount(id))
     }
 
     const getExpenses = async (shouldGetByDate = true) => {
@@ -44,19 +45,15 @@ function App({ auth }) {
 
   const changeCurrentDate = async date => setCurrentDate(date)
 
-  const isLoggedIn = () => currentUser ? true : false
-
   return (
     <>
       {auth.authenticated && <NavBar logoutUser={logoutUser} />}
       <MainRouter
         auth={auth}
-        isLoggedIn={isLoggedIn}
         changeCurrentDate={changeCurrentDate}
         currentDate={currentDate}
         currentAccount={currentAccount}
         setIsLoading={setIsLoading}
-        setCurrentAccount={setCurrentAccount}
         isLoading={isLoading}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}

@@ -4,18 +4,16 @@ import AddExpense from './AddExpense'
 import Home from './data/Home'
 import Reports from './reports/Reports'
 import Settings from './Settings'
-import Loader from './Loader'
 import AccountSignIn from './signin/AccountSignIn'
 import ProtectedRoute from './ProtectedRoute'
 import NotFound from './general/NotFound'
 import Income from './data/Income'
 import ComingSoon from './general/ComingSoon'
-import Login from './Login'
 
 function MainRouter(
   {
-    auth, isLoggedIn, changeCurrentDate, currentDate, currentAccount,
-    setIsLoading, setCurrentAccount, isLoading, currentUser, setCurrentUser
+    auth, changeCurrentDate, currentDate,
+    setIsLoading, isLoading, currentUser, setCurrentUser
   }
 ) {
 
@@ -33,12 +31,10 @@ function MainRouter(
       <ProtectedRoute
         exact
         path='/add-expense'
-        component={!currentAccount._id ? Loader : isLoggedIn() && currentAccount.users.includes(localStorage.userName) ? AddExpense : Login}
+        component={AddExpense}
         auth={auth}
-        users={currentAccount.users}
         setCurrentUser={setCurrentUser}
         currentUser={currentUser}
-        currentAccount={currentAccount}
       />
       <ProtectedRoute
         exact
@@ -56,7 +52,6 @@ function MainRouter(
         auth={auth}
         currentDate={currentDate}
         changeCurrentDate={changeCurrentDate}
-        currentAccount={currentAccount}
       />
       <ProtectedRoute
         exact
@@ -67,20 +62,17 @@ function MainRouter(
         changeCurrentDate={changeCurrentDate}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
-        currentAccount={currentAccount}
       />
       <ProtectedRoute
         exact
         path='/settings'
-        component={!currentAccount._id ? Loader : Settings}
+        component={Settings}
         auth={auth}
-        currentAccount={currentAccount}
-        setCurrentAccount={setCurrentAccount}
       />
       <Route
         exact
         path='/signin'
-        render={() => <AccountSignIn setCurrentAccount={setCurrentAccount} auth={auth} />}
+        render={() => <AccountSignIn auth={auth} />}
       />
       <Route
         path='*'

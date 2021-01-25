@@ -19,5 +19,11 @@ export const apiClient = {
   },
   deleteIncome: (incomeId) => {
     return axios.delete(`${API_URL}/api/incomes/${incomeId}`)
+  },
+  getAccount: (accountId) => {
+    return axios.get(`${API_URL}/api/accounts/${accountId}`)
+  },
+  updateAccount: (accountId, updateProperties) => {
+    return axios.put(`${API_URL}/api/accounts/${accountId}`, updateProperties)
   }
 }
