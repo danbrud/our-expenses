@@ -14,18 +14,18 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ChipsArray(props) {
+export default function ChipsArray({ chipData, handleDelete }) {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
-      {props.chipData.map(data => {
+      {chipData.map(data => {
 
         return (
           <Chip
             key={data}
             label={data}
-            onDelete={props.handleDelete(data)}
+            onDelete={handleDelete(data)}
             className={classes.chip}
           />
         )

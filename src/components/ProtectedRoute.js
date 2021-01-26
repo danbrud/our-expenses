@@ -3,15 +3,12 @@ import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const props = { ...rest }
+    const { auth } = props
 
     return (
-        <Route {...props} render={() => {
-                if (props.auth.authenticated) {
-                    return <Component {...props} />
-                } else {
-                    return <Redirect to='/signin' />
-                }
-            }}
+        <Route
+            {...props}
+            render={() => auth.authenticated ? <Component { ...props } /> : <Redirect to='/signin' />}
         />
     )
 }

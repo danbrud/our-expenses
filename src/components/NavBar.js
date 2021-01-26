@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, IconButton, List, Divider, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core'
 import CreditCardIcon from '@material-ui/icons/CreditCard'
@@ -52,15 +52,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function NavBar(props) {
+export default function NavBar({ logoutUser }) {
   const expensesSum = useSelector(selectExpensesSum)
   const totalIncome = useSelector(selectIncomesSum)
 
   const classes = useStyles()
   const location = useLocation()
-  const [state, setState] = React.useState({
-    left: false
-  })
+  const [state, setState] = useState({ left: false })
 
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -72,7 +70,7 @@ export default function NavBar(props) {
 
   const handleClick = text => {
     if (text === 'יציאה') {
-      props.logoutUser()
+      logoutUser()
     }
   }
 

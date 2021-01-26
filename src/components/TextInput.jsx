@@ -1,15 +1,15 @@
 import React from 'react'
 
-function TextInput(props) {
+function TextInput({ placeholder, name, value, type, onChange }) {
 
   return (
     <input
-      type="text"
-      dir="rtl"
-      placeholder={props.placeholder}
-      name={props.name}
-      value={props.state.user}
-      onChange={props.handleInputs}
+      type={type || 'text'}
+      dir='rtl'
+      placeholder={placeholder}
+      name={name}
+      value={value}
+      onChange={onChange}
     />
   )
 }

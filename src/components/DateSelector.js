@@ -59,10 +59,10 @@ const materialTheme = createMuiTheme({
     },
 })
 
-export default function DateSelector(props) {
+export default function DateSelector({ date, changeDate }) {
     const classes = useStyles()
 
-    const handleDateChange = date => props.changeDate(new Date(date))
+    const handleDateChange = date => changeDate(new Date(date))
 
     return (
         <div className={classes.root}>
@@ -72,7 +72,7 @@ export default function DateSelector(props) {
                         margin="normal"
                         id="date-picker-dialog"
                         format="L"
-                        value={props.date}
+                        value={date}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',

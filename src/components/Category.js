@@ -1,12 +1,12 @@
 import React from 'react'
 import '../styles/Expense.css'
 
-function Category(props) {
+function Category({ category, color }) {
 
     return (
-        <div className="category-table expense-item" style={{backgroundColor: props.color}}>
-            <div>₪ {new Intl.NumberFormat('en-US').format(props.category.amount)}</div>
-            <div>{props.category.name}</div>
+        <div className="category-table expense-item" style={{backgroundColor: color}}>
+            <div>₪ {new Intl.NumberFormat('en-US').format(category.amount)}</div>
+            <div>{category.name}</div>
         </div>
     )
 }

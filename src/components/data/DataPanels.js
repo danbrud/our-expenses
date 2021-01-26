@@ -24,11 +24,10 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-function DataPanels(props) {
+function DataPanels({ data, type }) {
     const dispatch = useDispatch()
-
-    const { data, type } = props
     const classes = useStyles()
+
     const [expanded, setExpanded] = useState(false)
 
     const handleChange = panel => (event, isExpanded) => {

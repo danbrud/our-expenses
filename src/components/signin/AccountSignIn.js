@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SignIn from '../SignIn'
 import Register from '../Register'
 import '../../styles/SignIn.css'
@@ -6,29 +6,31 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContentWrapper from '../SnackbarContentWrapper'
 import { Redirect } from 'react-router-dom'
 
-function AccountSignIn(props) {
-    const { auth, setCurrentAccount } = props
-
-    const [isLogin, setIsLogin] = React.useState(true)
-    const [snackbar, setSnackbar] = React.useState({ open: false, message: '', variant: '' })
+function AccountSignIn({ auth, setCurrentAccount }) {
+    const [isLogin, setIsLogin] = useState(true)
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', variant: '' })
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') { return }
         setSnackbar({ ...snackbar, open: false })
     }
 
-    if(auth.authenticated) { return <Redirect to='/' /> }
+    if (auth.authenticated) { return <Redirect to='/' /> }
 
     return (
         <div>
             <p style={{ textAlign: 'center' }}><img src="/logo_transparent.png" width="100px" height="100px" /></p>
             <div id="btn-container">
                 <div id='btns'>
-                    <div className={`toggle-btn ${isLogin ? null : 'selected'}`} onClick={() => setIsLogin(false)}>הרשמה</div>
-                    <div className={`toggle-btn ${isLogin ? 'selected' : null}`} onClick={() => setIsLogin(true)}>התחברות</div>
+                    <div className={`toggle-btn ${!isLogin && 'selected'}`} onClick={() => setIsLogin(false)}>הרשמה</div>
+                    <div className={`toggle-btn ${isLogin && 'selected'}`} onClick={() => setIsLogin(true)}>התחברות</div>
                 </div>
             </div>
-            {isLogin ? <SignIn auth={auth} setCurrentAccount={setCurrentAccount} setSnackbar={setSnackbar} /> : <Register setIsLogin={setIsLogin} setSnackbar={setSnackbar} />}
+            {
+                isLogin
+                    ? <SignIn auth={auth} setCurrentAccount={setCurrentAccount} setSnackbar={setSnackbar} />
+                    : <Register setIsLogin={setIsLogin} setSnackbar={setSnackbar} />
+            }
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',

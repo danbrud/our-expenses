@@ -12,8 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function DataPanelDetails(props) {
-  const { category, date, id, deleteData } = props
+function DataPanelDetails({ category, date, id, deleteData }) {
   const classes = useStyles()
 
   return (

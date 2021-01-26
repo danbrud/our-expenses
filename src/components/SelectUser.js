@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-function SelectUser(props) {
+function SelectUser() {
     const classes = useStyles()
     const dispatch = useDispatch()
 
@@ -28,22 +28,18 @@ function SelectUser(props) {
         dispatch(accountUserSelected(selectedUser))
     }
 
-    if (users.length) {
-        return (
-            <div>
+    return (
+        users.length
+            ? <div>
                 <h1>תבחר/י משתמש</h1>
                 <div id="user-container">
                     {users.map(u => <Button key={u} variant="contained" onClick={() => setUser(u)} className={classes.button}>{u}</Button>)}
                 </div>
             </div>
-        )
-    } else {
-        return (
-            <div>
+            : <div>
                 <h1>הגדר משתמשים בעמוד ההגדרות</h1>
             </div>
-        )
-    }
+    )
 }
 
 export default SelectUser
