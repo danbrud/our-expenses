@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 
 const app = express()
+const accountsApi = require('./routes/accounts')
+const expensesApi = require('./routes/expenses')
+const incomesApi = require('./routes/incomes')
 const api = require('./routes/api')
 const script = require('./scripts/script')
 const useStrategy = require('./config/passport')
@@ -32,6 +35,10 @@ app.use(passport.initialize())
 useStrategy(passport)
 
 app.use('/api', api)
+app.use('/accounts', accountsApi)
+app.use('/expenses', expensesApi)
+app.use('/incomes', incomesApi)
+
 app.use('/script', script)
 
 
