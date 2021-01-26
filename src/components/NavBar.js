@@ -118,8 +118,8 @@ export default function NavBar({ logoutUser }) {
           {sideList('left')}
         </Drawer>
         <Toolbar >
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon onClick={toggleDrawer('left', true)} />
+          <IconButton onClick={toggleDrawer('left', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
 

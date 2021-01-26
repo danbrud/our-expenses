@@ -39,7 +39,7 @@ function App({ auth }) {
     if (currentAccount._id) {
       getExpenses()
     }
-  }, [currentDate, currentAccount._id, dispatch])
+  }, [currentDate, currentAccount._id, dispatch, auth])
 
 
   return (

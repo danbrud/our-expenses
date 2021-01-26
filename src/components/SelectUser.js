@@ -1,10 +1,10 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
 import '../styles/Login.css'
-import { accountUserSelected, selectCurrentAccount } from '../state/slices/accountSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { LS_ACCOUNT_USER } from '../utils/consts';
+import { accountUserSelected, selectCurrentAccount } from '../state/slices/accountSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { LS_ACCOUNT_USER } from '../utils/consts'
 
 const useStyles = makeStyles(theme => ({
     button: {

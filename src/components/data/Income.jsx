@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import TableHeader from '../general/TableHeader';
+import TableHeader from '../general/TableHeader'
 import FabButton from '../FabButton'
-import MonthSelector from '../general/MonthSelector';
-import ExpensePanels from './DataPanels';
-import Loader from '../Loader';
+import MonthSelector from '../general/MonthSelector'
+import ExpensePanels from './DataPanels'
+import Loader from '../Loader'
 import '../../styles/Expense.css'
 import { useDispatch, useSelector } from 'react-redux'
-import NoData from '../general/NoData';
+import NoData from '../general/NoData'
 import '../../styles/Income.css'
-import { CONSTS } from '../../utils/consts';
-import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice';
-import { selectCurrentAccount } from '../../state/slices/accountSlice';
-import { selectCurrentDate } from '../../state/slices/uiSlice';
+import { CONSTS } from '../../utils/consts'
+import { fetchIncomes, selectAllIncomes } from '../../state/slices/incomesSlice'
+import { selectCurrentAccount } from '../../state/slices/accountSlice'
+import { selectCurrentDate } from '../../state/slices/uiSlice'
 
 
 

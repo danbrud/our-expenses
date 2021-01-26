@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import axios from 'axios';
-import { API_URL } from '../../utils/utils';
-import { CONSTS } from '../../utils/consts';
-import DataPanelSummary from './DataPanelSummary';
-import DataPanelDetails from './DataPanelDetails';
-import { useDispatch } from 'react-redux';
-import { deleteExpense } from '../../state/slices/expensesSlice';
-import { deleteIncome } from '../../state/slices/incomesSlice';
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { CONSTS } from '../../utils/consts'
+import DataPanelSummary from './DataPanelSummary'
+import DataPanelDetails from './DataPanelDetails'
+import { useDispatch } from 'react-redux'
+import { deleteExpense } from '../../state/slices/expensesSlice'
+import { deleteIncome } from '../../state/slices/incomesSlice'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -52,8 +50,8 @@ function DataPanels({ data, type }) {
                     <ExpansionPanel key={d._id} className={classes.paper} expanded={expanded === d._id} onChange={handleChange(d._id)}>
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1bh-content"
-                            id="panel1bh-header"
+                            aria-controls='panel1bh-content'
+                            id='panel1bh-header'
                         >
                             <DataPanelSummary user={d.user} amount={d.amount} name={type === CONSTS.pluralExpense ? d.expense : d.name} />
                         </ExpansionPanelSummary>

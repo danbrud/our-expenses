@@ -1,14 +1,14 @@
 import React from 'react'
-import TableHeader from '../general/TableHeader';
+import TableHeader from '../general/TableHeader'
 import FabButton from '../FabButton'
-import MonthSelector from '../general/MonthSelector';
-import DataPanels from './DataPanels';
-import Loader from '../Loader';
+import MonthSelector from '../general/MonthSelector'
+import DataPanels from './DataPanels'
+import Loader from '../Loader'
 import '../../styles/Expense.css'
-import NoData from '../general/NoData';
-import { CONSTS } from '../../utils/consts';
-import { selectAllExpenses } from '../../state/slices/expensesSlice';
-import { useSelector } from 'react-redux';
+import NoData from '../general/NoData'
+import { CONSTS } from '../../utils/consts'
+import { selectAllExpenses } from '../../state/slices/expensesSlice'
+import { useSelector } from 'react-redux'
 
 
 

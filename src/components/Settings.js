@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import './../styles/Settings.css'
 import ChipsArray from './ChipsArray'
-import { API_URL } from '../utils/utils'
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentAccount, updateAccount } from '../state/slices/accountSlice'
 import Loader from './Loader'

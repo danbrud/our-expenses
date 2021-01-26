@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SignIn from '../SignIn'
 import Register from '../Register'
 import '../../styles/SignIn.css'
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContentWrapper from '../SnackbarContentWrapper'
 import { Redirect } from 'react-router-dom'
 
@@ -19,8 +19,8 @@ function AccountSignIn({ auth, setCurrentAccount }) {
 
     return (
         <div>
-            <p style={{ textAlign: 'center' }}><img src="/logo_transparent.png" width="100px" height="100px" /></p>
-            <div id="btn-container">
+            <p style={{ textAlign: 'center' }}><img src='/logo_transparent.png' alt='logo' width='100px' height='100px' /></p>
+            <div id='btn-container'>
                 <div id='btns'>
                     <div className={`toggle-btn ${!isLogin && 'selected'}`} onClick={() => setIsLogin(false)}>הרשמה</div>
                     <div className={`toggle-btn ${isLogin && 'selected'}`} onClick={() => setIsLogin(true)}>התחברות</div>

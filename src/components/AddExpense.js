@@ -1,16 +1,16 @@
 import React, { createRef, useEffect, useState } from 'react'
-import DateSelector from './DateSelector';
+import DateSelector from './DateSelector'
 import '../styles/AddExpense.css'
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContentWrapper from './SnackbarContentWrapper'
-import Loader from './Loader';
-import { CONSTS } from '../utils/consts';
-import { useDispatch, useSelector } from 'react-redux';
+import Loader from './Loader'
+import { CONSTS } from '../utils/consts'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveExpense } from '../state/slices/expensesSlice'
-import { useHistory } from 'react-router-dom';
-import { saveIncome } from '../state/slices/incomesSlice';
-import { selectCurrentAccount, selectAccountUser } from '../state/slices/accountSlice';
-import SelectUser from './SelectUser';
+import { useHistory } from 'react-router-dom'
+import { saveIncome } from '../state/slices/incomesSlice'
+import { selectCurrentAccount, selectAccountUser } from '../state/slices/accountSlice'
+import SelectUser from './SelectUser'
 
 function AddExpense() {
     const dispatch = useDispatch()
@@ -71,55 +71,55 @@ function AddExpense() {
 
     const isLoggedIn = () => selectedAccountUser ? true : false
 
-    if (!currentAccount._id) { return <Loader /> }
+    if (!currentAccount._id || isLoading) { return <Loader /> }
 
     if (!currentAccount.categories.length) { return <h1>הגדר קטגוריות להוצאות בעמוד ההגדרות</h1> }
 
     return (
         isLoggedIn() && currentAccount.users.includes(selectedAccountUser)
             ? (
-                <div id="add-expense">
+                <div id='add-expense'>
                     <h1>הוספת {state.type}</h1>
-                    <div id="add-expense-form">
-                        <select name="type" dir="rtl" onChange={handleInputs}>
+                    <div id='add-expense-form'>
+                        <select name='type' dir='rtl' onChange={handleInputs}>
                             <option disabled>סוג</option>
                             {[CONSTS.singularExpense, CONSTS.singularIncome].map((t, i) => <option key={i} value={t}>{t}</option>)}
                         </select>
                         <input
-                            type="text"
-                            dir="rtl"
-                            placeholder="משתמש"
-                            name="user"
+                            type='text'
+                            dir='rtl'
+                            placeholder='משתמש'
+                            name='user'
                             value={state.user}
                             onChange={handleInputs}
                         />
                         <input
-                            name="amount"
-                            type="number"
-                            dir="rtl"
-                            placeholder="סכום"
+                            name='amount'
+                            type='number'
+                            dir='rtl'
+                            placeholder='סכום'
                             value={state.amount}
                             onChange={handleInputs}
                             ref={amountInput}
                         />
                         <input
-                            dir="rtl"
+                            dir='rtl'
                             placeholder={`שם ${state.type}`}
-                            name="expense"
-                            type="text"
+                            name='expense'
+                            type='text'
                             value={state.expense}
                             onChange={handleInputs}
                         />
                         {
                             state.type === CONSTS.singularExpense && (
-                                <select name="category" dir="rtl" onChange={handleInputs}>
+                                <select name='category' dir='rtl' onChange={handleInputs}>
                                     <option selected disabled>תבחר קטגוריה</option>
                                     {currentAccount.categories.map((c, i) => <option key={i} value={c}>{c}</option>)}
                                 </select>
                             )
                         }
                         <DateSelector changeDate={changeDate} date={state.date} />
-                        <div id="add-expense-button" onClick={handleAdd}>הוסף</div>
+                        <div id='add-expense-button' onClick={handleAdd}>הוסף</div>
                     </div>
                     <Snackbar
                         anchorOrigin={{
@@ -132,8 +132,8 @@ function AddExpense() {
                     >
                         <SnackbarContentWrapper
                             onClose={handleClose}
-                            variant="error"
-                            message="מלא את כל השדות והוסף שוב"
+                            variant='error'
+                            message='מלא את כל השדות והוסף שוב'
                         />
                     </Snackbar>
                 </div>

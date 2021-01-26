@@ -1,12 +1,12 @@
-import 'date-fns';
-import React from 'react';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import { makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core";
-import moment from "moment";
-import MomentUtils from "@date-io/moment";
-import 'moment/locale/he';
+import React from 'react'
+import 'date-fns'
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import { makeStyles } from '@material-ui/core/styles'
+import { ThemeProvider } from "@material-ui/styles"
+import { createMuiTheme } from "@material-ui/core"
+import moment from "moment"
+import MomentUtils from "@date-io/moment"
+import 'moment/locale/he'
 
 moment.locale('he')
 
@@ -69,16 +69,16 @@ export default function DateSelector({ date, changeDate }) {
             <ThemeProvider theme={materialTheme}>
                 <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                     <KeyboardDatePicker className={classes.picker}
-                        margin="normal"
-                        id="date-picker-dialog"
-                        format="L"
+                        margin='normal'
+                        id='date-picker-dialog'
+                        format='L'
                         value={date}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
-                        okLabel="בחר"
-                        cancelLabel="בטל"
+                        okLabel='בחר'
+                        cancelLabel='בטל'
                     />
                 </MuiPickersUtilsProvider>
             </ThemeProvider>

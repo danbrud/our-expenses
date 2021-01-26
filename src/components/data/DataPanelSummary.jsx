@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core';
-import { formatAmount } from '../../utils/utils';
+import React, { Fragment } from 'react'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core'
+import { formatAmount } from '../../utils/utils'
 
 const useStyles = makeStyles(theme => ({
   heading: {

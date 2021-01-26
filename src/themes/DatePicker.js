@@ -28,9 +28,9 @@ export const materialTheme = createMuiTheme({
           },
       },
       MuiPickersModal: {
-          dialogAction: {
-              color: '#34495e',
-          },
+        //   dialogAction: {
+        //       color: '#34495e',
+        //   },
       },
   },
 })
