@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { getDocsByDate, getMinMaxDate } = require('../utils/utilFunctions')
+const auth = require('../middleware/auth')
 
 const Income = require('../models/Income')
 const Account = require('../models/Account')
+
+router.use(auth)
 
 router.post('/', async function (req, res) {
   const income = new Income(req.body)

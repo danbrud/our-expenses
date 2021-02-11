@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const { getDocsByDate, getMinMaxDate } = require('../utils/utilFunctions')
+const auth = require('../middleware/auth')
 
 const Expense = require('../models/Expense')
+
+router.use(auth)
 
 
 router.get('/:accountId', async function (req, res) {

@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../middleware/auth')
 
 const Account = require('../models/Account')
 
+router.use(auth)
 
 router.get('/:accountId', async function (req, res) {
   const account = await Account.findOne({ _id: req.params.accountId })
